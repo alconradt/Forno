@@ -91,14 +91,14 @@ void Gpio__PinWrite(GPIO_PORT port,unsigned char pin,unsigned char value)
 unsigned char Gpio__PinRead(GPIO_PORT port,unsigned char pin)
 {
 	volatile GPIO_DATA_TYPE *pt_data;
-	unsigned char pin_state = OFF;       // pin_state = 0x00  acionado  
+	unsigned char pin_state = ON;       // pin_state = 0x00  acionado  
 	
 		
 	
     	pt_data = GPIO_DATA_LIST[port];
     	if (pt_data->DATA_IN_REG.byte & GPIO_PIN_SET_MASK[pin])     // if(leitura != 0)   ou if(leitura)
         {
-    		pin_state = ON;     // pin_state = 0x01   não acionado
+    		pin_state = OFF;     // pin_state = 0x01   não acionado
         }
    
     return (pin_state);

@@ -1,33 +1,78 @@
-#define F_CPU 16000000UL /*define a frequência do microcontrolador 16MHz(necessário para usar as rotinas de atraso)*/
-#include <avr/io.h> //definições do componente especificado
-#include <util/delay.h> /*biblioteca para o uso das rotinas de timer */
+//-------------------------------------- Include Files ----------------------------------------------------------------
+#include <Z:\Forno\Forno\Header\main_prm.h>
 
-#include <Z:\Forno\Forno\Header\gpio.h>
-#include <Z:\Forno\Forno\Header\micro.h>
-
-#define ACESO   0
-#define APAGADO 1
-int main( )
+//-------------------------------------- Defines, Enumerations ----------------------------------------------------------------
+typedef enum
 {
-	//Configuração Saída Digital
-	Gpio__PinConfig(PORT_B,LED2,OUTPUT_DIGITAL);
-	
-	//Configuração Entrada Digital
-	Gpio__PinConfig(PORT_C, SW1, INPUT_DIGITAL_PULLUP);
-	
-	//Variável SW1
-	int Button; 	
+	SLOT_1,
+	SLOT_2,
+	SLOT_3,
+	SLOT_4,
+	SLOT_5,
+	NUM_OF_MAIN_SLOTS
+}MAIN_SLOT_TYPE;
 
-	while(1) 
+#define _1MS    0x08
+#define _4MS    0x0A
+#define _10MS   0x0B
+//-------------------------------------- Global Variables ----------------------------------------------------------------
+
+MAIN_SLOT_TYPE Slot;
+
+
+//=====================================================================================================================
+//-------------------------------------- Public Functions -------------------------------------------------------------
+//=====================================================================================================================
+
+void main(void)
+{
+	
+	Slot = SLOT_1;
+	
+	// Functions Initialization
+	INITIALIZE_TASKS();
+	
+	
+	//Main Loop
+	for(;;)
 	{
-		Button = Gpio__PinRead(PORT_C,SW1);
 		
-		if(Button == ON)	
-		{	
-			Gpio__PinWrite(PORT_B,LED2,ACESO);
-			_delay_ms(1000);
-			Gpio__PinWrite(PORT_B,LED2,APAGADO);
-			_delay_ms(1000);
+		switch(Slot)
+		{
+			case SLOT_1:
+			SLOT_1_TASKS();
+			break;
+
+			case SLOT_2:
+			SLOT_2_TASKS();
+			break;
+
+			case SLOT_3:
+			SLOT_3_TASKS();
+			break;
+
+			case SLOT_4:
+			SLOT_4_TASKS();
+			break;
+
+			case SLOT_5:
+			SLOT_5_TASKS();
+			break;
+
+			default:
+			Slot = SLOT_1;
+			break;
+
 		}
+
+		Slot++;
+		if(Slot >= NUM_OF_MAIN_SLOTS)
+		{
+			Slot = SLOT_1;
+		}
+
 	}
+
 }
+
+
