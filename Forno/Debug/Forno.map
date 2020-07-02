@@ -300,9 +300,9 @@ END GROUP
  .text.Appl__Handler
                 0x000000a6       0xf6 Application/appl.o
                 0x000000a6                Appl__Handler
- .text.Gpio_PinConfig
+ .text.Gpio_Init
                 0x0000019c       0x70 Application/appl.o
-                0x0000019c                Gpio_PinConfig
+                0x0000019c                Gpio_Init
  .text.Appl__Initialize
                 0x0000020c        0x6 Application/appl.o
                 0x0000020c                Appl__Initialize
@@ -493,14 +493,14 @@ END GROUP
  .debug_frame   0x00000044       0x24 Application/main.o
  .debug_frame   0x00000068       0x44 Driver/gpio.o
 
-.debug_str      0x00000000      0x5ae
+.debug_str      0x00000000      0x5a9
  *(.debug_str)
  .debug_str     0x00000000      0x208 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.3.300/gcc/dev/atmega328p/avr5/crtatmega328p.o
- .debug_str     0x00000208      0x233 Application/appl.o
-                                0x267 (size before relaxing)
- .debug_str     0x0000043b       0x64 Application/main.o
+ .debug_str     0x00000208      0x22e Application/appl.o
+                                0x262 (size before relaxing)
+ .debug_str     0x00000436       0x64 Application/main.o
                                 0x151 (size before relaxing)
- .debug_str     0x0000049f      0x10f Driver/gpio.o
+ .debug_str     0x0000049a      0x10f Driver/gpio.o
                                 0x2ae (size before relaxing)
 
 .debug_loc      0x00000000      0x182

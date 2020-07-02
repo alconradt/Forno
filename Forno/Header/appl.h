@@ -13,7 +13,7 @@
 //=====================================================================================================================
 void Appl__Handler(void);
 void Appl__Initialize(void);
-void Gpio_PinConfig(void);
+void Gpio_Init(void);
 
 
 

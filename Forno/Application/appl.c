@@ -34,7 +34,7 @@ unsigned char SW1_Button, SW2_Button, SW3_Button;
 
 void Appl__Initialize(void)
 {
-	Gpio_PinConfig(); // Configuração das entradas e saídas digitais 
+	Gpio_Init(); // Configuração das entradas e saídas digitais 
 }
 
 
@@ -82,7 +82,7 @@ void Appl__Handler(void)
 	}
 }
 
-void Gpio_PinConfig(void)
+void Gpio_Init(void)
 {
 	// Configurando as saídas digitais 
 	Gpio__PinConfig(PORT_B, LED1, OUTPUT_DIGITAL);

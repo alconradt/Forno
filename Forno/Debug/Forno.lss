@@ -23,11 +23,11 @@ Idx Name          Size      VMA       LMA       File off  Algn
                   CONTENTS, READONLY, DEBUGGING
   9 .debug_frame  000000ac  00000000  00000000  000021e4  2**2
                   CONTENTS, READONLY, DEBUGGING
- 10 .debug_str    000005ae  00000000  00000000  00002290  2**0
+ 10 .debug_str    000005a9  00000000  00000000  00002290  2**0
                   CONTENTS, READONLY, DEBUGGING
- 11 .debug_loc    00000182  00000000  00000000  0000283e  2**0
+ 11 .debug_loc    00000182  00000000  00000000  00002839  2**0
                   CONTENTS, READONLY, DEBUGGING
- 12 .debug_ranges 00000050  00000000  00000000  000029c0  2**0
+ 12 .debug_ranges 00000050  00000000  00000000  000029bb  2**0
                   CONTENTS, READONLY, DEBUGGING
 
 Disassembly of section .text:
@@ -247,10 +247,10 @@ void Appl__Handler(void)
  196:	0e 94 4c 01 	call	0x298	; 0x298 <Gpio__PinWrite>
  19a:	08 95       	ret
 
-0000019c <Gpio_PinConfig>:
+0000019c <Gpio_Init>:
 }
 
-void Gpio_PinConfig(void)
+void Gpio_Init(void)
 {
 	// Configurando as saídas digitais 
 	Gpio__PinConfig(PORT_B, LED1, OUTPUT_DIGITAL);
@@ -320,8 +320,8 @@ void Gpio_PinConfig(void)
 
 void Appl__Initialize(void)
 {
-	Gpio_PinConfig(); // Configuração das entradas e saídas digitais 
- 20c:	0e 94 ce 00 	call	0x19c	; 0x19c <Gpio_PinConfig>
+	Gpio_Init(); // Configuração das entradas e saídas digitais 
+ 20c:	0e 94 ce 00 	call	0x19c	; 0x19c <Gpio_Init>
  210:	08 95       	ret
 
 00000212 <main>:
