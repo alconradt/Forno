@@ -3,31 +3,31 @@ Forno.elf:     file format elf32-avr
 
 Sections:
 Idx Name          Size      VMA       LMA       File off  Algn
-  0 .data         00000016  00800100  00000318  000003ac  2**0
+  0 .data         00000024  00800100  00000334  000003c8  2**0
                   CONTENTS, ALLOC, LOAD, DATA
-  1 .text         00000318  00000000  00000000  00000094  2**1
+  1 .text         00000334  00000000  00000000  00000094  2**1
                   CONTENTS, ALLOC, LOAD, READONLY, CODE
-  2 .bss          00000007  00800116  00800116  000003c2  2**0
+  2 .bss          00000007  00800124  00800124  000003ec  2**0
                   ALLOC
-  3 .comment      00000030  00000000  00000000  000003c2  2**0
+  3 .comment      00000030  00000000  00000000  000003ec  2**0
                   CONTENTS, READONLY
-  4 .note.gnu.avr.deviceinfo 00000040  00000000  00000000  000003f4  2**2
+  4 .note.gnu.avr.deviceinfo 00000040  00000000  00000000  0000041c  2**2
                   CONTENTS, READONLY
-  5 .debug_aranges 00000080  00000000  00000000  00000434  2**0
+  5 .debug_aranges 000000b8  00000000  00000000  0000045c  2**0
                   CONTENTS, READONLY, DEBUGGING
-  6 .debug_info   00000f66  00000000  00000000  000004b4  2**0
+  6 .debug_info   000010b3  00000000  00000000  00000514  2**0
                   CONTENTS, READONLY, DEBUGGING
-  7 .debug_abbrev 000008bc  00000000  00000000  0000141a  2**0
+  7 .debug_abbrev 00000ad3  00000000  00000000  000015c7  2**0
                   CONTENTS, READONLY, DEBUGGING
-  8 .debug_line   0000050b  00000000  00000000  00001cd6  2**0
+  8 .debug_line   000005b5  00000000  00000000  0000209a  2**0
                   CONTENTS, READONLY, DEBUGGING
-  9 .debug_frame  000000ac  00000000  00000000  000021e4  2**2
+  9 .debug_frame  0000015c  00000000  00000000  00002650  2**2
                   CONTENTS, READONLY, DEBUGGING
- 10 .debug_str    000005a9  00000000  00000000  00002290  2**0
+ 10 .debug_str    0000067b  00000000  00000000  000027ac  2**0
                   CONTENTS, READONLY, DEBUGGING
- 11 .debug_loc    00000182  00000000  00000000  00002839  2**0
+ 11 .debug_loc    0000040b  00000000  00000000  00002e27  2**0
                   CONTENTS, READONLY, DEBUGGING
- 12 .debug_ranges 00000050  00000000  00000000  000029bb  2**0
+ 12 .debug_ranges 00000078  00000000  00000000  00003232  2**0
                   CONTENTS, READONLY, DEBUGGING
 
 Disassembly of section .text:
@@ -72,18 +72,18 @@ Disassembly of section .text:
   74:	11 e0       	ldi	r17, 0x01	; 1
   76:	a0 e0       	ldi	r26, 0x00	; 0
   78:	b1 e0       	ldi	r27, 0x01	; 1
-  7a:	e8 e1       	ldi	r30, 0x18	; 24
+  7a:	e4 e3       	ldi	r30, 0x34	; 52
   7c:	f3 e0       	ldi	r31, 0x03	; 3
   7e:	02 c0       	rjmp	.+4      	; 0x84 <__do_copy_data+0x10>
   80:	05 90       	lpm	r0, Z+
   82:	0d 92       	st	X+, r0
-  84:	a6 31       	cpi	r26, 0x16	; 22
+  84:	a4 32       	cpi	r26, 0x24	; 36
   86:	b1 07       	cpc	r27, r17
   88:	d9 f7       	brne	.-10     	; 0x80 <__do_copy_data+0xc>
 
 0000008a <__do_clear_bss>:
   8a:	21 e0       	ldi	r18, 0x01	; 1
-  8c:	a6 e1       	ldi	r26, 0x16	; 22
+  8c:	a4 e2       	ldi	r26, 0x24	; 36
   8e:	b1 e0       	ldi	r27, 0x01	; 1
   90:	01 c0       	rjmp	.+2      	; 0x94 <.do_clear_bss_start>
 
@@ -91,479 +91,520 @@ Disassembly of section .text:
   92:	1d 92       	st	X+, r1
 
 00000094 <.do_clear_bss_start>:
-  94:	ad 31       	cpi	r26, 0x1D	; 29
+  94:	ab 32       	cpi	r26, 0x2B	; 43
   96:	b2 07       	cpc	r27, r18
   98:	e1 f7       	brne	.-8      	; 0x92 <.do_clear_bss_loop>
-  9a:	0e 94 09 01 	call	0x212	; 0x212 <main>
-  9e:	0c 94 8a 01 	jmp	0x314	; 0x314 <_exit>
+  9a:	0e 94 a6 00 	call	0x14c	; 0x14c <main>
+  9e:	0c 94 98 01 	jmp	0x330	; 0x330 <_exit>
 
 000000a2 <__bad_interrupt>:
   a2:	0c 94 00 00 	jmp	0	; 0x0 <__vectors>
 
-000000a6 <Appl__Handler>:
+000000a6 <Appl__Initialize>:
+//=====================================================================================================================
 
 
+void Appl__Initialize(void)
+{
+Hal__Initialize();
+  a6:	0e 94 27 01 	call	0x24e	; 0x24e <Hal__Initialize>
+Hal__SetAllLeds(APAGADO);
+  aa:	81 e0       	ldi	r24, 0x01	; 1
+  ac:	0e 94 56 01 	call	0x2ac	; 0x2ac <Hal__SetAllLeds>
+  b0:	08 95       	ret
+
+000000b2 <Appl__Handler>:
+// PODE-SE FAZER ESTE TESTE DE DUAS FORMAS: LER CADA BOTÃO OU LER TODOS DE UMA VEZ!!!
+
+
+//1) LER UMA DE CADA VEZ
 void Appl__Handler(void)
-{	
-	// Leitura dos botoes 
-	SW1_Button = Gpio__PinRead(PORT_C, SW1);
-  a6:	61 e0       	ldi	r22, 0x01	; 1
-  a8:	81 e0       	ldi	r24, 0x01	; 1
-  aa:	0e 94 76 01 	call	0x2ec	; 0x2ec <Gpio__PinRead>
-  ae:	80 93 18 01 	sts	0x0118, r24	; 0x800118 <SW1_Button>
-	SW2_Button = Gpio__PinRead(PORT_C, SW2);
-  b2:	62 e0       	ldi	r22, 0x02	; 2
-  b4:	81 e0       	ldi	r24, 0x01	; 1
-  b6:	0e 94 76 01 	call	0x2ec	; 0x2ec <Gpio__PinRead>
-  ba:	80 93 16 01 	sts	0x0116, r24	; 0x800116 <__data_end>
-	SW3_Button = Gpio__PinRead(PORT_C, SW3);
-  be:	63 e0       	ldi	r22, 0x03	; 3
-  c0:	81 e0       	ldi	r24, 0x01	; 1
-  c2:	0e 94 76 01 	call	0x2ec	; 0x2ec <Gpio__PinRead>
-  c6:	80 93 17 01 	sts	0x0117, r24	; 0x800117 <SW3_Button>
-	
-	if(SW1_Button == ON && SW3_Button == ON)
-  ca:	90 91 18 01 	lds	r25, 0x0118	; 0x800118 <SW1_Button>
+{
+  b2:	cf 93       	push	r28
+  b4:	df 93       	push	r29
+KEY_INPUT_TYPE index;
+for (index = 0; index < NUM_OF_KEYS; index++)
+{
+	tab.key[index] = Hal__ReadAllKey();
+  b6:	0e 94 6f 01 	call	0x2de	; 0x2de <Hal__ReadAllKey>
+  ba:	c4 e2       	ldi	r28, 0x24	; 36
+  bc:	d1 e0       	ldi	r29, 0x01	; 1
+  be:	88 83       	st	Y, r24
+  c0:	0e 94 6f 01 	call	0x2de	; 0x2de <Hal__ReadAllKey>
+  c4:	89 83       	std	Y+1, r24	; 0x01
+  c6:	0e 94 6f 01 	call	0x2de	; 0x2de <Hal__ReadAllKey>
+  ca:	8a 83       	std	Y+2, r24	; 0x02
+}
+
+if (tab.key[0]== ON && tab.key[2]== ON)
+  cc:	98 81       	ld	r25, Y
   ce:	91 30       	cpi	r25, 0x01	; 1
-  d0:	a1 f5       	brne	.+104    	; 0x13a <Appl__Handler+0x94>
+  d0:	d1 f4       	brne	.+52     	; 0x106 <Appl__Handler+0x54>
   d2:	81 30       	cpi	r24, 0x01	; 1
-  d4:	f1 f4       	brne	.+60     	; 0x112 <Appl__Handler+0x6c>
-	{
-		// Se SW1 e SW3 foram clicadas ao mesmo tempo entra nesa condicao
-		Gpio__PinWrite(PORT_B, LED1, APAGADO);
-  d6:	41 e0       	ldi	r20, 0x01	; 1
-  d8:	65 e0       	ldi	r22, 0x05	; 5
-  da:	80 e0       	ldi	r24, 0x00	; 0
-  dc:	0e 94 4c 01 	call	0x298	; 0x298 <Gpio__PinWrite>
-		Gpio__PinWrite(PORT_B, LED2, APAGADO);
-  e0:	41 e0       	ldi	r20, 0x01	; 1
-  e2:	64 e0       	ldi	r22, 0x04	; 4
-  e4:	80 e0       	ldi	r24, 0x00	; 0
-  e6:	0e 94 4c 01 	call	0x298	; 0x298 <Gpio__PinWrite>
-		Gpio__PinWrite(PORT_B, LED3, APAGADO);
-  ea:	41 e0       	ldi	r20, 0x01	; 1
-  ec:	63 e0       	ldi	r22, 0x03	; 3
-  ee:	80 e0       	ldi	r24, 0x00	; 0
-  f0:	0e 94 4c 01 	call	0x298	; 0x298 <Gpio__PinWrite>
-		Gpio__PinWrite(PORT_B, LED4, APAGADO);
-  f4:	41 e0       	ldi	r20, 0x01	; 1
-  f6:	62 e0       	ldi	r22, 0x02	; 2
-  f8:	80 e0       	ldi	r24, 0x00	; 0
-  fa:	0e 94 4c 01 	call	0x298	; 0x298 <Gpio__PinWrite>
+  d4:	61 f4       	brne	.+24     	; 0xee <Appl__Handler+0x3c>
+  {
+  Hal__SetAllLeds(APAGADO);
+  d6:	0e 94 56 01 	call	0x2ac	; 0x2ac <Hal__SetAllLeds>
 	#else
 		//round up by default
 		__ticks_dc = (uint32_t)(ceil(fabs(__tmp)));
 	#endif
 
 	__builtin_avr_delay_cycles(__ticks_dc);
-  fe:	2f eb       	ldi	r18, 0xBF	; 191
- 100:	87 e2       	ldi	r24, 0x27	; 39
- 102:	99 e0       	ldi	r25, 0x09	; 9
- 104:	21 50       	subi	r18, 0x01	; 1
- 106:	80 40       	sbci	r24, 0x00	; 0
- 108:	90 40       	sbci	r25, 0x00	; 0
- 10a:	e1 f7       	brne	.-8      	; 0x104 <Appl__Handler+0x5e>
- 10c:	00 c0       	rjmp	.+0      	; 0x10e <Appl__Handler+0x68>
- 10e:	00 00       	nop
- 110:	08 95       	ret
-	}
-	else
+  da:	2f e3       	ldi	r18, 0x3F	; 63
+  dc:	8d e0       	ldi	r24, 0x0D	; 13
+  de:	93 e0       	ldi	r25, 0x03	; 3
+  e0:	21 50       	subi	r18, 0x01	; 1
+  e2:	80 40       	sbci	r24, 0x00	; 0
+  e4:	90 40       	sbci	r25, 0x00	; 0
+  e6:	e1 f7       	brne	.-8      	; 0xe0 <Appl__Handler+0x2e>
+  e8:	00 c0       	rjmp	.+0      	; 0xea <Appl__Handler+0x38>
+  ea:	00 00       	nop
+  ec:	2c c0       	rjmp	.+88     	; 0x146 <Appl__Handler+0x94>
+  }
+else
+  {
+  if(tab.key[0] == ON)    //reads key 1 (at SW1)
 	{
-		if(SW1_Button == ON)
-		{
-			Gpio__PinWrite(PORT_B, LED1, ACESO);
- 112:	40 e0       	ldi	r20, 0x00	; 0
- 114:	65 e0       	ldi	r22, 0x05	; 5
- 116:	80 e0       	ldi	r24, 0x00	; 0
- 118:	0e 94 4c 01 	call	0x298	; 0x298 <Gpio__PinWrite>
-			Gpio__PinWrite(PORT_B, LED2, APAGADO);
- 11c:	41 e0       	ldi	r20, 0x01	; 1
- 11e:	64 e0       	ldi	r22, 0x04	; 4
- 120:	80 e0       	ldi	r24, 0x00	; 0
- 122:	0e 94 4c 01 	call	0x298	; 0x298 <Gpio__PinWrite>
-			Gpio__PinWrite(PORT_B, LED3, APAGADO);
- 126:	41 e0       	ldi	r20, 0x01	; 1
- 128:	63 e0       	ldi	r22, 0x03	; 3
- 12a:	80 e0       	ldi	r24, 0x00	; 0
- 12c:	0e 94 4c 01 	call	0x298	; 0x298 <Gpio__PinWrite>
-			Gpio__PinWrite(PORT_B, LED4, APAGADO);
- 130:	41 e0       	ldi	r20, 0x01	; 1
- 132:	62 e0       	ldi	r22, 0x02	; 2
- 134:	80 e0       	ldi	r24, 0x00	; 0
- 136:	0e 94 4c 01 	call	0x298	; 0x298 <Gpio__PinWrite>
-		}
-		
-		if(SW2_Button == ON)
- 13a:	80 91 16 01 	lds	r24, 0x0116	; 0x800116 <__data_end>
- 13e:	81 30       	cpi	r24, 0x01	; 1
- 140:	a1 f4       	brne	.+40     	; 0x16a <Appl__Handler+0xc4>
-		{
-			Gpio__PinWrite(PORT_B, LED1, ACESO);
- 142:	40 e0       	ldi	r20, 0x00	; 0
- 144:	65 e0       	ldi	r22, 0x05	; 5
- 146:	80 e0       	ldi	r24, 0x00	; 0
- 148:	0e 94 4c 01 	call	0x298	; 0x298 <Gpio__PinWrite>
-			Gpio__PinWrite(PORT_B, LED2, ACESO);
- 14c:	40 e0       	ldi	r20, 0x00	; 0
- 14e:	64 e0       	ldi	r22, 0x04	; 4
- 150:	80 e0       	ldi	r24, 0x00	; 0
- 152:	0e 94 4c 01 	call	0x298	; 0x298 <Gpio__PinWrite>
-			Gpio__PinWrite(PORT_B, LED3, APAGADO);
- 156:	41 e0       	ldi	r20, 0x01	; 1
- 158:	63 e0       	ldi	r22, 0x03	; 3
- 15a:	80 e0       	ldi	r24, 0x00	; 0
- 15c:	0e 94 4c 01 	call	0x298	; 0x298 <Gpio__PinWrite>
-			Gpio__PinWrite(PORT_B, LED4, APAGADO);
- 160:	41 e0       	ldi	r20, 0x01	; 1
- 162:	62 e0       	ldi	r22, 0x02	; 2
- 164:	80 e0       	ldi	r24, 0x00	; 0
- 166:	0e 94 4c 01 	call	0x298	; 0x298 <Gpio__PinWrite>
-		}
-		
-		if(SW3_Button == ON)
- 16a:	80 91 17 01 	lds	r24, 0x0117	; 0x800117 <SW3_Button>
- 16e:	81 30       	cpi	r24, 0x01	; 1
- 170:	a1 f4       	brne	.+40     	; 0x19a <Appl__Handler+0xf4>
-		{
-			Gpio__PinWrite(PORT_B, LED1, ACESO);
- 172:	40 e0       	ldi	r20, 0x00	; 0
- 174:	65 e0       	ldi	r22, 0x05	; 5
- 176:	80 e0       	ldi	r24, 0x00	; 0
- 178:	0e 94 4c 01 	call	0x298	; 0x298 <Gpio__PinWrite>
-			Gpio__PinWrite(PORT_B, LED2, ACESO);
- 17c:	40 e0       	ldi	r20, 0x00	; 0
- 17e:	64 e0       	ldi	r22, 0x04	; 4
- 180:	80 e0       	ldi	r24, 0x00	; 0
- 182:	0e 94 4c 01 	call	0x298	; 0x298 <Gpio__PinWrite>
-			Gpio__PinWrite(PORT_B, LED3, ACESO);
- 186:	40 e0       	ldi	r20, 0x00	; 0
- 188:	63 e0       	ldi	r22, 0x03	; 3
- 18a:	80 e0       	ldi	r24, 0x00	; 0
- 18c:	0e 94 4c 01 	call	0x298	; 0x298 <Gpio__PinWrite>
-			Gpio__PinWrite(PORT_B, LED4, APAGADO);
- 190:	41 e0       	ldi	r20, 0x01	; 1
- 192:	62 e0       	ldi	r22, 0x02	; 2
- 194:	80 e0       	ldi	r24, 0x00	; 0
- 196:	0e 94 4c 01 	call	0x298	; 0x298 <Gpio__PinWrite>
- 19a:	08 95       	ret
-
-0000019c <Gpio_Init>:
+	Hal__SetLed(LED_0,ACESO);
+  ee:	60 e0       	ldi	r22, 0x00	; 0
+  f0:	80 e0       	ldi	r24, 0x00	; 0
+  f2:	0e 94 4a 01 	call	0x294	; 0x294 <Hal__SetLed>
+	Hal__SetLed(LED_1,APAGADO);
+  f6:	61 e0       	ldi	r22, 0x01	; 1
+  f8:	81 e0       	ldi	r24, 0x01	; 1
+  fa:	0e 94 4a 01 	call	0x294	; 0x294 <Hal__SetLed>
+	Hal__SetLed(LED_2,APAGADO);	  
+  fe:	61 e0       	ldi	r22, 0x01	; 1
+ 100:	82 e0       	ldi	r24, 0x02	; 2
+ 102:	0e 94 4a 01 	call	0x294	; 0x294 <Hal__SetLed>
+	}
+ if(tab.key[1] == ON)           //reads key 2 (at SW2)
+ 106:	80 91 25 01 	lds	r24, 0x0125	; 0x800125 <__data_end+0x1>
+ 10a:	81 30       	cpi	r24, 0x01	; 1
+ 10c:	61 f4       	brne	.+24     	; 0x126 <Appl__Handler+0x74>
+	{
+    Hal__SetLed(LED_0,ACESO);	 
+ 10e:	60 e0       	ldi	r22, 0x00	; 0
+ 110:	80 e0       	ldi	r24, 0x00	; 0
+ 112:	0e 94 4a 01 	call	0x294	; 0x294 <Hal__SetLed>
+    Hal__SetLed(LED_1,ACESO);
+ 116:	60 e0       	ldi	r22, 0x00	; 0
+ 118:	81 e0       	ldi	r24, 0x01	; 1
+ 11a:	0e 94 4a 01 	call	0x294	; 0x294 <Hal__SetLed>
+    Hal__SetLed(LED_2,APAGADO);		 
+ 11e:	61 e0       	ldi	r22, 0x01	; 1
+ 120:	82 e0       	ldi	r24, 0x02	; 2
+ 122:	0e 94 4a 01 	call	0x294	; 0x294 <Hal__SetLed>
+    }
+if(tab.key[2] == ON)   //reads key 3 (at SW3)
+ 126:	80 91 26 01 	lds	r24, 0x0126	; 0x800126 <__data_end+0x2>
+ 12a:	81 30       	cpi	r24, 0x01	; 1
+ 12c:	61 f4       	brne	.+24     	; 0x146 <Appl__Handler+0x94>
+	{
+	Hal__SetLed(LED_0,ACESO);
+ 12e:	60 e0       	ldi	r22, 0x00	; 0
+ 130:	80 e0       	ldi	r24, 0x00	; 0
+ 132:	0e 94 4a 01 	call	0x294	; 0x294 <Hal__SetLed>
+	Hal__SetLed(LED_1,ACESO);  
+ 136:	60 e0       	ldi	r22, 0x00	; 0
+ 138:	81 e0       	ldi	r24, 0x01	; 1
+ 13a:	0e 94 4a 01 	call	0x294	; 0x294 <Hal__SetLed>
+	Hal__SetLed(LED_2,ACESO);	  
+ 13e:	60 e0       	ldi	r22, 0x00	; 0
+ 140:	82 e0       	ldi	r24, 0x02	; 2
+ 142:	0e 94 4a 01 	call	0x294	; 0x294 <Hal__SetLed>
+	}
+ }
 }
+ 146:	df 91       	pop	r29
+ 148:	cf 91       	pop	r28
+ 14a:	08 95       	ret
 
-void Gpio_Init(void)
-{
-	// Configurando as saídas digitais 
-	Gpio__PinConfig(PORT_B, LED1, OUTPUT_DIGITAL);
- 19c:	41 e0       	ldi	r20, 0x01	; 1
- 19e:	65 e0       	ldi	r22, 0x05	; 5
- 1a0:	80 e0       	ldi	r24, 0x00	; 0
- 1a2:	0e 94 25 01 	call	0x24a	; 0x24a <Gpio__PinConfig>
-	Gpio__PinConfig(PORT_B, LED2, OUTPUT_DIGITAL);
- 1a6:	41 e0       	ldi	r20, 0x01	; 1
- 1a8:	64 e0       	ldi	r22, 0x04	; 4
- 1aa:	80 e0       	ldi	r24, 0x00	; 0
- 1ac:	0e 94 25 01 	call	0x24a	; 0x24a <Gpio__PinConfig>
-	Gpio__PinConfig(PORT_B, LED3, OUTPUT_DIGITAL);
- 1b0:	41 e0       	ldi	r20, 0x01	; 1
- 1b2:	63 e0       	ldi	r22, 0x03	; 3
- 1b4:	80 e0       	ldi	r24, 0x00	; 0
- 1b6:	0e 94 25 01 	call	0x24a	; 0x24a <Gpio__PinConfig>
-	Gpio__PinConfig(PORT_B, LED4, OUTPUT_DIGITAL);
- 1ba:	41 e0       	ldi	r20, 0x01	; 1
- 1bc:	62 e0       	ldi	r22, 0x02	; 2
- 1be:	80 e0       	ldi	r24, 0x00	; 0
- 1c0:	0e 94 25 01 	call	0x24a	; 0x24a <Gpio__PinConfig>
-	
-	// Configurando as entradas digitais
-	Gpio__PinConfig(PORT_C, SW1, INPUT_DIGITAL_PULLUP);
- 1c4:	40 e0       	ldi	r20, 0x00	; 0
- 1c6:	61 e0       	ldi	r22, 0x01	; 1
- 1c8:	81 e0       	ldi	r24, 0x01	; 1
- 1ca:	0e 94 25 01 	call	0x24a	; 0x24a <Gpio__PinConfig>
-	Gpio__PinConfig(PORT_C, SW2, INPUT_DIGITAL_PULLUP);
- 1ce:	40 e0       	ldi	r20, 0x00	; 0
- 1d0:	62 e0       	ldi	r22, 0x02	; 2
- 1d2:	81 e0       	ldi	r24, 0x01	; 1
- 1d4:	0e 94 25 01 	call	0x24a	; 0x24a <Gpio__PinConfig>
-	Gpio__PinConfig(PORT_C, SW3, INPUT_DIGITAL_PULLUP); 
- 1d8:	40 e0       	ldi	r20, 0x00	; 0
- 1da:	63 e0       	ldi	r22, 0x03	; 3
- 1dc:	81 e0       	ldi	r24, 0x01	; 1
- 1de:	0e 94 25 01 	call	0x24a	; 0x24a <Gpio__PinConfig>
-	
-	// Tornando todos os LEDs apagados 
-	Gpio__PinWrite(PORT_B, LED1, APAGADO);
- 1e2:	41 e0       	ldi	r20, 0x01	; 1
- 1e4:	65 e0       	ldi	r22, 0x05	; 5
- 1e6:	80 e0       	ldi	r24, 0x00	; 0
- 1e8:	0e 94 4c 01 	call	0x298	; 0x298 <Gpio__PinWrite>
-	Gpio__PinWrite(PORT_B, LED2, APAGADO);
- 1ec:	41 e0       	ldi	r20, 0x01	; 1
- 1ee:	64 e0       	ldi	r22, 0x04	; 4
- 1f0:	80 e0       	ldi	r24, 0x00	; 0
- 1f2:	0e 94 4c 01 	call	0x298	; 0x298 <Gpio__PinWrite>
-	Gpio__PinWrite(PORT_B, LED3, APAGADO);
- 1f6:	41 e0       	ldi	r20, 0x01	; 1
- 1f8:	63 e0       	ldi	r22, 0x03	; 3
- 1fa:	80 e0       	ldi	r24, 0x00	; 0
- 1fc:	0e 94 4c 01 	call	0x298	; 0x298 <Gpio__PinWrite>
-	Gpio__PinWrite(PORT_B, LED4, APAGADO);
- 200:	41 e0       	ldi	r20, 0x01	; 1
- 202:	62 e0       	ldi	r22, 0x02	; 2
- 204:	80 e0       	ldi	r24, 0x00	; 0
- 206:	0e 94 4c 01 	call	0x298	; 0x298 <Gpio__PinWrite>
- 20a:	08 95       	ret
-
-0000020c <Appl__Initialize>:
-//=====================================================================================================================
-
-
-void Appl__Initialize(void)
-{
-	Gpio_Init(); // Configuração das entradas e saídas digitais 
- 20c:	0e 94 ce 00 	call	0x19c	; 0x19c <Gpio_Init>
- 210:	08 95       	ret
-
-00000212 <main>:
+0000014c <main>:
 //=====================================================================================================================
 
 void main(void)
 {
 	
 	Slot = SLOT_1;
- 212:	10 92 1c 01 	sts	0x011C, r1	; 0x80011c <Slot>
+ 14c:	10 92 2a 01 	sts	0x012A, r1	; 0x80012a <Slot>
 	
 	// Functions Initialization
 	INITIALIZE_TASKS();
- 216:	0e 94 06 01 	call	0x20c	; 0x20c <Appl__Initialize>
+ 150:	0e 94 53 00 	call	0xa6	; 0xa6 <Appl__Initialize>
 			Slot = SLOT_1;
 			break;
 
 		}
 
 		Slot++;
- 21a:	c1 e0       	ldi	r28, 0x01	; 1
+ 154:	c1 e0       	ldi	r28, 0x01	; 1
 	
 	//Main Loop
 	for(;;)
 	{
 		
 		switch(Slot)
- 21c:	80 91 1c 01 	lds	r24, 0x011C	; 0x80011c <Slot>
- 220:	88 23       	and	r24, r24
- 222:	19 f0       	breq	.+6      	; 0x22a <main+0x18>
- 224:	85 30       	cpi	r24, 0x05	; 5
- 226:	20 f4       	brcc	.+8      	; 0x230 <main+0x1e>
- 228:	06 c0       	rjmp	.+12     	; 0x236 <main+0x24>
+ 156:	80 91 2a 01 	lds	r24, 0x012A	; 0x80012a <Slot>
+ 15a:	88 23       	and	r24, r24
+ 15c:	19 f0       	breq	.+6      	; 0x164 <main+0x18>
+ 15e:	85 30       	cpi	r24, 0x05	; 5
+ 160:	20 f4       	brcc	.+8      	; 0x16a <main+0x1e>
+ 162:	06 c0       	rjmp	.+12     	; 0x170 <main+0x24>
 		{
 			case SLOT_1:
 			SLOT_1_TASKS();
- 22a:	0e 94 53 00 	call	0xa6	; 0xa6 <Appl__Handler>
+ 164:	0e 94 59 00 	call	0xb2	; 0xb2 <Appl__Handler>
 			break;
- 22e:	03 c0       	rjmp	.+6      	; 0x236 <main+0x24>
+ 168:	03 c0       	rjmp	.+6      	; 0x170 <main+0x24>
 			Slot = SLOT_1;
 			break;
 
 		}
 
 		Slot++;
- 230:	c0 93 1c 01 	sts	0x011C, r28	; 0x80011c <Slot>
- 234:	f3 cf       	rjmp	.-26     	; 0x21c <main+0xa>
- 236:	80 91 1c 01 	lds	r24, 0x011C	; 0x80011c <Slot>
- 23a:	8f 5f       	subi	r24, 0xFF	; 255
- 23c:	80 93 1c 01 	sts	0x011C, r24	; 0x80011c <Slot>
+ 16a:	c0 93 2a 01 	sts	0x012A, r28	; 0x80012a <Slot>
+ 16e:	f3 cf       	rjmp	.-26     	; 0x156 <main+0xa>
+ 170:	80 91 2a 01 	lds	r24, 0x012A	; 0x80012a <Slot>
+ 174:	8f 5f       	subi	r24, 0xFF	; 255
+ 176:	80 93 2a 01 	sts	0x012A, r24	; 0x80012a <Slot>
 		if(Slot >= NUM_OF_MAIN_SLOTS)
- 240:	85 30       	cpi	r24, 0x05	; 5
- 242:	60 f3       	brcs	.-40     	; 0x21c <main+0xa>
+ 17a:	85 30       	cpi	r24, 0x05	; 5
+ 17c:	60 f3       	brcs	.-40     	; 0x156 <main+0xa>
 		{
 			Slot = SLOT_1;
- 244:	10 92 1c 01 	sts	0x011C, r1	; 0x80011c <Slot>
- 248:	e9 cf       	rjmp	.-46     	; 0x21c <main+0xa>
+ 17e:	10 92 2a 01 	sts	0x012A, r1	; 0x80012a <Slot>
+ 182:	e9 cf       	rjmp	.-46     	; 0x156 <main+0xa>
 
-0000024a <Gpio__PinConfig>:
+00000184 <Gpio__PinConfig>:
 {
 	volatile GPIO_DATA_TYPE *pt_data;
 	unsigned char set_bit_mask;
 	unsigned char clr_bit_mask;
 	
 	set_bit_mask = GPIO_PIN_SET_MASK[pin];
- 24a:	70 e0       	ldi	r23, 0x00	; 0
- 24c:	db 01       	movw	r26, r22
- 24e:	a2 5f       	subi	r26, 0xF2	; 242
- 250:	be 4f       	sbci	r27, 0xFE	; 254
- 252:	2c 91       	ld	r18, X
+ 184:	70 e0       	ldi	r23, 0x00	; 0
+ 186:	db 01       	movw	r26, r22
+ 188:	a4 5e       	subi	r26, 0xE4	; 228
+ 18a:	be 4f       	sbci	r27, 0xFE	; 254
+ 18c:	2c 91       	ld	r18, X
 	clr_bit_mask = GPIO_PIN_CLR_MASK[pin];
 	
 	
 	switch(port)
- 254:	81 30       	cpi	r24, 0x01	; 1
- 256:	39 f0       	breq	.+14     	; 0x266 <Gpio__PinConfig+0x1c>
- 258:	18 f0       	brcs	.+6      	; 0x260 <Gpio__PinConfig+0x16>
- 25a:	82 30       	cpi	r24, 0x02	; 2
- 25c:	39 f0       	breq	.+14     	; 0x26c <Gpio__PinConfig+0x22>
- 25e:	08 c0       	rjmp	.+16     	; 0x270 <Gpio__PinConfig+0x26>
+ 18e:	81 30       	cpi	r24, 0x01	; 1
+ 190:	39 f0       	breq	.+14     	; 0x1a0 <Gpio__PinConfig+0x1c>
+ 192:	18 f0       	brcs	.+6      	; 0x19a <Gpio__PinConfig+0x16>
+ 194:	82 30       	cpi	r24, 0x02	; 2
+ 196:	39 f0       	breq	.+14     	; 0x1a6 <Gpio__PinConfig+0x22>
+ 198:	08 c0       	rjmp	.+16     	; 0x1aa <Gpio__PinConfig+0x26>
 	{
 	case	PORT_B:
 		pt_data = PORTB;   // Está no Micro.h: #define PORTA &GPIOA_DATA   => endereço 0x0000 00000
- 260:	e3 e2       	ldi	r30, 0x23	; 35
- 262:	f0 e0       	ldi	r31, 0x00	; 0
- 264:	05 c0       	rjmp	.+10     	; 0x270 <Gpio__PinConfig+0x26>
+ 19a:	e3 e2       	ldi	r30, 0x23	; 35
+ 19c:	f0 e0       	ldi	r31, 0x00	; 0
+ 19e:	05 c0       	rjmp	.+10     	; 0x1aa <Gpio__PinConfig+0x26>
 		break;
 	case	PORT_C:
 		pt_data = PORTC;
- 266:	e6 e2       	ldi	r30, 0x26	; 38
- 268:	f0 e0       	ldi	r31, 0x00	; 0
+ 1a0:	e6 e2       	ldi	r30, 0x26	; 38
+ 1a2:	f0 e0       	ldi	r31, 0x00	; 0
 		break;
- 26a:	02 c0       	rjmp	.+4      	; 0x270 <Gpio__PinConfig+0x26>
+ 1a4:	02 c0       	rjmp	.+4      	; 0x1aa <Gpio__PinConfig+0x26>
 	case	PORT_D:
 		pt_data = PORTD;
- 26c:	e9 e2       	ldi	r30, 0x29	; 41
- 26e:	f0 e0       	ldi	r31, 0x00	; 0
+ 1a6:	e9 e2       	ldi	r30, 0x29	; 41
+ 1a8:	f0 e0       	ldi	r31, 0x00	; 0
 		break;
 	default:
 		break;
 	}
 	
 if(type == OUTPUT_DIGITAL)    // setar 1 para saída
- 270:	41 30       	cpi	r20, 0x01	; 1
- 272:	21 f4       	brne	.+8      	; 0x27c <Gpio__PinConfig+0x32>
+ 1aa:	41 30       	cpi	r20, 0x01	; 1
+ 1ac:	21 f4       	brne	.+8      	; 0x1b6 <Gpio__PinConfig+0x32>
 {
 	//pt_data = GPIO_DATA_LIST[port];		 	
 	pt_data->DIRECION_REG.byte |= set_bit_mask;	// Config Output
- 274:	81 81       	ldd	r24, Z+1	; 0x01
- 276:	82 2b       	or	r24, r18
- 278:	81 83       	std	Z+1, r24	; 0x01
- 27a:	08 95       	ret
+ 1ae:	81 81       	ldd	r24, Z+1	; 0x01
+ 1b0:	82 2b       	or	r24, r18
+ 1b2:	81 83       	std	Z+1, r24	; 0x01
+ 1b4:	08 95       	ret
 }
 
 if(type == INPUT_DIGITAL_PULLUP)
- 27c:	41 11       	cpse	r20, r1
- 27e:	0b c0       	rjmp	.+22     	; 0x296 <Gpio__PinConfig+0x4c>
+ 1b6:	41 11       	cpse	r20, r1
+ 1b8:	0b c0       	rjmp	.+22     	; 0x1d0 <Gpio__PinConfig+0x4c>
 {
 	//pt_data = GPIO_DATA_LIST[port];		 	
 	pt_data->DIRECION_REG.byte &= clr_bit_mask; 	// Config Input
- 280:	81 81       	ldd	r24, Z+1	; 0x01
+ 1ba:	81 81       	ldd	r24, Z+1	; 0x01
 	volatile GPIO_DATA_TYPE *pt_data;
 	unsigned char set_bit_mask;
 	unsigned char clr_bit_mask;
 	
 	set_bit_mask = GPIO_PIN_SET_MASK[pin];
 	clr_bit_mask = GPIO_PIN_CLR_MASK[pin];
- 282:	db 01       	movw	r26, r22
- 284:	aa 5f       	subi	r26, 0xFA	; 250
- 286:	be 4f       	sbci	r27, 0xFE	; 254
+ 1bc:	db 01       	movw	r26, r22
+ 1be:	ac 5e       	subi	r26, 0xEC	; 236
+ 1c0:	be 4f       	sbci	r27, 0xFE	; 254
 }
 
 if(type == INPUT_DIGITAL_PULLUP)
 {
 	//pt_data = GPIO_DATA_LIST[port];		 	
 	pt_data->DIRECION_REG.byte &= clr_bit_mask; 	// Config Input
- 288:	9c 91       	ld	r25, X
- 28a:	98 23       	and	r25, r24
- 28c:	91 83       	std	Z+1, r25	; 0x01
+ 1c2:	9c 91       	ld	r25, X
+ 1c4:	98 23       	and	r25, r24
+ 1c6:	91 83       	std	Z+1, r25	; 0x01
 	
 	pt_data->DATA_OUT_PULL_REG.byte |= set_bit_mask;   // Config Input Pull up
- 28e:	92 81       	ldd	r25, Z+2	; 0x02
- 290:	82 2f       	mov	r24, r18
- 292:	89 2b       	or	r24, r25
- 294:	82 83       	std	Z+2, r24	; 0x02
- 296:	08 95       	ret
+ 1c8:	92 81       	ldd	r25, Z+2	; 0x02
+ 1ca:	82 2f       	mov	r24, r18
+ 1cc:	89 2b       	or	r24, r25
+ 1ce:	82 83       	std	Z+2, r24	; 0x02
+ 1d0:	08 95       	ret
 
-00000298 <Gpio__PinWrite>:
+000001d2 <Gpio__PinWrite>:
  */
 void Gpio__PinWrite(GPIO_PORT port,unsigned char pin,unsigned char value)
 {
 	volatile GPIO_DATA_TYPE *pt_data;
 	
 	  if (value == 0)
- 298:	41 11       	cpse	r20, r1
- 29a:	14 c0       	rjmp	.+40     	; 0x2c4 <Gpio__PinWrite+0x2c>
+ 1d2:	41 11       	cpse	r20, r1
+ 1d4:	14 c0       	rjmp	.+40     	; 0x1fe <Gpio__PinWrite+0x2c>
         {
         	pt_data = GPIO_DATA_LIST[port];		 	
- 29c:	e8 2f       	mov	r30, r24
- 29e:	f0 e0       	ldi	r31, 0x00	; 0
- 2a0:	ee 0f       	add	r30, r30
- 2a2:	ff 1f       	adc	r31, r31
- 2a4:	e0 50       	subi	r30, 0x00	; 0
- 2a6:	ff 4f       	sbci	r31, 0xFF	; 255
- 2a8:	a0 81       	ld	r26, Z
- 2aa:	b1 81       	ldd	r27, Z+1	; 0x01
+ 1d6:	e8 2f       	mov	r30, r24
+ 1d8:	f0 e0       	ldi	r31, 0x00	; 0
+ 1da:	ee 0f       	add	r30, r30
+ 1dc:	ff 1f       	adc	r31, r31
+ 1de:	e0 50       	subi	r30, 0x00	; 0
+ 1e0:	ff 4f       	sbci	r31, 0xFF	; 255
+ 1e2:	a0 81       	ld	r26, Z
+ 1e4:	b1 81       	ldd	r27, Z+1	; 0x01
         	pt_data->DATA_OUT_PULL_REG.byte &= GPIO_PIN_CLR_MASK[pin];
- 2ac:	12 96       	adiw	r26, 0x02	; 2
- 2ae:	9c 91       	ld	r25, X
- 2b0:	12 97       	sbiw	r26, 0x02	; 2
- 2b2:	e6 2f       	mov	r30, r22
- 2b4:	f0 e0       	ldi	r31, 0x00	; 0
- 2b6:	ea 5f       	subi	r30, 0xFA	; 250
- 2b8:	fe 4f       	sbci	r31, 0xFE	; 254
- 2ba:	80 81       	ld	r24, Z
- 2bc:	89 23       	and	r24, r25
- 2be:	12 96       	adiw	r26, 0x02	; 2
- 2c0:	8c 93       	st	X, r24
- 2c2:	08 95       	ret
+ 1e6:	12 96       	adiw	r26, 0x02	; 2
+ 1e8:	9c 91       	ld	r25, X
+ 1ea:	12 97       	sbiw	r26, 0x02	; 2
+ 1ec:	e6 2f       	mov	r30, r22
+ 1ee:	f0 e0       	ldi	r31, 0x00	; 0
+ 1f0:	ec 5e       	subi	r30, 0xEC	; 236
+ 1f2:	fe 4f       	sbci	r31, 0xFE	; 254
+ 1f4:	80 81       	ld	r24, Z
+ 1f6:	89 23       	and	r24, r25
+ 1f8:	12 96       	adiw	r26, 0x02	; 2
+ 1fa:	8c 93       	st	X, r24
+ 1fc:	08 95       	ret
         }
         else
         {
         	pt_data = GPIO_DATA_LIST[port];
- 2c4:	e8 2f       	mov	r30, r24
- 2c6:	f0 e0       	ldi	r31, 0x00	; 0
- 2c8:	ee 0f       	add	r30, r30
- 2ca:	ff 1f       	adc	r31, r31
- 2cc:	e0 50       	subi	r30, 0x00	; 0
- 2ce:	ff 4f       	sbci	r31, 0xFF	; 255
- 2d0:	a0 81       	ld	r26, Z
- 2d2:	b1 81       	ldd	r27, Z+1	; 0x01
+ 1fe:	e8 2f       	mov	r30, r24
+ 200:	f0 e0       	ldi	r31, 0x00	; 0
+ 202:	ee 0f       	add	r30, r30
+ 204:	ff 1f       	adc	r31, r31
+ 206:	e0 50       	subi	r30, 0x00	; 0
+ 208:	ff 4f       	sbci	r31, 0xFF	; 255
+ 20a:	a0 81       	ld	r26, Z
+ 20c:	b1 81       	ldd	r27, Z+1	; 0x01
         	pt_data->DATA_OUT_PULL_REG.byte |= GPIO_PIN_SET_MASK[pin];
- 2d4:	12 96       	adiw	r26, 0x02	; 2
- 2d6:	9c 91       	ld	r25, X
- 2d8:	12 97       	sbiw	r26, 0x02	; 2
- 2da:	e6 2f       	mov	r30, r22
- 2dc:	f0 e0       	ldi	r31, 0x00	; 0
- 2de:	e2 5f       	subi	r30, 0xF2	; 242
- 2e0:	fe 4f       	sbci	r31, 0xFE	; 254
- 2e2:	80 81       	ld	r24, Z
- 2e4:	89 2b       	or	r24, r25
- 2e6:	12 96       	adiw	r26, 0x02	; 2
- 2e8:	8c 93       	st	X, r24
- 2ea:	08 95       	ret
+ 20e:	12 96       	adiw	r26, 0x02	; 2
+ 210:	9c 91       	ld	r25, X
+ 212:	12 97       	sbiw	r26, 0x02	; 2
+ 214:	e6 2f       	mov	r30, r22
+ 216:	f0 e0       	ldi	r31, 0x00	; 0
+ 218:	e4 5e       	subi	r30, 0xE4	; 228
+ 21a:	fe 4f       	sbci	r31, 0xFE	; 254
+ 21c:	80 81       	ld	r24, Z
+ 21e:	89 2b       	or	r24, r25
+ 220:	12 96       	adiw	r26, 0x02	; 2
+ 222:	8c 93       	st	X, r24
+ 224:	08 95       	ret
 
-000002ec <Gpio__PinRead>:
+00000226 <Gpio__PinRead>:
 	volatile GPIO_DATA_TYPE *pt_data;
 	unsigned char pin_state = ON;       // pin_state = 0x00  acionado  
 	
 		
 	
     	pt_data = GPIO_DATA_LIST[port];
- 2ec:	e8 2f       	mov	r30, r24
- 2ee:	f0 e0       	ldi	r31, 0x00	; 0
- 2f0:	ee 0f       	add	r30, r30
- 2f2:	ff 1f       	adc	r31, r31
- 2f4:	e0 50       	subi	r30, 0x00	; 0
- 2f6:	ff 4f       	sbci	r31, 0xFF	; 255
- 2f8:	01 90       	ld	r0, Z+
- 2fa:	f0 81       	ld	r31, Z
- 2fc:	e0 2d       	mov	r30, r0
+ 226:	e8 2f       	mov	r30, r24
+ 228:	f0 e0       	ldi	r31, 0x00	; 0
+ 22a:	ee 0f       	add	r30, r30
+ 22c:	ff 1f       	adc	r31, r31
+ 22e:	e0 50       	subi	r30, 0x00	; 0
+ 230:	ff 4f       	sbci	r31, 0xFF	; 255
+ 232:	01 90       	ld	r0, Z+
+ 234:	f0 81       	ld	r31, Z
+ 236:	e0 2d       	mov	r30, r0
     	if (pt_data->DATA_IN_REG.byte & GPIO_PIN_SET_MASK[pin])     // if(leitura != 0)   ou if(leitura)
- 2fe:	90 81       	ld	r25, Z
- 300:	e6 2f       	mov	r30, r22
- 302:	f0 e0       	ldi	r31, 0x00	; 0
- 304:	e2 5f       	subi	r30, 0xF2	; 242
- 306:	fe 4f       	sbci	r31, 0xFE	; 254
+ 238:	90 81       	ld	r25, Z
+ 23a:	e6 2f       	mov	r30, r22
+ 23c:	f0 e0       	ldi	r31, 0x00	; 0
+ 23e:	e4 5e       	subi	r30, 0xE4	; 228
+ 240:	fe 4f       	sbci	r31, 0xFE	; 254
         {
     		pin_state = OFF;     // pin_state = 0x01   não acionado
         }
    
     return (pin_state);
- 308:	80 81       	ld	r24, Z
- 30a:	98 23       	and	r25, r24
- 30c:	81 e0       	ldi	r24, 0x01	; 1
- 30e:	09 f0       	breq	.+2      	; 0x312 <Gpio__PinRead+0x26>
- 310:	80 e0       	ldi	r24, 0x00	; 0
+ 242:	80 81       	ld	r24, Z
+ 244:	98 23       	and	r25, r24
+ 246:	81 e0       	ldi	r24, 0x01	; 1
+ 248:	09 f0       	breq	.+2      	; 0x24c <Gpio__PinRead+0x26>
+ 24a:	80 e0       	ldi	r24, 0x00	; 0
     
- 312:	08 95       	ret
+ 24c:	08 95       	ret
 
-00000314 <_exit>:
- 314:	f8 94       	cli
+0000024e <Hal__Initialize>:
+unsigned char Hal__ReadKey(KEY_INPUT_TYPE key)
+{
+unsigned char value;
+value = Gpio__PinRead(KEYS_GPIO[key].port, KEYS_GPIO[key].pin);
+return (value);
+}
+ 24e:	0f 93       	push	r16
+ 250:	1f 93       	push	r17
+ 252:	cf 93       	push	r28
+ 254:	df 93       	push	r29
+ 256:	cc e0       	ldi	r28, 0x0C	; 12
+ 258:	d1 e0       	ldi	r29, 0x01	; 1
+ 25a:	04 e1       	ldi	r16, 0x14	; 20
+ 25c:	11 e0       	ldi	r17, 0x01	; 1
+ 25e:	41 e0       	ldi	r20, 0x01	; 1
+ 260:	69 81       	ldd	r22, Y+1	; 0x01
+ 262:	88 81       	ld	r24, Y
+ 264:	0e 94 c2 00 	call	0x184	; 0x184 <Gpio__PinConfig>
+ 268:	22 96       	adiw	r28, 0x02	; 2
+ 26a:	c0 17       	cp	r28, r16
+ 26c:	d1 07       	cpc	r29, r17
+ 26e:	b9 f7       	brne	.-18     	; 0x25e <Hal__Initialize+0x10>
+ 270:	c6 e0       	ldi	r28, 0x06	; 6
+ 272:	d1 e0       	ldi	r29, 0x01	; 1
+ 274:	0c e0       	ldi	r16, 0x0C	; 12
+ 276:	11 e0       	ldi	r17, 0x01	; 1
+ 278:	40 e0       	ldi	r20, 0x00	; 0
+ 27a:	69 81       	ldd	r22, Y+1	; 0x01
+ 27c:	88 81       	ld	r24, Y
+ 27e:	0e 94 c2 00 	call	0x184	; 0x184 <Gpio__PinConfig>
+ 282:	22 96       	adiw	r28, 0x02	; 2
+ 284:	c0 17       	cp	r28, r16
+ 286:	d1 07       	cpc	r29, r17
+ 288:	b9 f7       	brne	.-18     	; 0x278 <Hal__Initialize+0x2a>
+ 28a:	df 91       	pop	r29
+ 28c:	cf 91       	pop	r28
+ 28e:	1f 91       	pop	r17
+ 290:	0f 91       	pop	r16
+ 292:	08 95       	ret
 
-00000316 <__stop_program>:
- 316:	ff cf       	rjmp	.-2      	; 0x316 <__stop_program>
+00000294 <Hal__SetLed>:
+ 294:	46 2f       	mov	r20, r22
+ 296:	e8 2f       	mov	r30, r24
+ 298:	f0 e0       	ldi	r31, 0x00	; 0
+ 29a:	ee 0f       	add	r30, r30
+ 29c:	ff 1f       	adc	r31, r31
+ 29e:	e4 5f       	subi	r30, 0xF4	; 244
+ 2a0:	fe 4f       	sbci	r31, 0xFE	; 254
+ 2a2:	61 81       	ldd	r22, Z+1	; 0x01
+ 2a4:	80 81       	ld	r24, Z
+ 2a6:	0e 94 e9 00 	call	0x1d2	; 0x1d2 <Gpio__PinWrite>
+ 2aa:	08 95       	ret
+
+000002ac <Hal__SetAllLeds>:
+ 2ac:	ff 92       	push	r15
+ 2ae:	0f 93       	push	r16
+ 2b0:	1f 93       	push	r17
+ 2b2:	cf 93       	push	r28
+ 2b4:	df 93       	push	r29
+ 2b6:	f8 2e       	mov	r15, r24
+ 2b8:	cc e0       	ldi	r28, 0x0C	; 12
+ 2ba:	d1 e0       	ldi	r29, 0x01	; 1
+ 2bc:	04 e1       	ldi	r16, 0x14	; 20
+ 2be:	11 e0       	ldi	r17, 0x01	; 1
+ 2c0:	4f 2d       	mov	r20, r15
+ 2c2:	69 81       	ldd	r22, Y+1	; 0x01
+ 2c4:	88 81       	ld	r24, Y
+ 2c6:	0e 94 e9 00 	call	0x1d2	; 0x1d2 <Gpio__PinWrite>
+ 2ca:	22 96       	adiw	r28, 0x02	; 2
+ 2cc:	c0 17       	cp	r28, r16
+ 2ce:	d1 07       	cpc	r29, r17
+ 2d0:	b9 f7       	brne	.-18     	; 0x2c0 <Hal__SetAllLeds+0x14>
+ 2d2:	df 91       	pop	r29
+ 2d4:	cf 91       	pop	r28
+ 2d6:	1f 91       	pop	r17
+ 2d8:	0f 91       	pop	r16
+ 2da:	ff 90       	pop	r15
+ 2dc:	08 95       	ret
+
+000002de <Hal__ReadAllKey>:
+ *  Use this function to read the status of all keys
+ *  *  return: retorno o ponteiro da estrutura com os vetores das chaves*/
+
+
+KEYS_READ* Hal__ReadAllKey(void)
+{
+ 2de:	ef 92       	push	r14
+ 2e0:	ff 92       	push	r15
+ 2e2:	0f 93       	push	r16
+ 2e4:	1f 93       	push	r17
+ 2e6:	cf 93       	push	r28
+ 2e8:	df 93       	push	r29
+	KEY_INPUT_TYPE index;
+	// limpa a tab 
+	for (index = 0; index < NUM_OF_KEYS; index++)
+		tab.key[index] = 0xff;
+ 2ea:	e4 e2       	ldi	r30, 0x24	; 36
+ 2ec:	f1 e0       	ldi	r31, 0x01	; 1
+ 2ee:	8f ef       	ldi	r24, 0xFF	; 255
+ 2f0:	80 83       	st	Z, r24
+ 2f2:	81 83       	std	Z+1, r24	; 0x01
+ 2f4:	82 83       	std	Z+2, r24	; 0x02
+ 2f6:	c6 e0       	ldi	r28, 0x06	; 6
+ 2f8:	d1 e0       	ldi	r29, 0x01	; 1
+ 2fa:	8f 01       	movw	r16, r30
+ 2fc:	0f 2e       	mov	r0, r31
+ 2fe:	fc e0       	ldi	r31, 0x0C	; 12
+ 300:	ef 2e       	mov	r14, r31
+ 302:	f1 e0       	ldi	r31, 0x01	; 1
+ 304:	ff 2e       	mov	r15, r31
+ 306:	f0 2d       	mov	r31, r0
+		
+	
+	for (index = 0; index < NUM_OF_KEYS; index++)
+			tab.key[index] = Gpio__PinRead(KEYS_GPIO[index].port, KEYS_GPIO[index].pin);
+ 308:	69 81       	ldd	r22, Y+1	; 0x01
+ 30a:	88 81       	ld	r24, Y
+ 30c:	0e 94 13 01 	call	0x226	; 0x226 <Gpio__PinRead>
+ 310:	f8 01       	movw	r30, r16
+ 312:	81 93       	st	Z+, r24
+ 314:	8f 01       	movw	r16, r30
+ 316:	22 96       	adiw	r28, 0x02	; 2
+	// limpa a tab 
+	for (index = 0; index < NUM_OF_KEYS; index++)
+		tab.key[index] = 0xff;
+		
+	
+	for (index = 0; index < NUM_OF_KEYS; index++)
+ 318:	ce 15       	cp	r28, r14
+ 31a:	df 05       	cpc	r29, r15
+ 31c:	a9 f7       	brne	.-22     	; 0x308 <Hal__ReadAllKey+0x2a>
+			tab.key[index] = Gpio__PinRead(KEYS_GPIO[index].port, KEYS_GPIO[index].pin);
+	return (&tab);
+ 31e:	84 e2       	ldi	r24, 0x24	; 36
+ 320:	91 e0       	ldi	r25, 0x01	; 1
+ 322:	df 91       	pop	r29
+ 324:	cf 91       	pop	r28
+ 326:	1f 91       	pop	r17
+ 328:	0f 91       	pop	r16
+ 32a:	ff 90       	pop	r15
+ 32c:	ef 90       	pop	r14
+ 32e:	08 95       	ret
+
+00000330 <_exit>:
+ 330:	f8 94       	cli
+
+00000332 <__stop_program>:
+ 332:	ff cf       	rjmp	.-2      	; 0x332 <__stop_program>

@@ -10,9 +10,7 @@ c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/..
 Allocating common symbols
 Common symbol       size              file
 
-SW2_Button          0x1               Application/appl.o
-SW3_Button          0x1               Application/appl.o
-SW1_Button          0x1               Application/appl.o
+tab                 0x3               Application/appl.o
 Timer_Counter       0x1               Application/appl.o
 Trigger             0x1               Application/appl.o
 Toggle              0x1               Application/appl.o
@@ -31,6 +29,11 @@ Discarded input sections
  .text          0x00000000        0x0 Driver/gpio.o
  .data          0x00000000        0x0 Driver/gpio.o
  .bss           0x00000000        0x0 Driver/gpio.o
+ .text          0x00000000        0x0 Hal/hal.o
+ .data          0x00000000        0x0 Hal/hal.o
+ .bss           0x00000000        0x0 Hal/hal.o
+ .text.Hal__ReadKey
+                0x00000000       0x16 Hal/hal.o
  .text          0x00000000        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_exit.o)
  .data          0x00000000        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_exit.o)
  .bss           0x00000000        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_exit.o)
@@ -99,6 +102,7 @@ LOAD C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.3.300/gcc/
 LOAD Application/appl.o
 LOAD Application/main.o
 LOAD Driver/gpio.o
+LOAD Hal/hal.o
 START GROUP
 LOAD c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a
 END GROUP
@@ -210,7 +214,7 @@ END GROUP
 .rela.plt
  *(.rela.plt)
 
-.text           0x00000000      0x318
+.text           0x00000000      0x334
  *(.vectors)
  .vectors       0x00000000       0x68 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.3.300/gcc/dev/atmega328p/avr5/crtatmega328p.o
                 0x00000000                __vector_default
@@ -297,31 +301,40 @@ END GROUP
                 0x000000a2                __vector_20
                 0x000000a6                . = ALIGN (0x2)
  *(.text.*)
- .text.Appl__Handler
-                0x000000a6       0xf6 Application/appl.o
-                0x000000a6                Appl__Handler
- .text.Gpio_Init
-                0x0000019c       0x70 Application/appl.o
-                0x0000019c                Gpio_Init
  .text.Appl__Initialize
-                0x0000020c        0x6 Application/appl.o
-                0x0000020c                Appl__Initialize
- .text.main     0x00000212       0x38 Application/main.o
-                0x00000212                main
+                0x000000a6        0xc Application/appl.o
+                0x000000a6                Appl__Initialize
+ .text.Appl__Handler
+                0x000000b2       0x9a Application/appl.o
+                0x000000b2                Appl__Handler
+ .text.main     0x0000014c       0x38 Application/main.o
+                0x0000014c                main
  .text.Gpio__PinConfig
-                0x0000024a       0x4e Driver/gpio.o
-                0x0000024a                Gpio__PinConfig
+                0x00000184       0x4e Driver/gpio.o
+                0x00000184                Gpio__PinConfig
  .text.Gpio__PinWrite
-                0x00000298       0x54 Driver/gpio.o
-                0x00000298                Gpio__PinWrite
+                0x000001d2       0x54 Driver/gpio.o
+                0x000001d2                Gpio__PinWrite
  .text.Gpio__PinRead
-                0x000002ec       0x28 Driver/gpio.o
-                0x000002ec                Gpio__PinRead
-                0x00000314                . = ALIGN (0x2)
+                0x00000226       0x28 Driver/gpio.o
+                0x00000226                Gpio__PinRead
+ .text.Hal__Initialize
+                0x0000024e       0x46 Hal/hal.o
+                0x0000024e                Hal__Initialize
+ .text.Hal__SetLed
+                0x00000294       0x18 Hal/hal.o
+                0x00000294                Hal__SetLed
+ .text.Hal__SetAllLeds
+                0x000002ac       0x32 Hal/hal.o
+                0x000002ac                Hal__SetAllLeds
+ .text.Hal__ReadAllKey
+                0x000002de       0x52 Hal/hal.o
+                0x000002de                Hal__ReadAllKey
+                0x00000330                . = ALIGN (0x2)
  *(.fini9)
- .fini9         0x00000314        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_exit.o)
-                0x00000314                _exit
-                0x00000314                exit
+ .fini9         0x00000330        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_exit.o)
+                0x00000330                _exit
+                0x00000330                exit
  *(.fini9)
  *(.fini8)
  *(.fini8)
@@ -340,54 +353,58 @@ END GROUP
  *(.fini1)
  *(.fini1)
  *(.fini0)
- .fini0         0x00000314        0x4 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_exit.o)
+ .fini0         0x00000330        0x4 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_exit.o)
  *(.fini0)
-                0x00000318                _etext = .
+                0x00000334                _etext = .
 
-.data           0x00800100       0x16 load address 0x00000318
+.data           0x00800100       0x24 load address 0x00000334
                 0x00800100                PROVIDE (__data_start, .)
  *(.data)
  *(.data*)
  .data.GPIO_DATA_LIST
                 0x00800100        0x6 Driver/gpio.o
                 0x00800100                GPIO_DATA_LIST
+ .data.KEYS_GPIO
+                0x00800106        0x6 Hal/hal.o
+                0x00800106                KEYS_GPIO
+ .data.LED_GPIO
+                0x0080010c        0x8 Hal/hal.o
+                0x0080010c                LED_GPIO
  *(.gnu.linkonce.d*)
  *(.rodata)
  *(.rodata*)
  .rodata.GPIO_PIN_CLR_MASK
-                0x00800106        0x8 Driver/gpio.o
-                0x00800106                GPIO_PIN_CLR_MASK
+                0x00800114        0x8 Driver/gpio.o
+                0x00800114                GPIO_PIN_CLR_MASK
  .rodata.GPIO_PIN_SET_MASK
-                0x0080010e        0x8 Driver/gpio.o
-                0x0080010e                GPIO_PIN_SET_MASK
+                0x0080011c        0x8 Driver/gpio.o
+                0x0080011c                GPIO_PIN_SET_MASK
  *(.gnu.linkonce.r*)
-                0x00800116                . = ALIGN (0x2)
-                0x00800116                _edata = .
-                0x00800116                PROVIDE (__data_end, .)
+                0x00800124                . = ALIGN (0x2)
+                0x00800124                _edata = .
+                0x00800124                PROVIDE (__data_end, .)
 
-.bss            0x00800116        0x7
-                0x00800116                PROVIDE (__bss_start, .)
+.bss            0x00800124        0x7
+                0x00800124                PROVIDE (__bss_start, .)
  *(.bss)
  *(.bss*)
  *(COMMON)
- COMMON         0x00800116        0x6 Application/appl.o
-                0x00800116                SW2_Button
-                0x00800117                SW3_Button
-                0x00800118                SW1_Button
-                0x00800119                Timer_Counter
-                0x0080011a                Trigger
-                0x0080011b                Toggle
- COMMON         0x0080011c        0x1 Application/main.o
-                0x0080011c                Slot
-                0x0080011d                PROVIDE (__bss_end, .)
-                0x00000318                __data_load_start = LOADADDR (.data)
-                0x0000032e                __data_load_end = (__data_load_start + SIZEOF (.data))
+ COMMON         0x00800124        0x6 Application/appl.o
+                0x00800124                tab
+                0x00800127                Timer_Counter
+                0x00800128                Trigger
+                0x00800129                Toggle
+ COMMON         0x0080012a        0x1 Application/main.o
+                0x0080012a                Slot
+                0x0080012b                PROVIDE (__bss_end, .)
+                0x00000334                __data_load_start = LOADADDR (.data)
+                0x00000358                __data_load_end = (__data_load_start + SIZEOF (.data))
 
-.noinit         0x0080011d        0x0
+.noinit         0x0080012b        0x0
                 [!provide]                PROVIDE (__noinit_start, .)
  *(.noinit*)
                 [!provide]                PROVIDE (__noinit_end, .)
-                0x0080011d                _end = .
+                0x0080012b                _end = .
                 [!provide]                PROVIDE (__heap_start, .)
 
 .eeprom         0x00810000        0x0
@@ -433,6 +450,7 @@ END GROUP
                                  0x31 (size before relaxing)
  .comment       0x00000030       0x31 Application/main.o
  .comment       0x00000030       0x31 Driver/gpio.o
+ .comment       0x00000030       0x31 Hal/hal.o
 
 .note.gnu.avr.deviceinfo
                 0x00000000       0x40
@@ -454,59 +472,68 @@ END GROUP
 .debug_sfnames
  *(.debug_sfnames)
 
-.debug_aranges  0x00000000       0x80
+.debug_aranges  0x00000000       0xb8
  *(.debug_aranges)
  .debug_aranges
-                0x00000000       0x30 Application/appl.o
+                0x00000000       0x28 Application/appl.o
  .debug_aranges
-                0x00000030       0x20 Application/main.o
+                0x00000028       0x20 Application/main.o
  .debug_aranges
-                0x00000050       0x30 Driver/gpio.o
+                0x00000048       0x30 Driver/gpio.o
+ .debug_aranges
+                0x00000078       0x40 Hal/hal.o
 
 .debug_pubnames
  *(.debug_pubnames)
 
-.debug_info     0x00000000      0xf66
+.debug_info     0x00000000     0x10b3
  *(.debug_info .gnu.linkonce.wi.*)
  .debug_info    0x00000000      0x5f4 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.3.300/gcc/dev/atmega328p/avr5/crtatmega328p.o
- .debug_info    0x000005f4      0x560 Application/appl.o
- .debug_info    0x00000b54       0xc7 Application/main.o
- .debug_info    0x00000c1b      0x34b Driver/gpio.o
+ .debug_info    0x000005f4      0x34b Application/appl.o
+ .debug_info    0x0000093f       0xc7 Application/main.o
+ .debug_info    0x00000a06      0x34b Driver/gpio.o
+ .debug_info    0x00000d51      0x362 Hal/hal.o
 
-.debug_abbrev   0x00000000      0x8bc
+.debug_abbrev   0x00000000      0xad3
  *(.debug_abbrev)
  .debug_abbrev  0x00000000      0x5a2 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.3.300/gcc/dev/atmega328p/avr5/crtatmega328p.o
- .debug_abbrev  0x000005a2      0x125 Application/appl.o
- .debug_abbrev  0x000006c7       0x91 Application/main.o
- .debug_abbrev  0x00000758      0x164 Driver/gpio.o
+ .debug_abbrev  0x000005a2      0x18d Application/appl.o
+ .debug_abbrev  0x0000072f       0x91 Application/main.o
+ .debug_abbrev  0x000007c0      0x164 Driver/gpio.o
+ .debug_abbrev  0x00000924      0x1af Hal/hal.o
 
-.debug_line     0x00000000      0x50b
+.debug_line     0x00000000      0x5b5
  *(.debug_line .debug_line.* .debug_line_end)
  .debug_line    0x00000000      0x133 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.3.300/gcc/dev/atmega328p/avr5/crtatmega328p.o
- .debug_line    0x00000133      0x230 Application/appl.o
- .debug_line    0x00000363       0x99 Application/main.o
- .debug_line    0x000003fc      0x10f Driver/gpio.o
+ .debug_line    0x00000133      0x1b8 Application/appl.o
+ .debug_line    0x000002eb       0x99 Application/main.o
+ .debug_line    0x00000384      0x10f Driver/gpio.o
+ .debug_line    0x00000493      0x122 Hal/hal.o
 
-.debug_frame    0x00000000       0xac
+.debug_frame    0x00000000      0x15c
  *(.debug_frame)
- .debug_frame   0x00000000       0x44 Application/appl.o
- .debug_frame   0x00000044       0x24 Application/main.o
- .debug_frame   0x00000068       0x44 Driver/gpio.o
+ .debug_frame   0x00000000       0x40 Application/appl.o
+ .debug_frame   0x00000040       0x24 Application/main.o
+ .debug_frame   0x00000064       0x44 Driver/gpio.o
+ .debug_frame   0x000000a8       0xb4 Hal/hal.o
 
-.debug_str      0x00000000      0x5a9
+.debug_str      0x00000000      0x67b
  *(.debug_str)
  .debug_str     0x00000000      0x208 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.3.300/gcc/dev/atmega328p/avr5/crtatmega328p.o
- .debug_str     0x00000208      0x22e Application/appl.o
-                                0x262 (size before relaxing)
- .debug_str     0x00000436       0x64 Application/main.o
+ .debug_str     0x00000208      0x230 Application/appl.o
+                                0x26a (size before relaxing)
+ .debug_str     0x00000438       0x64 Application/main.o
                                 0x151 (size before relaxing)
- .debug_str     0x0000049a      0x10f Driver/gpio.o
+ .debug_str     0x0000049c      0x179 Driver/gpio.o
                                 0x2ae (size before relaxing)
+ .debug_str     0x00000615       0x66 Hal/hal.o
+                                0x2bb (size before relaxing)
 
-.debug_loc      0x00000000      0x182
+.debug_loc      0x00000000      0x40b
  *(.debug_loc)
- .debug_loc     0x00000000       0x48 Application/appl.o
- .debug_loc     0x00000048      0x13a Driver/gpio.o
+ .debug_loc     0x00000000       0xaf Application/appl.o
+ .debug_loc     0x000000af      0x13a Driver/gpio.o
+ .debug_loc     0x000001e9      0x222 Hal/hal.o
 
 .debug_macinfo
  *(.debug_macinfo)
@@ -526,11 +553,12 @@ END GROUP
 .debug_pubtypes
  *(.debug_pubtypes)
 
-.debug_ranges   0x00000000       0x50
+.debug_ranges   0x00000000       0x78
  *(.debug_ranges)
- .debug_ranges  0x00000000       0x20 Application/appl.o
- .debug_ranges  0x00000020       0x10 Application/main.o
- .debug_ranges  0x00000030       0x20 Driver/gpio.o
+ .debug_ranges  0x00000000       0x18 Application/appl.o
+ .debug_ranges  0x00000018       0x10 Application/main.o
+ .debug_ranges  0x00000028       0x20 Driver/gpio.o
+ .debug_ranges  0x00000048       0x30 Hal/hal.o
 
 .debug_macro
  *(.debug_macro)

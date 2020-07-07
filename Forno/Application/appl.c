@@ -8,10 +8,10 @@
 //-------------------------------------- Include Files ----------------------------------------------------------------
 //#include "C_Types.h"    ainda não...
 #include <avr/io.h> //definições do componente especificado
-#include <util/delay.h> /*biblioteca para o uso das rotinas de
-//_delay_ms() e _delay_us()*/
+#include <util/delay.h> /*biblioteca para o uso das rotinas de _delay_ms() e _delay_us()*/
 #include <Z:\Forno\Forno\Header\appl.h>
 #include <Z:\Forno\Forno\Header\gpio.h>
+#include <Z:\Forno\Forno\Header\hal.h>
 //-------------------------------------- PUBLIC (Variables) -----------------------------------------------------------
 
 
@@ -23,7 +23,8 @@
 unsigned char Timer_Counter;
 unsigned char Toggle;
 unsigned char Trigger;
-unsigned char SW1_Button, SW2_Button, SW3_Button;
+KEYS_READ tab;
+
 //-------------------------------------- PRIVATE (Function Prototypes) ---------------------------------------------------
 
 
@@ -34,70 +35,53 @@ unsigned char SW1_Button, SW2_Button, SW3_Button;
 
 void Appl__Initialize(void)
 {
-	Gpio_Init(); // Configuração das entradas e saídas digitais 
+Hal__Initialize();
+Hal__SetAllLeds(APAGADO);
 }
 
 
+//****************************************************
+// PODE-SE FAZER ESTE TESTE DE DUAS FORMAS: LER CADA BOTÃO OU LER TODOS DE UMA VEZ!!!
+
+
+//1) LER UMA DE CADA VEZ
 void Appl__Handler(void)
-{	
-	// Leitura dos botoes 
-	SW1_Button = Gpio__PinRead(PORT_C, SW1);
-	SW2_Button = Gpio__PinRead(PORT_C, SW2);
-	SW3_Button = Gpio__PinRead(PORT_C, SW3);
-	
-	if(SW1_Button == ON && SW3_Button == ON)
-	{
-		// Se SW1 e SW3 foram clicadas ao mesmo tempo entra nesa condicao
-		Gpio__PinWrite(PORT_B, LED1, APAGADO);
-		Gpio__PinWrite(PORT_B, LED2, APAGADO);
-		Gpio__PinWrite(PORT_B, LED3, APAGADO);
-		Gpio__PinWrite(PORT_B, LED4, APAGADO);
-		_delay_ms(3000); // Este delay serve para resolver o problema de mal contato dos push buttons 
-	}
-	else
-	{
-		if(SW1_Button == ON)
-		{
-			Gpio__PinWrite(PORT_B, LED1, ACESO);
-			Gpio__PinWrite(PORT_B, LED2, APAGADO);
-			Gpio__PinWrite(PORT_B, LED3, APAGADO);
-			Gpio__PinWrite(PORT_B, LED4, APAGADO);
-		}
-		
-		if(SW2_Button == ON)
-		{
-			Gpio__PinWrite(PORT_B, LED1, ACESO);
-			Gpio__PinWrite(PORT_B, LED2, ACESO);
-			Gpio__PinWrite(PORT_B, LED3, APAGADO);
-			Gpio__PinWrite(PORT_B, LED4, APAGADO);
-		}
-		
-		if(SW3_Button == ON)
-		{
-			Gpio__PinWrite(PORT_B, LED1, ACESO);
-			Gpio__PinWrite(PORT_B, LED2, ACESO);
-			Gpio__PinWrite(PORT_B, LED3, ACESO);
-			Gpio__PinWrite(PORT_B, LED4, APAGADO);
-		}	
-	}
+{
+KEY_INPUT_TYPE index;
+for (index = 0; index < NUM_OF_KEYS; index++)
+{
+	tab.key[index] = Hal__ReadAllKey();
 }
 
-void Gpio_Init(void)
-{
-	// Configurando as saídas digitais 
-	Gpio__PinConfig(PORT_B, LED1, OUTPUT_DIGITAL);
-	Gpio__PinConfig(PORT_B, LED2, OUTPUT_DIGITAL);
-	Gpio__PinConfig(PORT_B, LED3, OUTPUT_DIGITAL);
-	Gpio__PinConfig(PORT_B, LED4, OUTPUT_DIGITAL);
-	
-	// Configurando as entradas digitais
-	Gpio__PinConfig(PORT_C, SW1, INPUT_DIGITAL_PULLUP);
-	Gpio__PinConfig(PORT_C, SW2, INPUT_DIGITAL_PULLUP);
-	Gpio__PinConfig(PORT_C, SW3, INPUT_DIGITAL_PULLUP); 
-	
-	// Tornando todos os LEDs apagados 
-	Gpio__PinWrite(PORT_B, LED1, APAGADO);
-	Gpio__PinWrite(PORT_B, LED2, APAGADO);
-	Gpio__PinWrite(PORT_B, LED3, APAGADO);
-	Gpio__PinWrite(PORT_B, LED4, APAGADO);
+if (tab.key[0]== ON && tab.key[2]== ON)
+  {
+  Hal__SetAllLeds(APAGADO);
+  _delay_ms(1000); 
+  }
+else
+  {
+  if(tab.key[0] == ON)    //reads key 1 (at SW1)
+	{
+	Hal__SetLed(LED_0,ACESO);
+	Hal__SetLed(LED_1,APAGADO);
+	Hal__SetLed(LED_2,APAGADO);	  
+	}
+ if(tab.key[1] == ON)           //reads key 2 (at SW2)
+	{
+    Hal__SetLed(LED_0,ACESO);	 
+    Hal__SetLed(LED_1,ACESO);
+    Hal__SetLed(LED_2,APAGADO);		 
+    }
+if(tab.key[2] == ON)   //reads key 3 (at SW3)
+	{
+	Hal__SetLed(LED_0,ACESO);
+	Hal__SetLed(LED_1,ACESO);  
+	Hal__SetLed(LED_2,ACESO);	  
+	}
+ }
 }
+
+// LER TODOS DE UMA VEZ....tarefa para entregar
+
+	
+	

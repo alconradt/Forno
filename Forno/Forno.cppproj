@@ -163,10 +163,16 @@
     <Compile Include="Driver\gpio.c">
       <SubType>compile</SubType>
     </Compile>
+    <Compile Include="Hal\hal.c">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="Header\appl.h">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="Header\gpio.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Header\hal.h">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="Header\main.h">
@@ -183,6 +189,7 @@
     <Folder Include="Application" />
     <Folder Include="Driver" />
     <Folder Include="Header" />
+    <Folder Include="Hal" />
   </ItemGroup>
   <Import Project="$(AVRSTUDIO_EXE_PATH)\\Vs\\Compiler.targets" />
 </Project>

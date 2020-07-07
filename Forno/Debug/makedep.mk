@@ -8,3 +8,5 @@ Application\main.c
 
 Driver\gpio.c
 
+Hal\hal.c
+
