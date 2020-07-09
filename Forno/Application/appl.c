@@ -23,7 +23,7 @@
 unsigned char Timer_Counter;
 unsigned char Toggle;
 unsigned char Trigger;
-KEYS_READ tab;
+
 
 //-------------------------------------- PRIVATE (Function Prototypes) ---------------------------------------------------
 
@@ -47,32 +47,30 @@ Hal__SetAllLeds(APAGADO);
 //1) LER UMA DE CADA VEZ
 void Appl__Handler(void)
 {
-KEY_INPUT_TYPE index;
-for (index = 0; index < NUM_OF_KEYS; index++)
-{
-	tab.key[index] = Hal__ReadAllKey();
-}
 
-if (tab.key[0]== ON && tab.key[2]== ON)
+KEYS_READ * value = Hal__ReadAllKey();
+
+
+if (value->key[0]== ON && value->key[2]== ON)
   {
   Hal__SetAllLeds(APAGADO);
   _delay_ms(1000); 
   }
 else
   {
-  if(tab.key[0] == ON)    //reads key 1 (at SW1)
+  if(value->key[0] == ON)    //reads key 1 (at SW1)
 	{
 	Hal__SetLed(LED_0,ACESO);
 	Hal__SetLed(LED_1,APAGADO);
 	Hal__SetLed(LED_2,APAGADO);	  
 	}
- if(tab.key[1] == ON)           //reads key 2 (at SW2)
+ if(value->key[1] == ON)           //reads key 2 (at SW2)
 	{
     Hal__SetLed(LED_0,ACESO);	 
     Hal__SetLed(LED_1,ACESO);
     Hal__SetLed(LED_2,APAGADO);		 
     }
-if(tab.key[2] == ON)   //reads key 3 (at SW3)
+if(value->key[2] == ON)   //reads key 3 (at SW3)
 	{
 	Hal__SetLed(LED_0,ACESO);
 	Hal__SetLed(LED_1,ACESO);  
