@@ -217,7 +217,7 @@ void UpdateDisplaySevenSeg(void)
 		case OVEN_MIN:
 		{
 			pt = MINIMO_DIGITO;
-			for(i=0;i<4;i++)
+			for(i=0;i<4;i++,pt++)
 			{
 				// coloca o valor no 7segmento = 0080
 				Hal__WriteValtoSegment(i, *pt);
@@ -227,7 +227,7 @@ void UpdateDisplaySevenSeg(void)
 		case OVEN_MED:
 		{
 			pt = MEDIO_DIGITO;
-			for(i=0;i<4;i++)
+			for(i=0;i<4;i++,pt++)
 			{
 				// coloca o valor no 7segmento = 0280
 				Hal__WriteValtoSegment(i, *pt);
@@ -237,7 +237,7 @@ void UpdateDisplaySevenSeg(void)
 		case OVEN_MAX:
 		{
 			pt = MAXIMO_DIGITO;
-			for(i=0;i<4;i++)
+			for(i=0;i<4;i++,pt++)
 			{
 				// coloca o valor no 7segmento = 0320
 				Hal__WriteValtoSegment(i, *pt);
