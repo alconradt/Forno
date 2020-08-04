@@ -13,7 +13,7 @@
 
 
 // Protótipo
-void SevenSeg_WriteValueToSegment(char Segment, char *Value);
+void SevenSeg_WriteValueToSegment(char Segment, char Value);
 
 
 #endif /* INCFILE1_H_ */

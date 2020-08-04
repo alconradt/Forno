@@ -47,7 +47,7 @@ void Hal__SetLed(LED_OUTPUT_TYPE output,unsigned char value);
 void Hal__SetAllLeds(unsigned char value);
 unsigned char Hal__ReadKey(KEY_INPUT_TYPE key);
 
-void Hal__WriteValtoSegment(char Segment, char *Value);
+void Hal__WriteValtoSegment(char Segment, char Value);
 
 
 #endif /* HAL_H_ */

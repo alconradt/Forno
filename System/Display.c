@@ -17,12 +17,10 @@
 
 
 //-------------------------------------- Defines, Enumerations ----------------------------------------------------------------
-
-#define NUM_EVENTS     	   50
+#define NUM_OF_DIGITOS      4      // número de segmentos do Display 7 segmentos
+#define NUM_EVENTS     		50
 #define ACENDE_LED          0
 #define APAGA_LED           1
-
-#define NUM_OF_SEG      4      // número de segmentos do Display 7 segmentos
 
 
 #define TRUE               1
@@ -34,10 +32,10 @@ OVEN_DISPLAY_STATE_TYPE Oven_Display_State;      // variável global  de display
 
 KEY_EVENT_TYPE Display_Keys_Map;                  // variável global  de keys
 
-char ZERADO_DIGITO[NUM_OF_SEG] = {0xC0,0xC0,0xC0,0xC0};   //# 0000
-char MINIMO_DIGITO[NUM_OF_SEG] = {0xC0,0xF9,0xA4,0xC0};   //# 0180
-char MEDIO_DIGITO[NUM_OF_SEG] =  {0xC0,0xA4,0x92,0xC0};   //# 0250
-char MAXIMO_DIGITO[NUM_OF_SEG] = {0xC0,0xB0,0xA4,0xC0};   //# 0320
+const char ZERADO_DIGITO[NUM_OF_DIGITOS] = {0xC0,0xC0,0xC0,0xC0};   //# 0000
+const char MINIMO_DIGITO[NUM_OF_DIGITOS] = {0xC0,0xF9,0xA4,0xC0};   //# 0180
+const char MEDIO_DIGITO[NUM_OF_DIGITOS] =  {0xC0,0xA4,0x92,0xC0};   //# 0250
+const char MAXIMO_DIGITO[NUM_OF_DIGITOS] = {0xC0,0xB0,0xA4,0xC0};   //# 0320
 
 
 //-------------------------------------- PRIVATE (Function Prototypes) ---------------------------------------------------
@@ -126,8 +124,7 @@ KEY_EVENT_TYPE Display__GetEvent(void)
  */
 void UpdateDisplayLeds(void)
 {
-	char i;
-	//char *p_digito;
+
 	switch(Oven_Display_State)
 	{
 	case OVEN_OFF:
@@ -204,62 +201,59 @@ void ReadDisplayKeys(void)
  */
 void UpdateDisplaySevenSeg(void)
 {
-char i;
-char *p_digito;
-switch(Oven_Display_State)
+	switch(Oven_Display_State)
 	{
-	case OVEN_OFF:
+		const char *pt;
+		char i;
+		case OVEN_OFF:
 		{
-		p_digito = &ZERADO_DIGITO[0];
-		for (i = 0; i< NUM_OF_SEG; i++, p_digito++)
-		Hal__WriteValtoSegment(i, p_digito);
-		break;
+			pt = ZERADO_DIGITO;
+			for(i=0;i<4;i++,pt++)
+			{
+				// coloca o valor no 7segmento = 0000
+				Hal__WriteValtoSegment(i, *pt);
+			}
+			break;
 		}
-	case OVEN_INIT:
-	case OVEN_TIMEOUT:
+		case OVEN_INIT:
+		case OVEN_TIMEOUT:
 		break;
-	case OVEN_MIN:
+		case OVEN_MIN:
 		{
-		// coloca o valor no 7segmento = 0080
-		//Hal__WriteValtoSegment(0, 0xC0);
-		//Hal__WriteValtoSegment(1, 0xC0);
-		//Hal__WriteValtoSegment(2, 0x80);
-		//Hal__WriteValtoSegment(3, 0xC0);
-		p_digito = &MINIMO_DIGITO[0];
-		for (i = 0; i< NUM_OF_SEG; i++, p_digito++)
-		Hal__WriteValtoSegment(i, p_digito);
-		break;
+			pt = MINIMO_DIGITO;
+			for(i=0;i<4;i++,pt++)
+			{
+				// coloca o valor no 7segmento = 0080
+				Hal__WriteValtoSegment(i, *pt);
+			}
+			break;
 		}
-	case OVEN_MED:
+		case OVEN_MED:
 		{
-		// coloca o valor no 7segmento = 0280
-		//Hal__WriteValtoSegment(0, 0xC0);
-		//Hal__WriteValtoSegment(1, 0xA4);
-		//Hal__WriteValtoSegment(2, 0x82);
-		//Hal__WriteValtoSegment(3, 0xC0);
-		p_digito = &MEDIO_DIGITO[0];
-		for (i = 0; i< NUM_OF_SEG; i++, p_digito++)
-		Hal__WriteValtoSegment(i, p_digito);
-		break;
+			pt = MEDIO_DIGITO;
+			for(i=0;i<4;i++,pt++)
+			{
+				// coloca o valor no 7segmento = 0280
+				Hal__WriteValtoSegment(i, *pt);
+			}
+			break;
 		}
-	case OVEN_MAX:
+		case OVEN_MAX:
 		{
-		// coloca o valor no 7segmento = 0320
-		//Hal__WriteValtoSegment(0, 0xC0);
-		//Hal__WriteValtoSegment(1, 0xB0);
-		//Hal__WriteValtoSegment(2, 0xA4);
-		//Hal__WriteValtoSegment(3, 0xC0);
-		p_digito = &MAXIMO_DIGITO;   // ou p_digito = &MAXIMO_DIGITO[0];
-		for (i = 0; i< NUM_OF_SEG; i++, p_digito++)
-		Hal__WriteValtoSegment(i, p_digito);
-		break;
+			pt = MAXIMO_DIGITO;
+			for(i=0;i<4;i++,pt++)
+			{
+				// coloca o valor no 7segmento = 0320
+				Hal__WriteValtoSegment(i, *pt);
+			}
+			break;
 		}
-	
-	default:
+		
+		default:
 		{
-		break;
+			break;
 		}
-   }
+	}
 }
 
 		

@@ -183,10 +183,10 @@ unsigned char Hal__ReadKey(KEY_INPUT_TYPE key)
  *  Use this function to write a Val in the segment 
  *  
  */
-void Hal__WriteValtoSegment(char Segment, char *Value)
+void Hal__WriteValtoSegment(char Segment, char Value)
 {
 
-SevenSeg_WriteValueToSegment(Segment, Value);
+	SevenSeg_WriteValueToSegment(Segment, Value);
 }
 
 

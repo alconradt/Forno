@@ -18,23 +18,23 @@ const char SEGMENT_SELECT[] = {0xF1,0xF2,0xF4,0xF8};
 
 
 /* Write a value to one of the 4 digits of the display */
-void SevenSeg_WriteValueToSegment(char Segment, char *Value)
+void SevenSeg_WriteValueToSegment(char Segment, char Value)
 {
-	bitClear(PORTD, 4);
+	bitClear(PORTD, LATCH_PIN);
 
 	for (uint8_t i = 0; i < 8; i++)  {
-		bitWrite(PORTB, 0, !!((*Value) & (1 << (7 - i))));
-		bitSet(PORTD, 7);
-		bitClear(PORTD, 7);
+		bitWrite(PORTB, 0, ((Value) & (1 << (7 - i))));
+		bitSet(PORTD, CLK_PIN);
+		bitClear(PORTD, CLK_PIN);
 	}
 
 	for (uint8_t i = 0; i < 8; i++)  {
-		bitWrite(PORTB, 0, !!(SEGMENT_SELECT[Segment] & (1 << (7 - i))));
-		bitSet(PORTD, 7);
-		bitClear(PORTD, 7);
+		bitWrite(PORTB, 0, (SEGMENT_SELECT[Segment] & (1 << (7 - i))));
+		bitSet(PORTD, CLK_PIN);
+		bitClear(PORTD, CLK_PIN);
 	}
 
-	bitSet(PORTD, 4);
+	bitSet(PORTD, LATCH_PIN);
 }
 
 
