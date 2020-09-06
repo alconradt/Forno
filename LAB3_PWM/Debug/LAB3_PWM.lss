@@ -1,0 +1,2889 @@
+
+LAB3_PWM.elf:     file format elf32-avr
+
+Sections:
+Idx Name          Size      VMA       LMA       File off  Algn
+  0 .data         0000006a  00800100  00000df6  00000e8a  2**0
+                  CONTENTS, ALLOC, LOAD, DATA
+  1 .text         00000df6  00000000  00000000  00000094  2**1
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE
+  2 .bss          0000004f  0080016a  0080016a  00000ef4  2**0
+                  ALLOC
+  3 .comment      00000030  00000000  00000000  00000ef4  2**0
+                  CONTENTS, READONLY
+  4 .note.gnu.avr.deviceinfo 00000040  00000000  00000000  00000f24  2**2
+                  CONTENTS, READONLY
+  5 .debug_aranges 00000280  00000000  00000000  00000f64  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  6 .debug_info   000031c7  00000000  00000000  000011e4  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  7 .debug_abbrev 00001355  00000000  00000000  000043ab  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  8 .debug_line   00001396  00000000  00000000  00005700  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  9 .debug_frame  00000490  00000000  00000000  00006a98  2**2
+                  CONTENTS, READONLY, DEBUGGING
+ 10 .debug_str    00001329  00000000  00000000  00006f28  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 11 .debug_loc    00000e97  00000000  00000000  00008251  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 12 .debug_ranges 000001d0  00000000  00000000  000090e8  2**0
+                  CONTENTS, READONLY, DEBUGGING
+
+Disassembly of section .text:
+
+00000000 <__vectors>:
+   0:	0c 94 34 00 	jmp	0x68	; 0x68 <__ctors_end>
+   4:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+   8:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+   c:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  10:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  14:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  18:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  1c:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  20:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  24:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  28:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  2c:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  30:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  34:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  38:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  3c:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  40:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  44:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  48:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  4c:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  50:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  54:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  58:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  5c:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  60:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  64:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+
+00000068 <__ctors_end>:
+  68:	11 24       	eor	r1, r1
+  6a:	1f be       	out	0x3f, r1	; 63
+  6c:	cf ef       	ldi	r28, 0xFF	; 255
+  6e:	d8 e0       	ldi	r29, 0x08	; 8
+  70:	de bf       	out	0x3e, r29	; 62
+  72:	cd bf       	out	0x3d, r28	; 61
+
+00000074 <__do_copy_data>:
+  74:	11 e0       	ldi	r17, 0x01	; 1
+  76:	a0 e0       	ldi	r26, 0x00	; 0
+  78:	b1 e0       	ldi	r27, 0x01	; 1
+  7a:	e6 ef       	ldi	r30, 0xF6	; 246
+  7c:	fd e0       	ldi	r31, 0x0D	; 13
+  7e:	02 c0       	rjmp	.+4      	; 0x84 <__do_copy_data+0x10>
+  80:	05 90       	lpm	r0, Z+
+  82:	0d 92       	st	X+, r0
+  84:	aa 36       	cpi	r26, 0x6A	; 106
+  86:	b1 07       	cpc	r27, r17
+  88:	d9 f7       	brne	.-10     	; 0x80 <__do_copy_data+0xc>
+
+0000008a <__do_clear_bss>:
+  8a:	21 e0       	ldi	r18, 0x01	; 1
+  8c:	aa e6       	ldi	r26, 0x6A	; 106
+  8e:	b1 e0       	ldi	r27, 0x01	; 1
+  90:	01 c0       	rjmp	.+2      	; 0x94 <.do_clear_bss_start>
+
+00000092 <.do_clear_bss_loop>:
+  92:	1d 92       	st	X+, r1
+
+00000094 <.do_clear_bss_start>:
+  94:	a9 3b       	cpi	r26, 0xB9	; 185
+  96:	b2 07       	cpc	r27, r18
+  98:	e1 f7       	brne	.-8      	; 0x92 <.do_clear_bss_loop>
+  9a:	0e 94 af 00 	call	0x15e	; 0x15e <main>
+  9e:	0c 94 f9 06 	jmp	0xdf2	; 0xdf2 <_exit>
+
+000000a2 <__bad_interrupt>:
+  a2:	0c 94 00 00 	jmp	0	; 0x0 <__vectors>
+
+000000a6 <Appl__Initialize>:
+//=====================================================================================================================
+
+
+void Appl__Initialize(void)
+{
+	User_Action = EVENTS_NO_EVENT;
+  a6:	8f ef       	ldi	r24, 0xFF	; 255
+  a8:	80 93 6a 01 	sts	0x016A, r24	; 0x80016a <__data_end>
+	Sounds__PlaySounds(SOUND_POWER_ON);    //buzzer de power on
+  ac:	80 e0       	ldi	r24, 0x00	; 0
+  ae:	0e 94 59 06 	call	0xcb2	; 0xcb2 <Sounds__PlaySounds>
+  b2:	08 95       	ret
+
+000000b4 <Appl__Handler>:
+
+void Appl__Handler(void)
+{//unsigned short int ad_value;
+	
+#if (EXP_OVEN == ENABLED)
+        Sounds__PlaySounds(PLAY_NO_SOUND); 	
+  b4:	83 e0       	ldi	r24, 0x03	; 3
+  b6:	0e 94 59 06 	call	0xcb2	; 0xcb2 <Sounds__PlaySounds>
+	    User_Action = Display__GetEvent();
+  ba:	0e 94 cf 05 	call	0xb9e	; 0xb9e <Display__GetEvent>
+  be:	80 93 6a 01 	sts	0x016A, r24	; 0x80016a <__data_end>
+		if (User_Action != EVENTS_NO_EVENT)
+  c2:	8f 3f       	cpi	r24, 0xFF	; 255
+  c4:	09 f4       	brne	.+2      	; 0xc8 <Appl__Handler+0x14>
+  c6:	48 c0       	rjmp	.+144    	; 0x158 <Appl__Handler+0xa4>
+		    {
+			switch(User_Action)
+  c8:	82 30       	cpi	r24, 0x02	; 2
+  ca:	39 f1       	breq	.+78     	; 0x11a <Appl__Handler+0x66>
+  cc:	28 f4       	brcc	.+10     	; 0xd8 <Appl__Handler+0x24>
+  ce:	88 23       	and	r24, r24
+  d0:	41 f0       	breq	.+16     	; 0xe2 <Appl__Handler+0x2e>
+  d2:	81 30       	cpi	r24, 0x01	; 1
+  d4:	a1 f0       	breq	.+40     	; 0xfe <Appl__Handler+0x4a>
+  d6:	40 c0       	rjmp	.+128    	; 0x158 <Appl__Handler+0xa4>
+  d8:	83 30       	cpi	r24, 0x03	; 3
+  da:	69 f1       	breq	.+90     	; 0x136 <Appl__Handler+0x82>
+  dc:	8a 3a       	cpi	r24, 0xAA	; 170
+  de:	c9 f1       	breq	.+114    	; 0x152 <Appl__Handler+0x9e>
+  e0:	3b c0       	rjmp	.+118    	; 0x158 <Appl__Handler+0xa4>
+			    {
+			    case KEY_OFF_EVENT:
+				   Display__SetState(OVEN_OFF);
+  e2:	80 e0       	ldi	r24, 0x00	; 0
+  e4:	0e 94 6b 05 	call	0xad6	; 0xad6 <Display__SetState>
+				   OvenTempControl__SetLevel(TEMP_LEVEL_OVEN_OFF);
+  e8:	83 e0       	ldi	r24, 0x03	; 3
+  ea:	0e 94 37 01 	call	0x26e	; 0x26e <OvenTempControl__SetLevel>
+				   Hal__SetBuzzerFreq(4000);
+  ee:	80 ea       	ldi	r24, 0xA0	; 160
+  f0:	9f e0       	ldi	r25, 0x0F	; 15
+  f2:	0e 94 1a 04 	call	0x834	; 0x834 <Hal__SetBuzzerFreq>
+				   Sounds__PlaySounds(SOUND_KEY_PRESS);    //buzzer de key press
+  f6:	81 e0       	ldi	r24, 0x01	; 1
+  f8:	0e 94 59 06 	call	0xcb2	; 0xcb2 <Sounds__PlaySounds>
+				   break;
+  fc:	2d c0       	rjmp	.+90     	; 0x158 <Appl__Handler+0xa4>
+				
+			    case KEY_MIN_EVENT:
+			          Display__SetState(OVEN_MIN);
+  fe:	81 e0       	ldi	r24, 0x01	; 1
+ 100:	0e 94 6b 05 	call	0xad6	; 0xad6 <Display__SetState>
+					  OvenTempControl__SetLevel(TEMP_LEVEL_MIN);
+ 104:	80 e0       	ldi	r24, 0x00	; 0
+ 106:	0e 94 37 01 	call	0x26e	; 0x26e <OvenTempControl__SetLevel>
+					  Hal__SetBuzzerFreq(2000);
+ 10a:	80 ed       	ldi	r24, 0xD0	; 208
+ 10c:	97 e0       	ldi	r25, 0x07	; 7
+ 10e:	0e 94 1a 04 	call	0x834	; 0x834 <Hal__SetBuzzerFreq>
+					  Sounds__PlaySounds(SOUND_KEY_PRESS);    //buzzer de key press
+ 112:	81 e0       	ldi	r24, 0x01	; 1
+ 114:	0e 94 59 06 	call	0xcb2	; 0xcb2 <Sounds__PlaySounds>
+				      break;
+ 118:	1f c0       	rjmp	.+62     	; 0x158 <Appl__Handler+0xa4>
+							
+				 case KEY_MED_EVENT:
+					  Display__SetState(OVEN_MED);
+ 11a:	82 e0       	ldi	r24, 0x02	; 2
+ 11c:	0e 94 6b 05 	call	0xad6	; 0xad6 <Display__SetState>
+					  OvenTempControl__SetLevel(TEMP_LEVEL_MED);
+ 120:	81 e0       	ldi	r24, 0x01	; 1
+ 122:	0e 94 37 01 	call	0x26e	; 0x26e <OvenTempControl__SetLevel>
+					  Hal__SetBuzzerFreq(3000);
+ 126:	88 eb       	ldi	r24, 0xB8	; 184
+ 128:	9b e0       	ldi	r25, 0x0B	; 11
+ 12a:	0e 94 1a 04 	call	0x834	; 0x834 <Hal__SetBuzzerFreq>
+				      Sounds__PlaySounds(SOUND_KEY_PRESS);    //buzzer de key press
+ 12e:	81 e0       	ldi	r24, 0x01	; 1
+ 130:	0e 94 59 06 	call	0xcb2	; 0xcb2 <Sounds__PlaySounds>
+					  break;
+ 134:	11 c0       	rjmp	.+34     	; 0x158 <Appl__Handler+0xa4>
+				
+			     case KEY_MAX_EVENT:
+				      Display__SetState(OVEN_MAX);
+ 136:	83 e0       	ldi	r24, 0x03	; 3
+ 138:	0e 94 6b 05 	call	0xad6	; 0xad6 <Display__SetState>
+					  OvenTempControl__SetLevel(TEMP_LEVEL_MAX);
+ 13c:	82 e0       	ldi	r24, 0x02	; 2
+ 13e:	0e 94 37 01 	call	0x26e	; 0x26e <OvenTempControl__SetLevel>
+					  Hal__SetBuzzerFreq(5000);
+ 142:	88 e8       	ldi	r24, 0x88	; 136
+ 144:	93 e1       	ldi	r25, 0x13	; 19
+ 146:	0e 94 1a 04 	call	0x834	; 0x834 <Hal__SetBuzzerFreq>
+					  Sounds__PlaySounds(SOUND_KEY_PRESS);    //buzzer de key press
+ 14a:	81 e0       	ldi	r24, 0x01	; 1
+ 14c:	0e 94 59 06 	call	0xcb2	; 0xcb2 <Sounds__PlaySounds>
+				      break;
+ 150:	03 c0       	rjmp	.+6      	; 0x158 <Appl__Handler+0xa4>
+			case KEY_NONE:
+			  		Sounds__PlaySounds(PLAY_NO_SOUND);    //buzzer de key press
+ 152:	83 e0       	ldi	r24, 0x03	; 3
+ 154:	0e 94 59 06 	call	0xcb2	; 0xcb2 <Sounds__PlaySounds>
+			     default:
+				    break;
+
+			}
+		}
+Display__Handler();
+ 158:	0e 94 4e 06 	call	0xc9c	; 0xc9c <Display__Handler>
+ 15c:	08 95       	ret
+
+0000015e <main>:
+{
+	//#if (WATCHDOG_ENABLE == DISABLED)
+	//DISABLE_WATCHDOG();
+	//#endif //WATCHDOG_ENABLE
+	//EnableInterrupts;
+	Slot = SLOT_1;
+ 15e:	10 92 6e 01 	sts	0x016E, r1	; 0x80016e <Slot>
+	//RTCSC_RTCLKS = 0x00;
+	//RTCSC_RTCPS = SLOT_TIME;
+	//#endif //USE_FIXED_TIME_SLOT
+	
+	// Functions Initialization
+	INITIALIZE_TASKS();
+ 162:	0e 94 3a 01 	call	0x274	; 0x274 <ADC__Initialize>
+ 166:	0e 94 aa 02 	call	0x554	; 0x554 <Pwm__Initialize>
+ 16a:	0e 94 9f 03 	call	0x73e	; 0x73e <Hal__Initialize>
+ 16e:	0e 94 65 05 	call	0xaca	; 0xaca <Display__Initialize>
+ 172:	0e 94 55 06 	call	0xcaa	; 0xcaa <Sounds__Initialize>
+ 176:	0e 94 ad 06 	call	0xd5a	; 0xd5a <TempSensor__Initialize>
+ 17a:	0e 94 f0 00 	call	0x1e0	; 0x1e0 <OvenTempControl__Initialize>
+ 17e:	0e 94 53 00 	call	0xa6	; 0xa6 <Appl__Initialize>
+
+			default:
+			  Slot = SLOT_1;
+			  break;
+	       }
+	Slot++;
+ 182:	c1 e0       	ldi	r28, 0x01	; 1
+	{
+		//#if (WATCHDOG_ENABLE == ENABLED)
+		//RESET_WATCHDOG();	/* feeds the watch dog */
+		//#endif //WATCHDOG_ENABLE
+		
+		ALL_SLOTS_TASKS();
+ 184:	0e 94 b8 04 	call	0x970	; 0x970 <Hal__FastHandler>
+		switch(Slot)
+ 188:	80 91 6e 01 	lds	r24, 0x016E	; 0x80016e <Slot>
+ 18c:	82 30       	cpi	r24, 0x02	; 2
+ 18e:	99 f0       	breq	.+38     	; 0x1b6 <main+0x58>
+ 190:	28 f4       	brcc	.+10     	; 0x19c <main+0x3e>
+ 192:	88 23       	and	r24, r24
+ 194:	41 f0       	breq	.+16     	; 0x1a6 <main+0x48>
+ 196:	81 30       	cpi	r24, 0x01	; 1
+ 198:	59 f0       	breq	.+22     	; 0x1b0 <main+0x52>
+ 19a:	15 c0       	rjmp	.+42     	; 0x1c6 <main+0x68>
+ 19c:	83 30       	cpi	r24, 0x03	; 3
+ 19e:	81 f0       	breq	.+32     	; 0x1c0 <main+0x62>
+ 1a0:	84 30       	cpi	r24, 0x04	; 4
+ 1a2:	a1 f0       	breq	.+40     	; 0x1cc <main+0x6e>
+ 1a4:	10 c0       	rjmp	.+32     	; 0x1c6 <main+0x68>
+		   {
+			case SLOT_1:
+			   SLOT_1_TASKS();
+ 1a6:	0e 94 88 06 	call	0xd10	; 0xd10 <Sounds__Background>
+ 1aa:	0e 94 31 05 	call	0xa62	; 0xa62 <Hal__BackgroundHandler>
+			   break;
+ 1ae:	0e c0       	rjmp	.+28     	; 0x1cc <main+0x6e>
+
+			case SLOT_2:
+			   SLOT_2_TASKS();
+ 1b0:	0e 94 5a 00 	call	0xb4	; 0xb4 <Appl__Handler>
+			   break;
+ 1b4:	0b c0       	rjmp	.+22     	; 0x1cc <main+0x6e>
+
+			case SLOT_3:
+			  SLOT_3_TASKS();
+ 1b6:	0e 94 63 01 	call	0x2c6	; 0x2c6 <ADC__Handler>
+ 1ba:	0e 94 b4 06 	call	0xd68	; 0xd68 <TempSensor__ConversionHandler>
+			  break;
+ 1be:	06 c0       	rjmp	.+12     	; 0x1cc <main+0x6e>
+
+			case SLOT_4:
+			  SLOT_4_TASKS();
+ 1c0:	0e 94 f6 00 	call	0x1ec	; 0x1ec <OvenTempControl__Handler>
+			  break;
+ 1c4:	03 c0       	rjmp	.+6      	; 0x1cc <main+0x6e>
+
+			default:
+			  Slot = SLOT_1;
+			  break;
+	       }
+	Slot++;
+ 1c6:	c0 93 6e 01 	sts	0x016E, r28	; 0x80016e <Slot>
+ 1ca:	dc cf       	rjmp	.-72     	; 0x184 <main+0x26>
+ 1cc:	80 91 6e 01 	lds	r24, 0x016E	; 0x80016e <Slot>
+ 1d0:	8f 5f       	subi	r24, 0xFF	; 255
+ 1d2:	80 93 6e 01 	sts	0x016E, r24	; 0x80016e <Slot>
+	if(Slot >= NUM_OF_MAIN_SLOTS)
+ 1d6:	85 30       	cpi	r24, 0x05	; 5
+ 1d8:	a8 f2       	brcs	.-86     	; 0x184 <main+0x26>
+		Slot = SLOT_1;
+ 1da:	10 92 6e 01 	sts	0x016E, r1	; 0x80016e <Slot>
+ 1de:	d2 cf       	rjmp	.-92     	; 0x184 <main+0x26>
+
+000001e0 <OvenTempControl__Initialize>:
+
+
+//---------------------------------------------------------------------------------------------------------------------
+void OvenTempControl__Initialize(void)
+{
+	Oven_TempControl_State = OVEN_INSIDE_RANGE;   
+ 1e0:	10 92 70 01 	sts	0x0170, r1	; 0x800170 <Oven_TempControl_State>
+	Current_Level = TEMP_LEVEL_OVEN_OFF;
+ 1e4:	83 e0       	ldi	r24, 0x03	; 3
+ 1e6:	80 93 6f 01 	sts	0x016F, r24	; 0x80016f <Current_Level>
+ 1ea:	08 95       	ret
+
+000001ec <OvenTempControl__Handler>:
+// ************************************************************
+
+
+
+void OvenTempControl__Handler(void)
+{
+ 1ec:	ef 92       	push	r14
+ 1ee:	ff 92       	push	r15
+ 1f0:	0f 93       	push	r16
+ 1f2:	1f 93       	push	r17
+ 1f4:	cf 93       	push	r28
+ 1f6:	df 93       	push	r29
+	unsigned short int temp_on;
+	unsigned short int temp_off;
+	unsigned short int current_temp;
+
+	temp_on = TEMP_CONTROL_PARAMETERS[Current_Level].Temp_On;
+ 1f8:	e0 91 6f 01 	lds	r30, 0x016F	; 0x80016f <Current_Level>
+ 1fc:	f0 e0       	ldi	r31, 0x00	; 0
+ 1fe:	ee 0f       	add	r30, r30
+ 200:	ff 1f       	adc	r31, r31
+ 202:	ee 0f       	add	r30, r30
+ 204:	ff 1f       	adc	r31, r31
+ 206:	ea 5d       	subi	r30, 0xDA	; 218
+ 208:	fe 4f       	sbci	r31, 0xFE	; 254
+ 20a:	e0 80       	ld	r14, Z
+ 20c:	f1 80       	ldd	r15, Z+1	; 0x01
+	temp_off = TEMP_CONTROL_PARAMETERS[Current_Level].Temp_Off;
+ 20e:	02 81       	ldd	r16, Z+2	; 0x02
+ 210:	13 81       	ldd	r17, Z+3	; 0x03
+	current_temp = TempSensor__GetCelsius(OVEN_RELATED_SENSOR);
+ 212:	81 e0       	ldi	r24, 0x01	; 1
+ 214:	0e 94 c3 06 	call	0xd86	; 0xd86 <TempSensor__GetCelsius>
+ 218:	ec 01       	movw	r28, r24
+
+	if(Current_Level == TEMP_LEVEL_OVEN_OFF)
+ 21a:	80 91 6f 01 	lds	r24, 0x016F	; 0x80016f <Current_Level>
+ 21e:	83 30       	cpi	r24, 0x03	; 3
+ 220:	21 f4       	brne	.+8      	; 0x22a <OvenTempControl__Handler+0x3e>
+	{
+		TURN_HEATER_OFF();
+ 222:	61 e0       	ldi	r22, 0x01	; 1
+ 224:	0e 94 82 03 	call	0x704	; 0x704 <Hal__SetLed>
+ 228:	1b c0       	rjmp	.+54     	; 0x260 <OvenTempControl__Handler+0x74>
+	}
+	else
+	{
+		switch(Oven_TempControl_State)
+ 22a:	80 91 70 01 	lds	r24, 0x0170	; 0x800170 <Oven_TempControl_State>
+ 22e:	88 23       	and	r24, r24
+ 230:	19 f0       	breq	.+6      	; 0x238 <OvenTempControl__Handler+0x4c>
+ 232:	81 30       	cpi	r24, 0x01	; 1
+ 234:	61 f0       	breq	.+24     	; 0x24e <OvenTempControl__Handler+0x62>
+ 236:	14 c0       	rjmp	.+40     	; 0x260 <OvenTempControl__Handler+0x74>
+		{
+		case OVEN_INSIDE_RANGE:
+			TURN_HEATER_OFF();
+ 238:	61 e0       	ldi	r22, 0x01	; 1
+ 23a:	83 e0       	ldi	r24, 0x03	; 3
+ 23c:	0e 94 82 03 	call	0x704	; 0x704 <Hal__SetLed>
+			if(current_temp <= temp_on)
+ 240:	ec 16       	cp	r14, r28
+ 242:	fd 06       	cpc	r15, r29
+ 244:	68 f0       	brcs	.+26     	; 0x260 <OvenTempControl__Handler+0x74>
+			{
+				Oven_TempControl_State = OVEN_HEATING;
+ 246:	81 e0       	ldi	r24, 0x01	; 1
+ 248:	80 93 70 01 	sts	0x0170, r24	; 0x800170 <Oven_TempControl_State>
+ 24c:	09 c0       	rjmp	.+18     	; 0x260 <OvenTempControl__Handler+0x74>
+			}
+			break;
+
+		case OVEN_HEATING:
+			TURN_HEATER_ON();
+ 24e:	60 e0       	ldi	r22, 0x00	; 0
+ 250:	83 e0       	ldi	r24, 0x03	; 3
+ 252:	0e 94 82 03 	call	0x704	; 0x704 <Hal__SetLed>
+			if(current_temp >= temp_off)
+ 256:	c0 17       	cp	r28, r16
+ 258:	d1 07       	cpc	r29, r17
+ 25a:	10 f0       	brcs	.+4      	; 0x260 <OvenTempControl__Handler+0x74>
+			{
+				Oven_TempControl_State = OVEN_INSIDE_RANGE;
+ 25c:	10 92 70 01 	sts	0x0170, r1	; 0x800170 <Oven_TempControl_State>
+			}
+
+			break;
+		}
+	}
+}
+ 260:	df 91       	pop	r29
+ 262:	cf 91       	pop	r28
+ 264:	1f 91       	pop	r17
+ 266:	0f 91       	pop	r16
+ 268:	ff 90       	pop	r15
+ 26a:	ef 90       	pop	r14
+ 26c:	08 95       	ret
+
+0000026e <OvenTempControl__SetLevel>:
+
+// ****************************************************
+
+void OvenTempControl__SetLevel(OVEN_TEMP_CONTROL_LEVELS_TYPE level)
+{
+	Current_Level = level;
+ 26e:	80 93 6f 01 	sts	0x016F, r24	; 0x80016f <Current_Level>
+ 272:	08 95       	ret
+
+00000274 <ADC__Initialize>:
+// Esta função configura somente os pinos de digital para analogico e inicializa o ADC_Buffer[]
+
+// ********************************** 
+ 
+void ADC__Initialize(void)
+{
+ 274:	cf 93       	push	r28
+ 276:	df 93       	push	r29
+	volatile ADC_REG_TYPE *adc_pt;   // tipo definido no micro.h
+	adc_pt = ADC_REGISTERS;          // adc_pt aponta par ao inicio dos regs do ADC ($000078)
+	
+	
+
+	Adc_Step = ADC_STEP_INIT;   // inicializa o Adc_Step em INIT
+ 278:	10 92 7d 01 	sts	0x017D, r1	; 0x80017d <Adc_Step>
+	Sampling_Time = 0;
+ 27c:	10 92 7e 01 	sts	0x017E, r1	; 0x80017e <Sampling_Time>
+	adc_pt->DIDR0_REG.byte =0x00;  //  nenhuma entrada analógica habilitada
+ 280:	10 92 7e 00 	sts	0x007E, r1	; 0x80007e <__DATA_REGION_ORIGIN__+0x1e>
+ 284:	c1 e7       	ldi	r28, 0x71	; 113
+ 286:	d1 e0       	ldi	r29, 0x01	; 1
+ 288:	6c e3       	ldi	r22, 0x3C	; 60
+ 28a:	71 e0       	ldi	r23, 0x01	; 1
+ 28c:	e6 e3       	ldi	r30, 0x36	; 54
+ 28e:	f1 e0       	ldi	r31, 0x01	; 1
+	
+	for(channel = 0; channel <NUM_OF_AD_CHANNELS ; channel++)
+ 290:	80 e0       	ldi	r24, 0x00	; 0
+		if(Adc_Enable_Table[channel] == ENABLED)      // se o canal é habilitado, então deixa analógico
+		{
+			// Configures relative input as analog input
+			if(channel < NUM_OF_AD_CHANNELS) 
+			   {							// CH0 to CH5 are configured in DIDR0
+			   adc_pt->DIDR0_REG.byte |= ADC_BIT_SET_MASK[channel];	// configura como analógico conforme o canal enabled
+ 292:	28 e7       	ldi	r18, 0x78	; 120
+ 294:	30 e0       	ldi	r19, 0x00	; 0
+	Sampling_Time = 0;
+	adc_pt->DIDR0_REG.byte =0x00;  //  nenhuma entrada analógica habilitada
+	
+	for(channel = 0; channel <NUM_OF_AD_CHANNELS ; channel++)
+	 {
+		ADC_Buffer[channel] = 0;
+ 296:	19 92       	st	Y+, r1
+ 298:	19 92       	st	Y+, r1
+
+		if(Adc_Enable_Table[channel] == ENABLED)      // se o canal é habilitado, então deixa analógico
+ 29a:	db 01       	movw	r26, r22
+ 29c:	9d 91       	ld	r25, X+
+ 29e:	bd 01       	movw	r22, r26
+ 2a0:	91 30       	cpi	r25, 0x01	; 1
+ 2a2:	51 f4       	brne	.+20     	; 0x2b8 <ADC__Initialize+0x44>
+		{
+			// Configures relative input as analog input
+			if(channel < NUM_OF_AD_CHANNELS) 
+ 2a4:	86 30       	cpi	r24, 0x06	; 6
+ 2a6:	40 f4       	brcc	.+16     	; 0x2b8 <ADC__Initialize+0x44>
+			   {							// CH0 to CH5 are configured in DIDR0
+			   adc_pt->DIDR0_REG.byte |= ADC_BIT_SET_MASK[channel];	// configura como analógico conforme o canal enabled
+ 2a8:	d9 01       	movw	r26, r18
+ 2aa:	16 96       	adiw	r26, 0x06	; 6
+ 2ac:	4c 91       	ld	r20, X
+ 2ae:	16 97       	sbiw	r26, 0x06	; 6
+ 2b0:	90 81       	ld	r25, Z
+ 2b2:	94 2b       	or	r25, r20
+ 2b4:	16 96       	adiw	r26, 0x06	; 6
+ 2b6:	9c 93       	st	X, r25
+
+	Adc_Step = ADC_STEP_INIT;   // inicializa o Adc_Step em INIT
+	Sampling_Time = 0;
+	adc_pt->DIDR0_REG.byte =0x00;  //  nenhuma entrada analógica habilitada
+	
+	for(channel = 0; channel <NUM_OF_AD_CHANNELS ; channel++)
+ 2b8:	8f 5f       	subi	r24, 0xFF	; 255
+ 2ba:	31 96       	adiw	r30, 0x01	; 1
+ 2bc:	86 30       	cpi	r24, 0x06	; 6
+ 2be:	59 f7       	brne	.-42     	; 0x296 <ADC__Initialize+0x22>
+			   {							// CH0 to CH5 are configured in DIDR0
+			   adc_pt->DIDR0_REG.byte |= ADC_BIT_SET_MASK[channel];	// configura como analógico conforme o canal enabled
+			   }
+		}
+	 }  
+}
+ 2c0:	df 91       	pop	r29
+ 2c2:	cf 91       	pop	r28
+ 2c4:	08 95       	ret
+
+000002c6 <ADC__Handler>:
+	unsigned short int value, value_high;
+	volatile ADC_REG_TYPE *adc_pt;
+	adc_pt = ADC_REGISTERS;
+	
+
+	switch(Adc_Step)
+ 2c6:	80 91 7d 01 	lds	r24, 0x017D	; 0x80017d <Adc_Step>
+ 2ca:	82 30       	cpi	r24, 0x02	; 2
+ 2cc:	81 f1       	breq	.+96     	; 0x32e <ADC__Handler+0x68>
+ 2ce:	28 f4       	brcc	.+10     	; 0x2da <ADC__Handler+0x14>
+ 2d0:	88 23       	and	r24, r24
+ 2d2:	41 f0       	breq	.+16     	; 0x2e4 <ADC__Handler+0x1e>
+ 2d4:	81 30       	cpi	r24, 0x01	; 1
+ 2d6:	f9 f0       	breq	.+62     	; 0x316 <ADC__Handler+0x50>
+ 2d8:	5f c0       	rjmp	.+190    	; 0x398 <ADC__Handler+0xd2>
+ 2da:	83 30       	cpi	r24, 0x03	; 3
+ 2dc:	c1 f1       	breq	.+112    	; 0x34e <ADC__Handler+0x88>
+ 2de:	84 30       	cpi	r24, 0x04	; 4
+ 2e0:	f1 f1       	breq	.+124    	; 0x35e <ADC__Handler+0x98>
+ 2e2:	5a c0       	rjmp	.+180    	; 0x398 <ADC__Handler+0xd2>
+	{
+	case ADC_STEP_INIT:
+		Adc_Channel++;											// Selects next channel
+ 2e4:	80 91 7f 01 	lds	r24, 0x017F	; 0x80017f <Adc_Channel>
+ 2e8:	8f 5f       	subi	r24, 0xFF	; 255
+		if(Adc_Channel >= NUM_OF_AD_CHANNELS)
+ 2ea:	86 30       	cpi	r24, 0x06	; 6
+ 2ec:	18 f4       	brcc	.+6      	; 0x2f4 <ADC__Handler+0x2e>
+	
+
+	switch(Adc_Step)
+	{
+	case ADC_STEP_INIT:
+		Adc_Channel++;											// Selects next channel
+ 2ee:	80 93 7f 01 	sts	0x017F, r24	; 0x80017f <Adc_Channel>
+ 2f2:	02 c0       	rjmp	.+4      	; 0x2f8 <ADC__Handler+0x32>
+		if(Adc_Channel >= NUM_OF_AD_CHANNELS)
+		{
+			Adc_Channel = AD_CH0;  // varre constantemente todas os canais
+ 2f4:	10 92 7f 01 	sts	0x017F, r1	; 0x80017f <Adc_Channel>
+		}
+
+		if(Adc_Enable_Table[Adc_Channel] == ENABLED)			// Checks if current channel is enabled
+ 2f8:	e0 91 7f 01 	lds	r30, 0x017F	; 0x80017f <Adc_Channel>
+ 2fc:	f0 e0       	ldi	r31, 0x00	; 0
+ 2fe:	e4 5c       	subi	r30, 0xC4	; 196
+ 300:	fe 4f       	sbci	r31, 0xFE	; 254
+ 302:	80 81       	ld	r24, Z
+ 304:	81 30       	cpi	r24, 0x01	; 1
+ 306:	09 f0       	breq	.+2      	; 0x30a <ADC__Handler+0x44>
+ 308:	49 c0       	rjmp	.+146    	; 0x39c <ADC__Handler+0xd6>
+		{
+			Adc_Step = ADC_STEP_SAMPLING;
+ 30a:	80 93 7d 01 	sts	0x017D, r24	; 0x80017d <Adc_Step>
+			Sampling_Time = ADC_SAMPLING_TIME;
+ 30e:	82 e3       	ldi	r24, 0x32	; 50
+ 310:	80 93 7e 01 	sts	0x017E, r24	; 0x80017e <Sampling_Time>
+ 314:	08 95       	ret
+		}
+		break;
+
+	case ADC_STEP_SAMPLING:
+		if(Sampling_Time)
+ 316:	80 91 7e 01 	lds	r24, 0x017E	; 0x80017e <Sampling_Time>
+ 31a:	88 23       	and	r24, r24
+ 31c:	21 f0       	breq	.+8      	; 0x326 <ADC__Handler+0x60>
+		{
+			Sampling_Time--;
+ 31e:	81 50       	subi	r24, 0x01	; 1
+ 320:	80 93 7e 01 	sts	0x017E, r24	; 0x80017e <Sampling_Time>
+ 324:	08 95       	ret
+		}
+		else
+		{
+			Adc_Step = ADC_STEP_CONFIG_CHANNEL;	
+ 326:	82 e0       	ldi	r24, 0x02	; 2
+ 328:	80 93 7d 01 	sts	0x017D, r24	; 0x80017d <Adc_Step>
+ 32c:	08 95       	ret
+		}
+		break;
+
+	case ADC_STEP_CONFIG_CHANNEL:
+	    adc_pt->ADMUX_REG.byte |= (unsigned char)Adc_Channel;	// Configures the channel be read
+ 32e:	e8 e7       	ldi	r30, 0x78	; 120
+ 330:	f0 e0       	ldi	r31, 0x00	; 0
+ 332:	94 81       	ldd	r25, Z+4	; 0x04
+ 334:	80 91 7f 01 	lds	r24, 0x017F	; 0x80017f <Adc_Channel>
+ 338:	89 2b       	or	r24, r25
+ 33a:	84 83       	std	Z+4, r24	; 0x04
+		// ADC habilitado, sem auto trigger, sem interrupção, prescaler 128
+		adc_pt->ADCSRA_REG.byte =  0x87; 
+ 33c:	87 e8       	ldi	r24, 0x87	; 135
+ 33e:	82 83       	std	Z+2, r24	; 0x02
+		// INICIA conversão
+		adc_pt->ADCSRA_REG.bit.bit6  = 1;    //seta bit 6 (ADSC)
+ 340:	82 81       	ldd	r24, Z+2	; 0x02
+ 342:	80 64       	ori	r24, 0x40	; 64
+ 344:	82 83       	std	Z+2, r24	; 0x02
+		Adc_Step = ADC_STEP_WAIT_CONVERSION;					// Set next step
+ 346:	83 e0       	ldi	r24, 0x03	; 3
+ 348:	80 93 7d 01 	sts	0x017D, r24	; 0x80017d <Adc_Step>
+		break;
+ 34c:	08 95       	ret
+		
+	case ADC_STEP_WAIT_CONVERSION:
+		if(adc_pt->ADCSRA_REG.bit.bit6 == 0)	// Wait until conversion be completed
+ 34e:	80 91 7a 00 	lds	r24, 0x007A	; 0x80007a <__DATA_REGION_ORIGIN__+0x1a>
+ 352:	86 fd       	sbrc	r24, 6
+ 354:	23 c0       	rjmp	.+70     	; 0x39c <ADC__Handler+0xd6>
+		   	Adc_Step = ADC_STEP_READ_RESULT;
+ 356:	84 e0       	ldi	r24, 0x04	; 4
+ 358:	80 93 7d 01 	sts	0x017D, r24	; 0x80017d <Adc_Step>
+ 35c:	08 95       	ret
+		break;
+
+	case ADC_STEP_READ_RESULT:  // AQUI é feita a leitura do ADC físico!!!
+	    if(adc_pt->ADMUX_REG.bit.bit5 == 1)   //8 bits
+ 35e:	80 91 7c 00 	lds	r24, 0x007C	; 0x80007c <__DATA_REGION_ORIGIN__+0x1c>
+ 362:	85 ff       	sbrs	r24, 5
+ 364:	03 c0       	rjmp	.+6      	; 0x36c <ADC__Handler+0xa6>
+		   {
+			value = (unsigned short int)((adc_pt->ADCH_REG.byte)& LO_BYTE_MASK); // 8 bits   
+ 366:	20 91 79 00 	lds	r18, 0x0079	; 0x800079 <__DATA_REGION_ORIGIN__+0x19>
+ 36a:	30 e0       	ldi	r19, 0x00	; 0
+		   }
+		if(adc_pt->ADMUX_REG.bit.bit5 == 0)    // 10 bits
+ 36c:	80 91 7c 00 	lds	r24, 0x007C	; 0x80007c <__DATA_REGION_ORIGIN__+0x1c>
+ 370:	85 fd       	sbrc	r24, 5
+ 372:	06 c0       	rjmp	.+12     	; 0x380 <ADC__Handler+0xba>
+		   {
+			value = (unsigned short int)((adc_pt->ADCL_REG.byte)& LO_BYTE_MASK);
+ 374:	e8 e7       	ldi	r30, 0x78	; 120
+ 376:	f0 e0       	ldi	r31, 0x00	; 0
+ 378:	20 81       	ld	r18, Z
+			value_high = (unsigned short int)(adc_pt->ADCH_REG.byte <<8); 
+ 37a:	81 81       	ldd	r24, Z+1	; 0x01
+			value |= value_high;	// Reads the conversion result bytes  
+ 37c:	30 e0       	ldi	r19, 0x00	; 0
+ 37e:	38 2b       	or	r19, r24
+		   }
+
+		ADC_Buffer[Adc_Channel] = value;  // A leitura do ADC é colocado no buffer ADC_Buffer do respectivo canal.
+ 380:	e0 91 7f 01 	lds	r30, 0x017F	; 0x80017f <Adc_Channel>
+ 384:	f0 e0       	ldi	r31, 0x00	; 0
+ 386:	ee 0f       	add	r30, r30
+ 388:	ff 1f       	adc	r31, r31
+ 38a:	ef 58       	subi	r30, 0x8F	; 143
+ 38c:	fe 4f       	sbci	r31, 0xFE	; 254
+ 38e:	31 83       	std	Z+1, r19	; 0x01
+ 390:	20 83       	st	Z, r18
+		Adc_Step = ADC_STEP_INIT;
+ 392:	10 92 7d 01 	sts	0x017D, r1	; 0x80017d <Adc_Step>
+		
+		   //if (value >= 127)
+		    //Hal__SetLed(LED_3, 0); //liga LED4
+		  //else
+		    //Hal__SetLed(LED_3, 1); //desliga LED4
+	 	 break;
+ 396:	08 95       	ret
+
+	default:
+		Adc_Step = ADC_STEP_INIT;
+ 398:	10 92 7d 01 	sts	0x017D, r1	; 0x80017d <Adc_Step>
+ 39c:	08 95       	ret
+
+0000039e <ADC__ConfigModes>:
+{
+	volatile ADC_REG_TYPE *adc_pt;
+	adc_pt = ADC_REGISTERS;
+	
+	 	// seleção da tensão de referencia:
+	adc_pt->ADMUX_REG.bit.bit7 = 0;   //tensão de referencia 5V
+ 39e:	e8 e7       	ldi	r30, 0x78	; 120
+ 3a0:	f0 e0       	ldi	r31, 0x00	; 0
+ 3a2:	94 81       	ldd	r25, Z+4	; 0x04
+ 3a4:	9f 77       	andi	r25, 0x7F	; 127
+ 3a6:	94 83       	std	Z+4, r25	; 0x04
+	adc_pt->ADMUX_REG.bit.bit6 = 1;   //tensão de referencia 5V
+ 3a8:	94 81       	ldd	r25, Z+4	; 0x04
+ 3aa:	90 64       	ori	r25, 0x40	; 64
+ 3ac:	94 83       	std	Z+4, r25	; 0x04
+	
+	if(mode < NUM_OF_MODES)
+ 3ae:	82 30       	cpi	r24, 0x02	; 2
+ 3b0:	68 f4       	brcc	.+26     	; 0x3cc <ADC__ConfigModes+0x2e>
+	{
+		if (mode == MODE_8BITS)
+ 3b2:	81 11       	cpse	r24, r1
+ 3b4:	04 c0       	rjmp	.+8      	; 0x3be <ADC__ConfigModes+0x20>
+		   adc_pt->ADMUX_REG.bit.bit5 = 1;  //Micro.h => ADLAR = 1, alinhado a esquerda e a leitura é no ADCH (8 bits)
+ 3b6:	84 81       	ldd	r24, Z+4	; 0x04
+ 3b8:	80 62       	ori	r24, 0x20	; 32
+ 3ba:	84 83       	std	Z+4, r24	; 0x04
+ 3bc:	07 c0       	rjmp	.+14     	; 0x3cc <ADC__ConfigModes+0x2e>
+		if (mode == MODE_10BITS)
+ 3be:	81 30       	cpi	r24, 0x01	; 1
+ 3c0:	29 f4       	brne	.+10     	; 0x3cc <ADC__ConfigModes+0x2e>
+		   adc_pt->ADMUX_REG.bit.bit5 = 0;  //ADLAR = 0, alinhado a direita e a leitura é primeiro no ADCL e depois ADCH (10 bits)
+ 3c2:	e8 e7       	ldi	r30, 0x78	; 120
+ 3c4:	f0 e0       	ldi	r31, 0x00	; 0
+ 3c6:	84 81       	ldd	r24, Z+4	; 0x04
+ 3c8:	8f 7d       	andi	r24, 0xDF	; 223
+ 3ca:	84 83       	std	Z+4, r24	; 0x04
+	}
+		
+	if(conv_type < NUM_OF_CONVERSION_TYPES)
+ 3cc:	62 30       	cpi	r22, 0x02	; 2
+ 3ce:	78 f4       	brcc	.+30     	; 0x3ee <ADC__ConfigModes+0x50>
+	{
+		if (conv_type == AD_SINGLE_CONVERSION)
+ 3d0:	61 11       	cpse	r22, r1
+ 3d2:	06 c0       	rjmp	.+12     	; 0x3e0 <ADC__ConfigModes+0x42>
+		   adc_pt->ADCSRA_REG.bit.bit5 = 0;      //Micro.h => ADATE = 0, uma leitura
+ 3d4:	e8 e7       	ldi	r30, 0x78	; 120
+ 3d6:	f0 e0       	ldi	r31, 0x00	; 0
+ 3d8:	82 81       	ldd	r24, Z+2	; 0x02
+ 3da:	8f 7d       	andi	r24, 0xDF	; 223
+ 3dc:	82 83       	std	Z+2, r24	; 0x02
+ 3de:	08 95       	ret
+		if (conv_type == AD_CONTINUOUS_CONVERSION)
+ 3e0:	61 30       	cpi	r22, 0x01	; 1
+ 3e2:	29 f4       	brne	.+10     	; 0x3ee <ADC__ConfigModes+0x50>
+		   adc_pt->ADCSRA_REG.bit.bit5 = 1;      //ADATE = 1, a fonte de disparo pode ser conversão continua, comparador analogico, etc 
+ 3e4:	e8 e7       	ldi	r30, 0x78	; 120
+ 3e6:	f0 e0       	ldi	r31, 0x00	; 0
+ 3e8:	82 81       	ldd	r24, Z+2	; 0x02
+ 3ea:	80 62       	ori	r24, 0x20	; 32
+ 3ec:	82 83       	std	Z+2, r24	; 0x02
+ 3ee:	08 95       	ret
+
+000003f0 <ADC__GetValue>:
+ */
+
+
+unsigned short int ADC__GetValue(AD_CHANNEL_TYPE channel)
+{
+	if(channel < NUM_OF_AD_CHANNELS)
+ 3f0:	86 30       	cpi	r24, 0x06	; 6
+ 3f2:	48 f4       	brcc	.+18     	; 0x406 <__LOCK_REGION_LENGTH__+0x6>
+	{
+		return ADC_Buffer[channel];  // retorna valor do ADC lido no ADC_Buffer do canal solcitado!
+ 3f4:	e8 2f       	mov	r30, r24
+ 3f6:	f0 e0       	ldi	r31, 0x00	; 0
+ 3f8:	ee 0f       	add	r30, r30
+ 3fa:	ff 1f       	adc	r31, r31
+ 3fc:	ef 58       	subi	r30, 0x8F	; 143
+ 3fe:	fe 4f       	sbci	r31, 0xFE	; 254
+ 400:	80 81       	ld	r24, Z
+ 402:	91 81       	ldd	r25, Z+1	; 0x01
+ 404:	08 95       	ret
+	}
+	return 0;
+ 406:	80 e0       	ldi	r24, 0x00	; 0
+ 408:	90 e0       	ldi	r25, 0x00	; 0
+}
+ 40a:	08 95       	ret
+
+0000040c <Pwm__SetTCFrequency>:
+pwm_pt0 = TC0_REGISTERS;
+pwm_pt1 = TC1_REGISTERS;
+pwm_pt2 = TC2_REGISTERS;
+
+
+if((frequency > 1900) && frequency  < 2100 ){
+ 40c:	9b 01       	movw	r18, r22
+ 40e:	2d 56       	subi	r18, 0x6D	; 109
+ 410:	37 40       	sbci	r19, 0x07	; 7
+ 412:	27 3c       	cpi	r18, 0xC7	; 199
+ 414:	31 05       	cpc	r19, r1
+ 416:	18 f5       	brcc	.+70     	; 0x45e <Pwm__SetTCFrequency+0x52>
+	switch(tc){
+ 418:	81 30       	cpi	r24, 0x01	; 1
+ 41a:	69 f0       	breq	.+26     	; 0x436 <Pwm__SetTCFrequency+0x2a>
+ 41c:	18 f0       	brcs	.+6      	; 0x424 <Pwm__SetTCFrequency+0x18>
+ 41e:	82 30       	cpi	r24, 0x02	; 2
+ 420:	a1 f0       	breq	.+40     	; 0x44a <Pwm__SetTCFrequency+0x3e>
+ 422:	1d c0       	rjmp	.+58     	; 0x45e <Pwm__SetTCFrequency+0x52>
+		case PWM_TC0:
+		pwm_pt0->TCCR0B_REG.byte = 0b00100010; 
+ 424:	92 e2       	ldi	r25, 0x22	; 34
+ 426:	95 bd       	out	0x25, r25	; 37
+
+		default:
+		break;
+	}
+}
+if((frequency > 2900) && frequency  < 3100 ){
+ 428:	9b 01       	movw	r18, r22
+ 42a:	25 55       	subi	r18, 0x55	; 85
+ 42c:	3b 40       	sbci	r19, 0x0B	; 11
+ 42e:	27 3c       	cpi	r18, 0xC7	; 199
+ 430:	31 05       	cpc	r19, r1
+ 432:	08 f1       	brcs	.+66     	; 0x476 <Pwm__SetTCFrequency+0x6a>
+ 434:	79 c0       	rjmp	.+242    	; 0x528 <Pwm__SetTCFrequency+0x11c>
+	switch(tc){
+		case PWM_TC0:
+		pwm_pt0->TCCR0B_REG.byte = 0b00100010; 
+		break;
+		case PWM_TC1:
+		pwm_pt1->TCCR1B_REG.byte = 0b00100010;
+ 436:	92 e2       	ldi	r25, 0x22	; 34
+ 438:	90 93 81 00 	sts	0x0081, r25	; 0x800081 <__DATA_REGION_ORIGIN__+0x21>
+
+		default:
+		break;
+	}
+}
+if((frequency > 2900) && frequency  < 3100 ){
+ 43c:	9b 01       	movw	r18, r22
+ 43e:	25 55       	subi	r18, 0x55	; 85
+ 440:	3b 40       	sbci	r19, 0x0B	; 11
+ 442:	27 3c       	cpi	r18, 0xC7	; 199
+ 444:	31 05       	cpc	r19, r1
+ 446:	00 f1       	brcs	.+64     	; 0x488 <Pwm__SetTCFrequency+0x7c>
+ 448:	76 c0       	rjmp	.+236    	; 0x536 <Pwm__SetTCFrequency+0x12a>
+		pwm_pt1->TCCR1B_REG.byte = 0b00100010;
+		break;
+		case PWM_TC2:
+		//pwm_pt2->TCCR2A_REG.byte = 0b00100001; //MODO 1 para PWM fase corrigida,
+		//pwm_pt2->TCCR2A_REG.byte = 0b00110001; //MODO 1 para PWM fase corrigida,
+		pwm_pt2->TCCR2B_REG.byte = 0b00100010; 
+ 44a:	92 e2       	ldi	r25, 0x22	; 34
+ 44c:	90 93 b1 00 	sts	0x00B1, r25	; 0x8000b1 <__DATA_REGION_ORIGIN__+0x51>
+
+		default:
+		break;
+	}
+}
+if((frequency > 2900) && frequency  < 3100 ){
+ 450:	9b 01       	movw	r18, r22
+ 452:	25 55       	subi	r18, 0x55	; 85
+ 454:	3b 40       	sbci	r19, 0x0B	; 11
+ 456:	27 3c       	cpi	r18, 0xC7	; 199
+ 458:	31 05       	cpc	r19, r1
+ 45a:	00 f1       	brcs	.+64     	; 0x49c <Pwm__SetTCFrequency+0x90>
+ 45c:	73 c0       	rjmp	.+230    	; 0x544 <Pwm__SetTCFrequency+0x138>
+ 45e:	9b 01       	movw	r18, r22
+ 460:	25 55       	subi	r18, 0x55	; 85
+ 462:	3b 40       	sbci	r19, 0x0B	; 11
+ 464:	27 3c       	cpi	r18, 0xC7	; 199
+ 466:	31 05       	cpc	r19, r1
+ 468:	18 f5       	brcc	.+70     	; 0x4b0 <Pwm__SetTCFrequency+0xa4>
+	switch(tc){
+ 46a:	81 30       	cpi	r24, 0x01	; 1
+ 46c:	69 f0       	breq	.+26     	; 0x488 <Pwm__SetTCFrequency+0x7c>
+ 46e:	18 f0       	brcs	.+6      	; 0x476 <Pwm__SetTCFrequency+0x6a>
+ 470:	82 30       	cpi	r24, 0x02	; 2
+ 472:	f1 f4       	brne	.+60     	; 0x4b0 <Pwm__SetTCFrequency+0xa4>
+ 474:	13 c0       	rjmp	.+38     	; 0x49c <Pwm__SetTCFrequency+0x90>
+		case PWM_TC0:
+		pwm_pt0->TCCR0B_REG.byte = 0b00100011; 
+ 476:	93 e2       	ldi	r25, 0x23	; 35
+ 478:	95 bd       	out	0x25, r25	; 37
+
+		default:
+		break;
+	}
+}
+if((frequency > 3900) && frequency  < 4100 ){
+ 47a:	9b 01       	movw	r18, r22
+ 47c:	2d 53       	subi	r18, 0x3D	; 61
+ 47e:	3f 40       	sbci	r19, 0x0F	; 15
+ 480:	27 3c       	cpi	r18, 0xC7	; 199
+ 482:	31 05       	cpc	r19, r1
+ 484:	08 f1       	brcs	.+66     	; 0x4c8 <Pwm__SetTCFrequency+0xbc>
+ 486:	3a c0       	rjmp	.+116    	; 0x4fc <Pwm__SetTCFrequency+0xf0>
+	switch(tc){
+		case PWM_TC0:
+		pwm_pt0->TCCR0B_REG.byte = 0b00100011; 
+		break;
+		case PWM_TC1:
+		pwm_pt1->TCCR1B_REG.byte = 0b00100011; 
+ 488:	93 e2       	ldi	r25, 0x23	; 35
+ 48a:	90 93 81 00 	sts	0x0081, r25	; 0x800081 <__DATA_REGION_ORIGIN__+0x21>
+
+		default:
+		break;
+	}
+}
+if((frequency > 3900) && frequency  < 4100 ){
+ 48e:	9b 01       	movw	r18, r22
+ 490:	2d 53       	subi	r18, 0x3D	; 61
+ 492:	3f 40       	sbci	r19, 0x0F	; 15
+ 494:	27 3c       	cpi	r18, 0xC7	; 199
+ 496:	31 05       	cpc	r19, r1
+ 498:	f8 f0       	brcs	.+62     	; 0x4d8 <Pwm__SetTCFrequency+0xcc>
+ 49a:	30 c0       	rjmp	.+96     	; 0x4fc <Pwm__SetTCFrequency+0xf0>
+		pwm_pt1->TCCR1B_REG.byte = 0b00100011; 
+		break;
+		case PWM_TC2:
+		//pwm_pt2->TCCR2A_REG.byte =  0b00100001; //MODO 1 para PWM fase corrigida,
+		//pwm_pt2->TCCR2A_REG.byte = 0b00110001; //MODO 1 para PWM fase corrigida,
+		pwm_pt2->TCCR2B_REG.byte = 0b00100011;
+ 49c:	93 e2       	ldi	r25, 0x23	; 35
+ 49e:	90 93 b1 00 	sts	0x00B1, r25	; 0x8000b1 <__DATA_REGION_ORIGIN__+0x51>
+
+		default:
+		break;
+	}
+}
+if((frequency > 3900) && frequency  < 4100 ){
+ 4a2:	9b 01       	movw	r18, r22
+ 4a4:	2d 53       	subi	r18, 0x3D	; 61
+ 4a6:	3f 40       	sbci	r19, 0x0F	; 15
+ 4a8:	27 3c       	cpi	r18, 0xC7	; 199
+ 4aa:	31 05       	cpc	r19, r1
+ 4ac:	f0 f0       	brcs	.+60     	; 0x4ea <Pwm__SetTCFrequency+0xde>
+ 4ae:	26 c0       	rjmp	.+76     	; 0x4fc <Pwm__SetTCFrequency+0xf0>
+ 4b0:	9b 01       	movw	r18, r22
+ 4b2:	2d 53       	subi	r18, 0x3D	; 61
+ 4b4:	3f 40       	sbci	r19, 0x0F	; 15
+ 4b6:	27 3c       	cpi	r18, 0xC7	; 199
+ 4b8:	31 05       	cpc	r19, r1
+ 4ba:	00 f5       	brcc	.+64     	; 0x4fc <Pwm__SetTCFrequency+0xf0>
+	switch(tc){
+ 4bc:	81 30       	cpi	r24, 0x01	; 1
+ 4be:	61 f0       	breq	.+24     	; 0x4d8 <Pwm__SetTCFrequency+0xcc>
+ 4c0:	18 f0       	brcs	.+6      	; 0x4c8 <Pwm__SetTCFrequency+0xbc>
+ 4c2:	82 30       	cpi	r24, 0x02	; 2
+ 4c4:	d9 f4       	brne	.+54     	; 0x4fc <Pwm__SetTCFrequency+0xf0>
+ 4c6:	11 c0       	rjmp	.+34     	; 0x4ea <Pwm__SetTCFrequency+0xde>
+		case PWM_TC0:
+		pwm_pt0->TCCR0B_REG.byte = 0b00100100; 
+ 4c8:	84 e2       	ldi	r24, 0x24	; 36
+ 4ca:	85 bd       	out	0x25, r24	; 37
+
+		default:
+		break;
+	}
+}
+if((frequency > 4900) && frequency  < 5100 ){
+ 4cc:	65 52       	subi	r22, 0x25	; 37
+ 4ce:	73 41       	sbci	r23, 0x13	; 19
+ 4d0:	67 3c       	cpi	r22, 0xC7	; 199
+ 4d2:	71 05       	cpc	r23, r1
+ 4d4:	f0 f0       	brcs	.+60     	; 0x512 <Pwm__SetTCFrequency+0x106>
+ 4d6:	08 95       	ret
+	switch(tc){
+		case PWM_TC0:
+		pwm_pt0->TCCR0B_REG.byte = 0b00100100; 
+		break;
+		case PWM_TC1:
+		pwm_pt1->TCCR1B_REG.byte = 0b00100100; 
+ 4d8:	84 e2       	ldi	r24, 0x24	; 36
+ 4da:	80 93 81 00 	sts	0x0081, r24	; 0x800081 <__DATA_REGION_ORIGIN__+0x21>
+
+		default:
+		break;
+	}
+}
+if((frequency > 4900) && frequency  < 5100 ){
+ 4de:	65 52       	subi	r22, 0x25	; 37
+ 4e0:	73 41       	sbci	r23, 0x13	; 19
+ 4e2:	67 3c       	cpi	r22, 0xC7	; 199
+ 4e4:	71 05       	cpc	r23, r1
+ 4e6:	c0 f0       	brcs	.+48     	; 0x518 <Pwm__SetTCFrequency+0x10c>
+ 4e8:	08 95       	ret
+		pwm_pt1->TCCR1B_REG.byte = 0b00100100; 
+		break;
+		case PWM_TC2:
+		//pwm_pt2->TCCR2A_REG.byte =  0b00100001; //MODO 1 para PWM fase corrigida,
+		//pwm_pt2->TCCR2A_REG.byte = 0b00110001; //MODO 1 para PWM fase corrigida,
+		pwm_pt2->TCCR2B_REG.byte = 0b00100100; 
+ 4ea:	84 e2       	ldi	r24, 0x24	; 36
+ 4ec:	80 93 b1 00 	sts	0x00B1, r24	; 0x8000b1 <__DATA_REGION_ORIGIN__+0x51>
+
+		default:
+		break;
+	}
+}
+if((frequency > 4900) && frequency  < 5100 ){
+ 4f0:	65 52       	subi	r22, 0x25	; 37
+ 4f2:	73 41       	sbci	r23, 0x13	; 19
+ 4f4:	67 3c       	cpi	r22, 0xC7	; 199
+ 4f6:	71 05       	cpc	r23, r1
+ 4f8:	98 f0       	brcs	.+38     	; 0x520 <Pwm__SetTCFrequency+0x114>
+ 4fa:	08 95       	ret
+ 4fc:	65 52       	subi	r22, 0x25	; 37
+ 4fe:	73 41       	sbci	r23, 0x13	; 19
+ 500:	67 3c       	cpi	r22, 0xC7	; 199
+ 502:	71 05       	cpc	r23, r1
+ 504:	30 f5       	brcc	.+76     	; 0x552 <Pwm__SetTCFrequency+0x146>
+	switch(tc){
+ 506:	81 30       	cpi	r24, 0x01	; 1
+ 508:	39 f0       	breq	.+14     	; 0x518 <Pwm__SetTCFrequency+0x10c>
+ 50a:	18 f0       	brcs	.+6      	; 0x512 <Pwm__SetTCFrequency+0x106>
+ 50c:	82 30       	cpi	r24, 0x02	; 2
+ 50e:	09 f5       	brne	.+66     	; 0x552 <Pwm__SetTCFrequency+0x146>
+ 510:	07 c0       	rjmp	.+14     	; 0x520 <Pwm__SetTCFrequency+0x114>
+		case PWM_TC0:
+		pwm_pt0->TCCR0B_REG.byte = 0b00100101; 
+ 512:	85 e2       	ldi	r24, 0x25	; 37
+ 514:	85 bd       	out	0x25, r24	; 37
+		break;
+ 516:	08 95       	ret
+		case PWM_TC1:
+		pwm_pt1->TCCR1B_REG.byte = 0b00100101; 
+ 518:	85 e2       	ldi	r24, 0x25	; 37
+ 51a:	80 93 81 00 	sts	0x0081, r24	; 0x800081 <__DATA_REGION_ORIGIN__+0x21>
+		break;
+ 51e:	08 95       	ret
+		case PWM_TC2:
+		//pwm_pt2->TCCR2A_REG.byte =  0b00100001; //MODO 1 para PWM fase corrigida,
+		//pwm_pt2->TCCR2A_REG.byte = 0b00110001; //MODO 1 para PWM fase corrigida,
+		pwm_pt2->TCCR2B_REG.byte = 0b00100101; 
+ 520:	85 e2       	ldi	r24, 0x25	; 37
+ 522:	80 93 b1 00 	sts	0x00B1, r24	; 0x8000b1 <__DATA_REGION_ORIGIN__+0x51>
+
+		default:
+		break;
+	}
+}
+}  // fim da função
+ 526:	08 95       	ret
+
+		default:
+		break;
+	}
+}
+if((frequency > 3900) && frequency  < 4100 ){
+ 528:	9b 01       	movw	r18, r22
+ 52a:	2d 53       	subi	r18, 0x3D	; 61
+ 52c:	3f 40       	sbci	r19, 0x0F	; 15
+ 52e:	27 3c       	cpi	r18, 0xC7	; 199
+ 530:	31 05       	cpc	r19, r1
+ 532:	50 f2       	brcs	.-108    	; 0x4c8 <Pwm__SetTCFrequency+0xbc>
+ 534:	e3 cf       	rjmp	.-58     	; 0x4fc <Pwm__SetTCFrequency+0xf0>
+ 536:	9b 01       	movw	r18, r22
+ 538:	2d 53       	subi	r18, 0x3D	; 61
+ 53a:	3f 40       	sbci	r19, 0x0F	; 15
+ 53c:	27 3c       	cpi	r18, 0xC7	; 199
+ 53e:	31 05       	cpc	r19, r1
+ 540:	58 f2       	brcs	.-106    	; 0x4d8 <Pwm__SetTCFrequency+0xcc>
+ 542:	dc cf       	rjmp	.-72     	; 0x4fc <Pwm__SetTCFrequency+0xf0>
+ 544:	9b 01       	movw	r18, r22
+ 546:	2d 53       	subi	r18, 0x3D	; 61
+ 548:	3f 40       	sbci	r19, 0x0F	; 15
+ 54a:	27 3c       	cpi	r18, 0xC7	; 199
+ 54c:	31 05       	cpc	r19, r1
+ 54e:	68 f2       	brcs	.-102    	; 0x4ea <Pwm__SetTCFrequency+0xde>
+ 550:	d5 cf       	rjmp	.-86     	; 0x4fc <Pwm__SetTCFrequency+0xf0>
+ 552:	08 95       	ret
+
+00000554 <Pwm__Initialize>:
+//   Esta rotina  faz a configuração do PWM (buzzer)
+//
+//*********************************************************
+ 
+// Inicialização do módulo PWM ( Buzzer está no PD3 OC2B !!)
+void Pwm__Initialize(void){
+ 554:	cf 93       	push	r28
+ 556:	df 93       	push	r29
+pwm_pt0 = TC0_REGISTERS;
+pwm_pt1 = TC1_REGISTERS;
+pwm_pt2 = TC2_REGISTERS;
+
+// porta de  saida para buzina
+bitWrite(DDRD, 3, OUTPUT_DIGITAL);
+ 558:	53 9a       	sbi	0x0a, 3	; 10
+//bitWrite(PORTD, 3, 0);
+// saida Buzzer para OC2B
+pwm_pt0->TCCR0A_REG.byte =  0b00110001;
+ 55a:	81 e3       	ldi	r24, 0x31	; 49
+ 55c:	84 bd       	out	0x24, r24	; 36
+pwm_pt1->TCCR1A_REG.byte =  0b00110001;
+ 55e:	80 93 80 00 	sts	0x0080, r24	; 0x800080 <__DATA_REGION_ORIGIN__+0x20>
+pwm_pt2->TCCR2A_REG.byte =  0b00110001; //MODO 1 para PWM fase corrigida, 
+ 562:	c0 eb       	ldi	r28, 0xB0	; 176
+ 564:	d0 e0       	ldi	r29, 0x00	; 0
+ 566:	88 83       	st	Y, r24
+                       // saida  OC2B  INVERTIDA TOP = 0xFF, OC2B habilitado
+//pwm_pt2->TCCR2B_REG.byte =  0b00000010; //TC2 parado
+
+Pwm__SetTCFrequency(PWM_TC2, BUZZER_DEFAULT_FREQ);
+ 568:	68 eb       	ldi	r22, 0xB8	; 184
+ 56a:	7b e0       	ldi	r23, 0x0B	; 11
+ 56c:	82 e0       	ldi	r24, 0x02	; 2
+ 56e:	0e 94 06 02 	call	0x40c	; 0x40c <Pwm__SetTCFrequency>
+	 break;    // tem que checar para 16 bits
+case PWM4:
+	 pwm_pt2->OCR2A_REG.byte = (unsigned char)(255*duty/100); //considerando TOP = 255
+	 break;    // tem que checar para 16 bits
+case PWM5:
+	pwm_pt2->OCR2B_REG.byte = (unsigned char)(255*duty/100); //considerando TOP = 255
+ 572:	1c 82       	std	Y+4, r1	; 0x04
+
+Pwm__SetTCFrequency(PWM_TC2, BUZZER_DEFAULT_FREQ);
+Pwm__SetDutyCycle(PWM5, BUZZER_OFF_DUTY);  //desliga o buzzer
+// desligar a buzina com duty cycle igual a 0
+//pwm_pt2->OCR2B_REG.byte =  0;	
+}
+ 574:	df 91       	pop	r29
+ 576:	cf 91       	pop	r28
+ 578:	08 95       	ret
+
+0000057a <Pwm__SetDutyCycle>:
+//
+//   Esta rotina configura o PWM TC num determinado 
+//   ciclo de trabalho ( 0 a 100)
+//
+//*********************************************************
+void Pwm__SetDutyCycle( PWM_ID_TYPE pwm, unsigned char duty){
+ 57a:	65 36       	cpi	r22, 0x65	; 101
+ 57c:	08 f0       	brcs	.+2      	; 0x580 <Pwm__SetDutyCycle+0x6>
+ 57e:	64 e6       	ldi	r22, 0x64	; 100
+pwm_pt0 = TC0_REGISTERS;
+pwm_pt1 = TC1_REGISTERS;
+pwm_pt2 = TC2_REGISTERS;
+if (duty >100)
+   duty = 100;
+switch (pwm){
+ 580:	82 30       	cpi	r24, 0x02	; 2
+ 582:	01 f1       	breq	.+64     	; 0x5c4 <Pwm__SetDutyCycle+0x4a>
+ 584:	28 f4       	brcc	.+10     	; 0x590 <Pwm__SetDutyCycle+0x16>
+ 586:	88 23       	and	r24, r24
+ 588:	49 f0       	breq	.+18     	; 0x59c <Pwm__SetDutyCycle+0x22>
+ 58a:	81 30       	cpi	r24, 0x01	; 1
+ 58c:	89 f0       	breq	.+34     	; 0x5b0 <Pwm__SetDutyCycle+0x36>
+ 58e:	08 95       	ret
+ 590:	84 30       	cpi	r24, 0x04	; 4
+ 592:	71 f1       	breq	.+92     	; 0x5f0 <Pwm__SetDutyCycle+0x76>
+ 594:	10 f1       	brcs	.+68     	; 0x5da <Pwm__SetDutyCycle+0x60>
+ 596:	85 30       	cpi	r24, 0x05	; 5
+ 598:	b1 f1       	breq	.+108    	; 0x606 <Pwm__SetDutyCycle+0x8c>
+ 59a:	08 95       	ret
+case PWM0:
+	pwm_pt0->OCR0A_REG.byte = (unsigned char)(255*duty/100); //considerando TOP = 255
+ 59c:	2f ef       	ldi	r18, 0xFF	; 255
+ 59e:	62 9f       	mul	r22, r18
+ 5a0:	c0 01       	movw	r24, r0
+ 5a2:	11 24       	eor	r1, r1
+ 5a4:	64 e6       	ldi	r22, 0x64	; 100
+ 5a6:	70 e0       	ldi	r23, 0x00	; 0
+ 5a8:	0e 94 d1 06 	call	0xda2	; 0xda2 <__divmodhi4>
+ 5ac:	67 bd       	out	0x27, r22	; 39
+	break;
+ 5ae:	08 95       	ret
+case PWM1:
+	pwm_pt0->OCR0B_REG.byte = (unsigned char)(255*duty/100); //considerando TOP = 255
+ 5b0:	2f ef       	ldi	r18, 0xFF	; 255
+ 5b2:	62 9f       	mul	r22, r18
+ 5b4:	c0 01       	movw	r24, r0
+ 5b6:	11 24       	eor	r1, r1
+ 5b8:	64 e6       	ldi	r22, 0x64	; 100
+ 5ba:	70 e0       	ldi	r23, 0x00	; 0
+ 5bc:	0e 94 d1 06 	call	0xda2	; 0xda2 <__divmodhi4>
+ 5c0:	68 bd       	out	0x28, r22	; 40
+	break;
+ 5c2:	08 95       	ret
+case PWM2:
+	pwm_pt1->OCR1AH_REG.byte = (unsigned char)(255*duty/100); //considerando TOP = 255
+ 5c4:	2f ef       	ldi	r18, 0xFF	; 255
+ 5c6:	62 9f       	mul	r22, r18
+ 5c8:	c0 01       	movw	r24, r0
+ 5ca:	11 24       	eor	r1, r1
+ 5cc:	64 e6       	ldi	r22, 0x64	; 100
+ 5ce:	70 e0       	ldi	r23, 0x00	; 0
+ 5d0:	0e 94 d1 06 	call	0xda2	; 0xda2 <__divmodhi4>
+ 5d4:	60 93 89 00 	sts	0x0089, r22	; 0x800089 <__DATA_REGION_ORIGIN__+0x29>
+ 	break;    // tem que checar para 16 bits
+ 5d8:	08 95       	ret
+case PWM3:
+	 pwm_pt1->OCR1BH_REG.byte = (unsigned char)(255*duty/100); //considerando TOP = 255
+ 5da:	2f ef       	ldi	r18, 0xFF	; 255
+ 5dc:	62 9f       	mul	r22, r18
+ 5de:	c0 01       	movw	r24, r0
+ 5e0:	11 24       	eor	r1, r1
+ 5e2:	64 e6       	ldi	r22, 0x64	; 100
+ 5e4:	70 e0       	ldi	r23, 0x00	; 0
+ 5e6:	0e 94 d1 06 	call	0xda2	; 0xda2 <__divmodhi4>
+ 5ea:	60 93 8b 00 	sts	0x008B, r22	; 0x80008b <__DATA_REGION_ORIGIN__+0x2b>
+	 break;    // tem que checar para 16 bits
+ 5ee:	08 95       	ret
+case PWM4:
+	 pwm_pt2->OCR2A_REG.byte = (unsigned char)(255*duty/100); //considerando TOP = 255
+ 5f0:	2f ef       	ldi	r18, 0xFF	; 255
+ 5f2:	62 9f       	mul	r22, r18
+ 5f4:	c0 01       	movw	r24, r0
+ 5f6:	11 24       	eor	r1, r1
+ 5f8:	64 e6       	ldi	r22, 0x64	; 100
+ 5fa:	70 e0       	ldi	r23, 0x00	; 0
+ 5fc:	0e 94 d1 06 	call	0xda2	; 0xda2 <__divmodhi4>
+ 600:	60 93 b3 00 	sts	0x00B3, r22	; 0x8000b3 <__DATA_REGION_ORIGIN__+0x53>
+	 break;    // tem que checar para 16 bits
+ 604:	08 95       	ret
+case PWM5:
+	pwm_pt2->OCR2B_REG.byte = (unsigned char)(255*duty/100); //considerando TOP = 255
+ 606:	2f ef       	ldi	r18, 0xFF	; 255
+ 608:	62 9f       	mul	r22, r18
+ 60a:	c0 01       	movw	r24, r0
+ 60c:	11 24       	eor	r1, r1
+ 60e:	64 e6       	ldi	r22, 0x64	; 100
+ 610:	70 e0       	ldi	r23, 0x00	; 0
+ 612:	0e 94 d1 06 	call	0xda2	; 0xda2 <__divmodhi4>
+ 616:	60 93 b4 00 	sts	0x00B4, r22	; 0x8000b4 <__DATA_REGION_ORIGIN__+0x54>
+ 61a:	08 95       	ret
+
+0000061c <Gpio__PinConfig>:
+	volatile GPIO_DATA_TYPE *pt_data;
+	//volatile GPIO_MISC_TYPE *pt_misc;
+	unsigned char set_bit_mask;
+	unsigned char clr_bit_mask;
+	
+	set_bit_mask = GPIO_PIN_SET_MASK[pin];
+ 61c:	70 e0       	ldi	r23, 0x00	; 0
+ 61e:	fb 01       	movw	r30, r22
+ 620:	e6 5b       	subi	r30, 0xB6	; 182
+ 622:	fe 4f       	sbci	r31, 0xFE	; 254
+ 624:	20 81       	ld	r18, Z
+	clr_bit_mask = GPIO_PIN_CLR_MASK[pin];
+	
+	
+	switch(port)
+ 626:	81 30       	cpi	r24, 0x01	; 1
+ 628:	31 f0       	breq	.+12     	; 0x636 <Gpio__PinConfig+0x1a>
+ 62a:	18 f0       	brcs	.+6      	; 0x632 <Gpio__PinConfig+0x16>
+ 62c:	82 30       	cpi	r24, 0x02	; 2
+ 62e:	29 f0       	breq	.+10     	; 0x63a <Gpio__PinConfig+0x1e>
+ 630:	05 c0       	rjmp	.+10     	; 0x63c <Gpio__PinConfig+0x20>
+	{
+	case	PORT_B:
+		pt_data = PORTB;   // Está no Micro.h: #define PORTA &GPIOA_DATA   => endereço 0x0000 00000
+ 632:	95 b1       	in	r25, 0x05	; 5
+		break;
+ 634:	03 c0       	rjmp	.+6      	; 0x63c <Gpio__PinConfig+0x20>
+	case	PORT_C:
+		pt_data = PORTC;
+ 636:	98 b1       	in	r25, 0x08	; 8
+		break;
+ 638:	01 c0       	rjmp	.+2      	; 0x63c <Gpio__PinConfig+0x20>
+	case	PORT_D:
+		pt_data = PORTD;
+ 63a:	9b b1       	in	r25, 0x0b	; 11
+		break;
+	default:
+		break;
+	}
+if(type == OUTPUT_DIGITAL)    // setar 1 para saída
+ 63c:	41 30       	cpi	r20, 0x01	; 1
+ 63e:	69 f4       	brne	.+26     	; 0x65a <Gpio__PinConfig+0x3e>
+{
+	//var = pt_data->DIRECION_REG.byte;
+	//BIT_SET(var,pin);      // Está no C_types.h =>  #define BIT_SET(mem,bit)    ((mem)|=(1UL<<(bit))) //This macro is used to set the bit of the data
+	//pt_data->DIRECION_REG.byte = var;  
+	//   OU
+	pt_data = GPIO_DATA_LIST[port];		 	
+ 640:	e8 2f       	mov	r30, r24
+ 642:	f0 e0       	ldi	r31, 0x00	; 0
+ 644:	ee 0f       	add	r30, r30
+ 646:	ff 1f       	adc	r31, r31
+ 648:	e0 50       	subi	r30, 0x00	; 0
+ 64a:	ff 4f       	sbci	r31, 0xFF	; 255
+ 64c:	01 90       	ld	r0, Z+
+ 64e:	f0 81       	ld	r31, Z
+ 650:	e0 2d       	mov	r30, r0
+	pt_data->DIRECION_REG.byte |= set_bit_mask;	// Config Output
+ 652:	81 81       	ldd	r24, Z+1	; 0x01
+ 654:	82 2b       	or	r24, r18
+ 656:	81 83       	std	Z+1, r24	; 0x01
+ 658:	08 95       	ret
+}
+
+if(type == INPUT_DIGITAL_PULLUP)
+ 65a:	41 11       	cpse	r20, r1
+ 65c:	14 c0       	rjmp	.+40     	; 0x686 <Gpio__PinConfig+0x6a>
+{
+	pt_data = GPIO_DATA_LIST[port];		 	
+ 65e:	e8 2f       	mov	r30, r24
+ 660:	f0 e0       	ldi	r31, 0x00	; 0
+ 662:	ee 0f       	add	r30, r30
+ 664:	ff 1f       	adc	r31, r31
+ 666:	e0 50       	subi	r30, 0x00	; 0
+ 668:	ff 4f       	sbci	r31, 0xFF	; 255
+ 66a:	01 90       	ld	r0, Z+
+ 66c:	f0 81       	ld	r31, Z
+ 66e:	e0 2d       	mov	r30, r0
+	pt_data->DIRECION_REG.byte &= clr_bit_mask; 	// Config Input
+ 670:	81 81       	ldd	r24, Z+1	; 0x01
+	//volatile GPIO_MISC_TYPE *pt_misc;
+	unsigned char set_bit_mask;
+	unsigned char clr_bit_mask;
+	
+	set_bit_mask = GPIO_PIN_SET_MASK[pin];
+	clr_bit_mask = GPIO_PIN_CLR_MASK[pin];
+ 672:	db 01       	movw	r26, r22
+ 674:	ae 5b       	subi	r26, 0xBE	; 190
+ 676:	be 4f       	sbci	r27, 0xFE	; 254
+}
+
+if(type == INPUT_DIGITAL_PULLUP)
+{
+	pt_data = GPIO_DATA_LIST[port];		 	
+	pt_data->DIRECION_REG.byte &= clr_bit_mask; 	// Config Input
+ 678:	9c 91       	ld	r25, X
+ 67a:	98 23       	and	r25, r24
+ 67c:	91 83       	std	Z+1, r25	; 0x01
+	
+	pt_data->DATA_OUT_PULL_REG.byte |= set_bit_mask;   // Config Input Pull up
+ 67e:	92 81       	ldd	r25, Z+2	; 0x02
+ 680:	82 2f       	mov	r24, r18
+ 682:	89 2b       	or	r24, r25
+ 684:	82 83       	std	Z+2, r24	; 0x02
+ 686:	08 95       	ret
+
+00000688 <Gpio__PinWrite>:
+ **********************************************************************************/
+void Gpio__PinWrite(GPIO_PORT port,unsigned char pin,unsigned char value)
+{
+	volatile GPIO_DATA_TYPE *pt_data;
+	
+	  if (value == 0)
+ 688:	41 11       	cpse	r20, r1
+ 68a:	14 c0       	rjmp	.+40     	; 0x6b4 <Gpio__PinWrite+0x2c>
+        {
+        	pt_data = GPIO_DATA_LIST[port];		 	
+ 68c:	e8 2f       	mov	r30, r24
+ 68e:	f0 e0       	ldi	r31, 0x00	; 0
+ 690:	ee 0f       	add	r30, r30
+ 692:	ff 1f       	adc	r31, r31
+ 694:	e0 50       	subi	r30, 0x00	; 0
+ 696:	ff 4f       	sbci	r31, 0xFF	; 255
+ 698:	a0 81       	ld	r26, Z
+ 69a:	b1 81       	ldd	r27, Z+1	; 0x01
+        	pt_data->DATA_OUT_PULL_REG.byte &= GPIO_PIN_CLR_MASK[pin];
+ 69c:	12 96       	adiw	r26, 0x02	; 2
+ 69e:	9c 91       	ld	r25, X
+ 6a0:	12 97       	sbiw	r26, 0x02	; 2
+ 6a2:	e6 2f       	mov	r30, r22
+ 6a4:	f0 e0       	ldi	r31, 0x00	; 0
+ 6a6:	ee 5b       	subi	r30, 0xBE	; 190
+ 6a8:	fe 4f       	sbci	r31, 0xFE	; 254
+ 6aa:	80 81       	ld	r24, Z
+ 6ac:	89 23       	and	r24, r25
+ 6ae:	12 96       	adiw	r26, 0x02	; 2
+ 6b0:	8c 93       	st	X, r24
+ 6b2:	08 95       	ret
+        }
+        else
+        {
+        	pt_data = GPIO_DATA_LIST[port];
+ 6b4:	e8 2f       	mov	r30, r24
+ 6b6:	f0 e0       	ldi	r31, 0x00	; 0
+ 6b8:	ee 0f       	add	r30, r30
+ 6ba:	ff 1f       	adc	r31, r31
+ 6bc:	e0 50       	subi	r30, 0x00	; 0
+ 6be:	ff 4f       	sbci	r31, 0xFF	; 255
+ 6c0:	a0 81       	ld	r26, Z
+ 6c2:	b1 81       	ldd	r27, Z+1	; 0x01
+        	pt_data->DATA_OUT_PULL_REG.byte |= GPIO_PIN_SET_MASK[pin];
+ 6c4:	12 96       	adiw	r26, 0x02	; 2
+ 6c6:	9c 91       	ld	r25, X
+ 6c8:	12 97       	sbiw	r26, 0x02	; 2
+ 6ca:	e6 2f       	mov	r30, r22
+ 6cc:	f0 e0       	ldi	r31, 0x00	; 0
+ 6ce:	e6 5b       	subi	r30, 0xB6	; 182
+ 6d0:	fe 4f       	sbci	r31, 0xFE	; 254
+ 6d2:	80 81       	ld	r24, Z
+ 6d4:	89 2b       	or	r24, r25
+ 6d6:	12 96       	adiw	r26, 0x02	; 2
+ 6d8:	8c 93       	st	X, r24
+ 6da:	08 95       	ret
+
+000006dc <Gpio__PinRead>:
+unsigned char Gpio__PinRead(GPIO_PORT port,unsigned char pin)
+{
+	volatile GPIO_DATA_TYPE *pt_data;
+	unsigned char pin_state = SW_OFF;       // pin_state = OFF  não pressionado  
+	
+		pt_data = GPIO_DATA_LIST[port];
+ 6dc:	e8 2f       	mov	r30, r24
+ 6de:	f0 e0       	ldi	r31, 0x00	; 0
+ 6e0:	ee 0f       	add	r30, r30
+ 6e2:	ff 1f       	adc	r31, r31
+ 6e4:	e0 50       	subi	r30, 0x00	; 0
+ 6e6:	ff 4f       	sbci	r31, 0xFF	; 255
+ 6e8:	01 90       	ld	r0, Z+
+ 6ea:	f0 81       	ld	r31, Z
+ 6ec:	e0 2d       	mov	r30, r0
+    	if (pt_data->DATA_IN_REG.byte & GPIO_PIN_SET_MASK[pin])     // if(leitura != 0)   ou if(leitura)
+ 6ee:	90 81       	ld	r25, Z
+ 6f0:	e6 2f       	mov	r30, r22
+ 6f2:	f0 e0       	ldi	r31, 0x00	; 0
+ 6f4:	e6 5b       	subi	r30, 0xB6	; 182
+ 6f6:	fe 4f       	sbci	r31, 0xFE	; 254
+           pin_state = SW_OFF;     // pin_state = SW_OFF   não acionado
+        else
+		   pin_state = SW_ON;
+   
+    return (pin_state);
+ 6f8:	80 81       	ld	r24, Z
+ 6fa:	98 23       	and	r25, r24
+ 6fc:	81 e0       	ldi	r24, 0x01	; 1
+ 6fe:	09 f4       	brne	.+2      	; 0x702 <Gpio__PinRead+0x26>
+ 700:	80 e0       	ldi	r24, 0x00	; 0
+    
+}
+ 702:	08 95       	ret
+
+00000704 <Hal__SetLed>:
+ *  output: Respective LED
+ *  value: ON/OFF
+ */
+void Hal__SetLed(LED_OUTPUT_TYPE output,unsigned char value)
+{
+	Hal_Leds_Buffer[output] = LED_OFF;
+ 704:	90 e0       	ldi	r25, 0x00	; 0
+	if (value == ACENDE_LED)
+ 706:	66 23       	and	r22, r22
+ 708:	31 f0       	breq	.+12     	; 0x716 <Hal__SetLed+0x12>
+ *  output: Respective LED
+ *  value: ON/OFF
+ */
+void Hal__SetLed(LED_OUTPUT_TYPE output,unsigned char value)
+{
+	Hal_Leds_Buffer[output] = LED_OFF;
+ 70a:	fc 01       	movw	r30, r24
+ 70c:	ef 57       	subi	r30, 0x7F	; 127
+ 70e:	fe 4f       	sbci	r31, 0xFE	; 254
+ 710:	21 e0       	ldi	r18, 0x01	; 1
+ 712:	20 83       	st	Z, r18
+ 714:	08 95       	ret
+	if (value == ACENDE_LED)
+	   Hal_Leds_Buffer[output] = LED_ON;
+ 716:	fc 01       	movw	r30, r24
+ 718:	ef 57       	subi	r30, 0x7F	; 127
+ 71a:	fe 4f       	sbci	r31, 0xFE	; 254
+ 71c:	10 82       	st	Z, r1
+ 71e:	08 95       	ret
+
+00000720 <Hal__SetAllLeds>:
+ *  value ON/OFF
+ *  ON: To turn All LEDs ON 
+ *  OFF: To turn All LEDs OFF
+ */
+void Hal__SetAllLeds(unsigned char value)
+{
+ 720:	e1 e8       	ldi	r30, 0x81	; 129
+ 722:	f1 e0       	ldi	r31, 0x01	; 1
+ 724:	25 e8       	ldi	r18, 0x85	; 133
+ 726:	31 e0       	ldi	r19, 0x01	; 1
+	LED_OUTPUT_TYPE index;
+
+	for(index = 0; index < NUM_OF_LEDS; index++)
+		{
+		Hal_Leds_Buffer[index] = LED_OFF;
+ 728:	91 e0       	ldi	r25, 0x01	; 1
+		if (value == ACENDE_LED)
+ 72a:	88 23       	and	r24, r24
+ 72c:	11 f0       	breq	.+4      	; 0x732 <Hal__SetAllLeds+0x12>
+{
+	LED_OUTPUT_TYPE index;
+
+	for(index = 0; index < NUM_OF_LEDS; index++)
+		{
+		Hal_Leds_Buffer[index] = LED_OFF;
+ 72e:	90 83       	st	Z, r25
+ 730:	01 c0       	rjmp	.+2      	; 0x734 <Hal__SetAllLeds+0x14>
+		if (value == ACENDE_LED)
+			Hal_Leds_Buffer[index] = LED_ON;
+ 732:	10 82       	st	Z, r1
+ 734:	31 96       	adiw	r30, 0x01	; 1
+ */
+void Hal__SetAllLeds(unsigned char value)
+{
+	LED_OUTPUT_TYPE index;
+
+	for(index = 0; index < NUM_OF_LEDS; index++)
+ 736:	e2 17       	cp	r30, r18
+ 738:	f3 07       	cpc	r31, r19
+ 73a:	b9 f7       	brne	.-18     	; 0x72a <Hal__SetAllLeds+0xa>
+		{
+		Hal_Leds_Buffer[index] = LED_OFF;
+		if (value == ACENDE_LED)
+			Hal_Leds_Buffer[index] = LED_ON;
+		}
+}
+ 73c:	08 95       	ret
+
+0000073e <Hal__Initialize>:
+/*
+ * Call this function on initialize tasks before use any function of this module
+ * This function will properly configure all pins before use it
+ */
+void Hal__Initialize(void)
+{
+ 73e:	0f 93       	push	r16
+ 740:	1f 93       	push	r17
+ 742:	cf 93       	push	r28
+ 744:	df 93       	push	r29
+ 746:	ce e0       	ldi	r28, 0x0E	; 14
+ 748:	d1 e0       	ldi	r29, 0x01	; 1
+ 74a:	06 e1       	ldi	r16, 0x16	; 22
+ 74c:	11 e0       	ldi	r17, 0x01	; 1
+	
+	
+	// LEDs Configuration
+	for(led_index = 0; led_index < NUM_OF_LEDS; led_index++)
+	{
+	Gpio__PinConfig(LED_GPIO[led_index].port, LED_GPIO[led_index].pin, OUTPUT_DIGITAL);
+ 74e:	41 e0       	ldi	r20, 0x01	; 1
+ 750:	69 81       	ldd	r22, Y+1	; 0x01
+ 752:	88 81       	ld	r24, Y
+ 754:	0e 94 0e 03 	call	0x61c	; 0x61c <Gpio__PinConfig>
+ 758:	22 96       	adiw	r28, 0x02	; 2
+	KEY_INPUT_TYPE key_index;
+	ANALOG_INPUT_TYPE analog_index;
+	
+	
+	// LEDs Configuration
+	for(led_index = 0; led_index < NUM_OF_LEDS; led_index++)
+ 75a:	c0 17       	cp	r28, r16
+ 75c:	d1 07       	cpc	r29, r17
+ 75e:	b9 f7       	brne	.-18     	; 0x74e <Hal__Initialize+0x10>
+ 760:	c6 e0       	ldi	r28, 0x06	; 6
+ 762:	d1 e0       	ldi	r29, 0x01	; 1
+ 764:	0e e0       	ldi	r16, 0x0E	; 14
+ 766:	11 e0       	ldi	r17, 0x01	; 1
+	
+	
+	// Keys Configuration
+	for(key_index = 0; key_index < NUM_OF_KEYS; key_index++)
+	{
+	Gpio__PinConfig(KEYS_GPIO[key_index].port, KEYS_GPIO[key_index].pin, INPUT_DIGITAL_PULLUP);
+ 768:	40 e0       	ldi	r20, 0x00	; 0
+ 76a:	69 81       	ldd	r22, Y+1	; 0x01
+ 76c:	88 81       	ld	r24, Y
+ 76e:	0e 94 0e 03 	call	0x61c	; 0x61c <Gpio__PinConfig>
+ 772:	22 96       	adiw	r28, 0x02	; 2
+	Gpio__PinConfig(LED_GPIO[led_index].port, LED_GPIO[led_index].pin, OUTPUT_DIGITAL);
+	}
+	
+	
+	// Keys Configuration
+	for(key_index = 0; key_index < NUM_OF_KEYS; key_index++)
+ 774:	c0 17       	cp	r28, r16
+ 776:	d1 07       	cpc	r29, r17
+ 778:	b9 f7       	brne	.-18     	; 0x768 <Hal__Initialize+0x2a>
+	{
+	Gpio__PinConfig(KEYS_GPIO[key_index].port, KEYS_GPIO[key_index].pin, INPUT_DIGITAL_PULLUP);
+	}
+	
+	// Apaga todos os leds
+	Hal__SetAllLeds(LED_OFF);   //apaga todos leds
+ 77a:	81 e0       	ldi	r24, 0x01	; 1
+ 77c:	0e 94 90 03 	call	0x720	; 0x720 <Hal__SetAllLeds>
+	
+	
+	// Configuração do 7 segmentos
+	
+	bitWrite(DDRD, 4, OUTPUT_DIGITAL);
+ 780:	54 9a       	sbi	0x0a, 4	; 10
+	bitWrite(DDRD, 7, OUTPUT_DIGITAL);
+ 782:	57 9a       	sbi	0x0a, 7	; 10
+	bitWrite(DDRB, 0, OUTPUT_DIGITAL);
+ 784:	20 9a       	sbi	0x04, 0	; 4
+	
+	
+	// Analog Inputs Configuration - modo de conversão e resolução e inicializa os buffers de várias leitura do ADC
+	ADC__ConfigModes(MODE_10BITS,AD_SINGLE_CONVERSION);
+ 786:	60 e0       	ldi	r22, 0x00	; 0
+ 788:	81 e0       	ldi	r24, 0x01	; 1
+ 78a:	0e 94 cf 01 	call	0x39e	; 0x39e <ADC__ConfigModes>
+	AD_Mux_State = MUX_INIT;
+ 78e:	10 92 9d 01 	sts	0x019D, r1	; 0x80019d <AD_Mux_State>
+	AD_Channel = POT_EXT;  // eqivalente ao canal AD5 do arduino
+ 792:	85 e0       	ldi	r24, 0x05	; 5
+ 794:	80 93 80 01 	sts	0x0180, r24	; 0x800180 <AD_Channel>
+ 798:	e8 e5       	ldi	r30, 0x58	; 88
+ 79a:	f1 e0       	ldi	r31, 0x01	; 1
+ 79c:	81 e9       	ldi	r24, 0x91	; 145
+ 79e:	91 e0       	ldi	r25, 0x01	; 1
+ 7a0:	c5 ea       	ldi	r28, 0xA5	; 165
+ 7a2:	d1 e0       	ldi	r29, 0x01	; 1
+ 7a4:	6e e9       	ldi	r22, 0x9E	; 158
+ 7a6:	71 e0       	ldi	r23, 0x01	; 1
+ 7a8:	4e e5       	ldi	r20, 0x5E	; 94
+ 7aa:	51 e0       	ldi	r21, 0x01	; 1
+
+	for(analog_index = 0; analog_index < NUM_OF_ANALOG_INPUT; analog_index++)
+	{
+		if(AD_Enable_Table[analog_index] == ENABLED)
+ 7ac:	21 91       	ld	r18, Z+
+ 7ae:	21 30       	cpi	r18, 0x01	; 1
+ 7b0:	39 f4       	brne	.+14     	; 0x7c0 <Hal__Initialize+0x82>
+		{
+			Hal_Analog_Inputs[analog_index] = 0;   // zera o buffer de valor de cada canal
+ 7b2:	dc 01       	movw	r26, r24
+ 7b4:	1d 92       	st	X+, r1
+ 7b6:	1c 92       	st	X, r1
+			AD_Accumulator[analog_index] = 0;
+ 7b8:	19 82       	std	Y+1, r1	; 0x01
+ 7ba:	18 82       	st	Y, r1
+			AD_Counter[analog_index] = 0;
+ 7bc:	db 01       	movw	r26, r22
+ 7be:	1c 92       	st	X, r1
+ 7c0:	02 96       	adiw	r24, 0x02	; 2
+ 7c2:	22 96       	adiw	r28, 0x02	; 2
+ 7c4:	6f 5f       	subi	r22, 0xFF	; 255
+ 7c6:	7f 4f       	sbci	r23, 0xFF	; 255
+	// Analog Inputs Configuration - modo de conversão e resolução e inicializa os buffers de várias leitura do ADC
+	ADC__ConfigModes(MODE_10BITS,AD_SINGLE_CONVERSION);
+	AD_Mux_State = MUX_INIT;
+	AD_Channel = POT_EXT;  // eqivalente ao canal AD5 do arduino
+
+	for(analog_index = 0; analog_index < NUM_OF_ANALOG_INPUT; analog_index++)
+ 7c8:	e4 17       	cp	r30, r20
+ 7ca:	f5 07       	cpc	r31, r21
+ 7cc:	79 f7       	brne	.-34     	; 0x7ac <Hal__Initialize+0x6e>
+	//#if (USE_BUZZER == ENABLED)
+
+	//Pwm__SetTCFrequency(PWM_TC2, BUZZER_DEFAULT_FREQ);
+	//Pwm__SetDutyCycle(PWM5,BUZZER_DEFAULT_ON_DUTY);
+	//#endif	//(USE_BUZZER == ENABLED)
+	}
+ 7ce:	df 91       	pop	r29
+ 7d0:	cf 91       	pop	r28
+ 7d2:	1f 91       	pop	r17
+ 7d4:	0f 91       	pop	r16
+ 7d6:	08 95       	ret
+
+000007d8 <Hal__ReadKey>:
+ *  Use this function to read the status of a specific key
+ *  key: desired key to be read
+ *  return: TRUE if key is pressed otherwise FALSE
+ */
+unsigned char Hal__ReadKey(KEY_INPUT_TYPE key)
+{
+ 7d8:	28 2f       	mov	r18, r24
+	if (key < NUM_OF_KEYS)
+ 7da:	84 30       	cpi	r24, 0x04	; 4
+ 7dc:	70 f4       	brcc	.+28     	; 0x7fa <Hal__ReadKey+0x22>
+	   {
+	   if (BIT_TEST(Hal_Keys_Buffer, key) > 0)
+	      return (TRUE);
+ 7de:	80 91 a4 01 	lds	r24, 0x01A4	; 0x8001a4 <Hal_Keys_Buffer>
+ 7e2:	90 e0       	ldi	r25, 0x00	; 0
+ 7e4:	a0 e0       	ldi	r26, 0x00	; 0
+ 7e6:	b0 e0       	ldi	r27, 0x00	; 0
+ 7e8:	04 c0       	rjmp	.+8      	; 0x7f2 <Hal__ReadKey+0x1a>
+ 7ea:	b6 95       	lsr	r27
+ 7ec:	a7 95       	ror	r26
+ 7ee:	97 95       	ror	r25
+ 7f0:	87 95       	ror	r24
+ 7f2:	2a 95       	dec	r18
+ 7f4:	d2 f7       	brpl	.-12     	; 0x7ea <Hal__ReadKey+0x12>
+ 7f6:	81 70       	andi	r24, 0x01	; 1
+ 7f8:	08 95       	ret
+	   }
+	 return (FALSE);
+ 7fa:	80 e0       	ldi	r24, 0x00	; 0
+}
+ 7fc:	08 95       	ret
+
+000007fe <Hal__WriteValtoSegment>:
+ *  
+ */
+void Hal__WriteValtoSegment(char Segment, char *Value)
+{
+
+SevenSeg_WriteValueToSegment(Segment, Value);
+ 7fe:	0e 94 34 05 	call	0xa68	; 0xa68 <SevenSeg_WriteValueToSegment>
+ 802:	08 95       	ret
+
+00000804 <Hal__GetAnalogInput>:
+ *  Use this function to read a value ADC in the selected channel
+ *  
+ */
+unsigned short int Hal__GetAnalogInput(ANALOG_INPUT_TYPE input)
+{
+if(input < NUM_OF_ANALOG_INPUT)
+ 804:	86 30       	cpi	r24, 0x06	; 6
+ 806:	48 f4       	brcc	.+18     	; 0x81a <Hal__GetAnalogInput+0x16>
+   return Hal_Analog_Inputs[input];  // retorna o valor no buffer HAL_AnalogInputs do canal solicitado
+ 808:	e8 2f       	mov	r30, r24
+ 80a:	f0 e0       	ldi	r31, 0x00	; 0
+ 80c:	ee 0f       	add	r30, r30
+ 80e:	ff 1f       	adc	r31, r31
+ 810:	ef 56       	subi	r30, 0x6F	; 111
+ 812:	fe 4f       	sbci	r31, 0xFE	; 254
+ 814:	80 81       	ld	r24, Z
+ 816:	91 81       	ldd	r25, Z+1	; 0x01
+ 818:	08 95       	ret
+}
+ 81a:	08 95       	ret
+
+0000081c <Hal__SetBuzzer>:
+ */
+void Hal__SetBuzzer(unsigned char state)
+{
+#if (USE_BUZZER == ENABLED)
+
+	if(state > 0)
+ 81c:	88 23       	and	r24, r24
+ 81e:	29 f0       	breq	.+10     	; 0x82a <Hal__SetBuzzer+0xe>
+		{
+		//BuzzerRequest = ON;
+		Pwm__SetDutyCycle(PWM5,BUZZER_DEFAULT_ON_DUTY);
+ 820:	62 e3       	ldi	r22, 0x32	; 50
+ 822:	85 e0       	ldi	r24, 0x05	; 5
+ 824:	0e 94 bd 02 	call	0x57a	; 0x57a <Pwm__SetDutyCycle>
+ 828:	08 95       	ret
+		}
+	else
+		{
+		Pwm__SetDutyCycle(PWM5,BUZZER_OFF_DUTY);
+ 82a:	60 e0       	ldi	r22, 0x00	; 0
+ 82c:	85 e0       	ldi	r24, 0x05	; 5
+ 82e:	0e 94 bd 02 	call	0x57a	; 0x57a <Pwm__SetDutyCycle>
+ 832:	08 95       	ret
+
+00000834 <Hal__SetBuzzerFreq>:
+ */
+void Hal__SetBuzzerFreq(unsigned short int frequency)
+{
+#if (USE_BUZZER == ENABLED)
+	
+	if(frequency >= 2000)
+ 834:	80 3d       	cpi	r24, 0xD0	; 208
+ 836:	27 e0       	ldi	r18, 0x07	; 7
+ 838:	92 07       	cpc	r25, r18
+ 83a:	20 f0       	brcs	.+8      	; 0x844 <Hal__SetBuzzerFreq+0x10>
+ 83c:	bc 01       	movw	r22, r24
+		{
+		Pwm__SetTCFrequency(PWM_TC2, frequency);
+ 83e:	82 e0       	ldi	r24, 0x02	; 2
+ 840:	0e 94 06 02 	call	0x40c	; 0x40c <Pwm__SetTCFrequency>
+ 844:	08 95       	ret
+
+00000846 <LEDsUpdate>:
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ *  This local function update the LEDs status
+ */
+void LEDsUpdate(void)
+{
+ 846:	af 92       	push	r10
+ 848:	bf 92       	push	r11
+ 84a:	cf 92       	push	r12
+ 84c:	df 92       	push	r13
+ 84e:	ef 92       	push	r14
+ 850:	ff 92       	push	r15
+ 852:	0f 93       	push	r16
+ 854:	1f 93       	push	r17
+ 856:	cf 93       	push	r28
+ 858:	df 93       	push	r29
+ 85a:	c2 e6       	ldi	r28, 0x62	; 98
+ 85c:	d1 e0       	ldi	r29, 0x01	; 1
+ 85e:	0f 2e       	mov	r0, r31
+ 860:	f1 e8       	ldi	r31, 0x81	; 129
+ 862:	ef 2e       	mov	r14, r31
+ 864:	f1 e0       	ldi	r31, 0x01	; 1
+ 866:	ff 2e       	mov	r15, r31
+ 868:	f0 2d       	mov	r31, r0
+ 86a:	0e e0       	ldi	r16, 0x0E	; 14
+ 86c:	11 e0       	ldi	r17, 0x01	; 1
+ 86e:	0f 2e       	mov	r0, r31
+ 870:	f6 e6       	ldi	r31, 0x66	; 102
+ 872:	cf 2e       	mov	r12, r31
+ 874:	f1 e0       	ldi	r31, 0x01	; 1
+ 876:	df 2e       	mov	r13, r31
+ 878:	f0 2d       	mov	r31, r0
+			value = LED_ON;
+			if(Hal_Leds_Buffer[index] > 0)
+			{
+				value = LED_OFF;
+			}
+			Gpio__PinWrite(LED_GPIO[index].port, LED_GPIO[index].pin, value);
+ 87a:	bb 24       	eor	r11, r11
+ 87c:	b3 94       	inc	r11
+ 87e:	a1 2c       	mov	r10, r1
+	unsigned char value;
+	
+	//LEDs Update
+	for(index = 0; index < NUM_OF_LEDS; index++)
+	{
+		if(Leds_Enable_Table[index] == ENABLED) // Update GPIO only if current LED is configured to be used
+ 880:	89 91       	ld	r24, Y+
+ 882:	81 30       	cpi	r24, 0x01	; 1
+ 884:	59 f4       	brne	.+22     	; 0x89c <LEDsUpdate+0x56>
+ 886:	f8 01       	movw	r30, r16
+			value = LED_ON;
+			if(Hal_Leds_Buffer[index] > 0)
+			{
+				value = LED_OFF;
+			}
+			Gpio__PinWrite(LED_GPIO[index].port, LED_GPIO[index].pin, value);
+ 888:	4b 2d       	mov	r20, r11
+ 88a:	d7 01       	movw	r26, r14
+ 88c:	8c 91       	ld	r24, X
+ 88e:	81 11       	cpse	r24, r1
+ 890:	01 c0       	rjmp	.+2      	; 0x894 <LEDsUpdate+0x4e>
+ 892:	4a 2d       	mov	r20, r10
+ 894:	61 81       	ldd	r22, Z+1	; 0x01
+ 896:	80 81       	ld	r24, Z
+ 898:	0e 94 44 03 	call	0x688	; 0x688 <Gpio__PinWrite>
+ 89c:	bf ef       	ldi	r27, 0xFF	; 255
+ 89e:	eb 1a       	sub	r14, r27
+ 8a0:	fb 0a       	sbc	r15, r27
+ 8a2:	0e 5f       	subi	r16, 0xFE	; 254
+ 8a4:	1f 4f       	sbci	r17, 0xFF	; 255
+{
+	unsigned char index;
+	unsigned char value;
+	
+	//LEDs Update
+	for(index = 0; index < NUM_OF_LEDS; index++)
+ 8a6:	cc 15       	cp	r28, r12
+ 8a8:	dd 05       	cpc	r29, r13
+ 8aa:	51 f7       	brne	.-44     	; 0x880 <LEDsUpdate+0x3a>
+				value = LED_OFF;
+			}
+			Gpio__PinWrite(LED_GPIO[index].port, LED_GPIO[index].pin, value);
+		}
+	}
+}
+ 8ac:	df 91       	pop	r29
+ 8ae:	cf 91       	pop	r28
+ 8b0:	1f 91       	pop	r17
+ 8b2:	0f 91       	pop	r16
+ 8b4:	ff 90       	pop	r15
+ 8b6:	ef 90       	pop	r14
+ 8b8:	df 90       	pop	r13
+ 8ba:	cf 90       	pop	r12
+ 8bc:	bf 90       	pop	r11
+ 8be:	af 90       	pop	r10
+ 8c0:	08 95       	ret
+
+000008c2 <KeysRead>:
+/**
+ *  This local function reads the keys input and update the Hal_Keys_Buffer
+ */
+
+void KeysRead(void)
+{
+ 8c2:	8f 92       	push	r8
+ 8c4:	9f 92       	push	r9
+ 8c6:	af 92       	push	r10
+ 8c8:	bf 92       	push	r11
+ 8ca:	df 92       	push	r13
+ 8cc:	ef 92       	push	r14
+ 8ce:	ff 92       	push	r15
+ 8d0:	0f 93       	push	r16
+ 8d2:	1f 93       	push	r17
+ 8d4:	cf 93       	push	r28
+ 8d6:	df 93       	push	r29
+ 8d8:	0f 2e       	mov	r0, r31
+ 8da:	fe e5       	ldi	r31, 0x5E	; 94
+ 8dc:	ef 2e       	mov	r14, r31
+ 8de:	f1 e0       	ldi	r31, 0x01	; 1
+ 8e0:	ff 2e       	mov	r15, r31
+ 8e2:	f0 2d       	mov	r31, r0
+ 8e4:	06 e0       	ldi	r16, 0x06	; 6
+ 8e6:	11 e0       	ldi	r17, 0x01	; 1
+ 8e8:	c0 e0       	ldi	r28, 0x00	; 0
+ 8ea:	d0 e0       	ldi	r29, 0x00	; 0
+			{
+				BIT_SET(Hal_Keys_Buffer,key_index);
+			}
+			else
+			{
+				BIT_CLR(Hal_Keys_Buffer,key_index);
+ 8ec:	81 2c       	mov	r8, r1
+ 8ee:	91 2c       	mov	r9, r1
+ 8f0:	54 01       	movw	r10, r8
+ 8f2:	83 94       	inc	r8
+	KEY_INPUT_TYPE key_index;
+	unsigned char value;
+	
+	for(key_index = KEY_0; key_index < NUM_OF_KEYS; key_index++)
+	{
+		if(Keys_Enable_Table[key_index] == ENABLED)
+ 8f4:	f7 01       	movw	r30, r14
+ 8f6:	81 91       	ld	r24, Z+
+ 8f8:	7f 01       	movw	r14, r30
+ 8fa:	81 30       	cpi	r24, 0x01	; 1
+ 8fc:	39 f5       	brne	.+78     	; 0x94c <__stack+0x4d>
+		{
+			value = Gpio__PinRead(KEYS_GPIO[key_index].port, KEYS_GPIO[key_index].pin);
+ 8fe:	f8 01       	movw	r30, r16
+ 900:	61 81       	ldd	r22, Z+1	; 0x01
+ 902:	80 81       	ld	r24, Z
+ 904:	0e 94 6e 03 	call	0x6dc	; 0x6dc <Gpio__PinRead>
+			if(value == KEY_PRESSED)
+ 908:	81 11       	cpse	r24, r1
+ 90a:	10 c0       	rjmp	.+32     	; 0x92c <__stack+0x2d>
+			{
+				BIT_SET(Hal_Keys_Buffer,key_index);
+ 90c:	d5 01       	movw	r26, r10
+ 90e:	c4 01       	movw	r24, r8
+ 910:	0c 2e       	mov	r0, r28
+ 912:	04 c0       	rjmp	.+8      	; 0x91c <__stack+0x1d>
+ 914:	88 0f       	add	r24, r24
+ 916:	99 1f       	adc	r25, r25
+ 918:	aa 1f       	adc	r26, r26
+ 91a:	bb 1f       	adc	r27, r27
+ 91c:	0a 94       	dec	r0
+ 91e:	d2 f7       	brpl	.-12     	; 0x914 <__stack+0x15>
+ 920:	20 91 a4 01 	lds	r18, 0x01A4	; 0x8001a4 <Hal_Keys_Buffer>
+ 924:	82 2b       	or	r24, r18
+ 926:	80 93 a4 01 	sts	0x01A4, r24	; 0x8001a4 <Hal_Keys_Buffer>
+ 92a:	10 c0       	rjmp	.+32     	; 0x94c <__stack+0x4d>
+			}
+			else
+			{
+				BIT_CLR(Hal_Keys_Buffer,key_index);
+ 92c:	d5 01       	movw	r26, r10
+ 92e:	c4 01       	movw	r24, r8
+ 930:	0c 2e       	mov	r0, r28
+ 932:	04 c0       	rjmp	.+8      	; 0x93c <__stack+0x3d>
+ 934:	88 0f       	add	r24, r24
+ 936:	99 1f       	adc	r25, r25
+ 938:	aa 1f       	adc	r26, r26
+ 93a:	bb 1f       	adc	r27, r27
+ 93c:	0a 94       	dec	r0
+ 93e:	d2 f7       	brpl	.-12     	; 0x934 <__stack+0x35>
+ 940:	80 95       	com	r24
+ 942:	90 91 a4 01 	lds	r25, 0x01A4	; 0x8001a4 <Hal_Keys_Buffer>
+ 946:	89 23       	and	r24, r25
+ 948:	80 93 a4 01 	sts	0x01A4, r24	; 0x8001a4 <Hal_Keys_Buffer>
+ 94c:	21 96       	adiw	r28, 0x01	; 1
+ 94e:	0e 5f       	subi	r16, 0xFE	; 254
+ 950:	1f 4f       	sbci	r17, 0xFF	; 255
+{
+	//Keys read
+	KEY_INPUT_TYPE key_index;
+	unsigned char value;
+	
+	for(key_index = KEY_0; key_index < NUM_OF_KEYS; key_index++)
+ 952:	c4 30       	cpi	r28, 0x04	; 4
+ 954:	d1 05       	cpc	r29, r1
+ 956:	71 f6       	brne	.-100    	; 0x8f4 <KeysRead+0x32>
+
+			}
+		}
+	}
+
+}
+ 958:	df 91       	pop	r29
+ 95a:	cf 91       	pop	r28
+ 95c:	1f 91       	pop	r17
+ 95e:	0f 91       	pop	r16
+ 960:	ff 90       	pop	r15
+ 962:	ef 90       	pop	r14
+ 964:	df 90       	pop	r13
+ 966:	bf 90       	pop	r11
+ 968:	af 90       	pop	r10
+ 96a:	9f 90       	pop	r9
+ 96c:	8f 90       	pop	r8
+ 96e:	08 95       	ret
+
+00000970 <Hal__FastHandler>:
+ *  This function shall run in background in the main loop 
+ *  Call rate: 1ms, 5ms, 10ms, ...PARA GPIO
+ */
+void Hal__FastHandler(void)
+{
+	LEDsUpdate();
+ 970:	0e 94 23 04 	call	0x846	; 0x846 <LEDsUpdate>
+	KeysRead();
+ 974:	0e 94 61 04 	call	0x8c2	; 0x8c2 <KeysRead>
+ 978:	08 95       	ret
+
+0000097a <ADProcess>:
+ *  This local function reads the analog input and update the buffer Hal_Analog_inputs[]
+    ROTINA ONDE SÃO FEITAS AS VÁRIAS LEITURAS DE AMOSTRAGEM (NUM_AD_SAMPLES) E DEPOIS TIRADO A MÉDIA DOS  VALORES
+****/
+
+void ADProcess(void)
+{
+ 97a:	cf 93       	push	r28
+ 97c:	df 93       	push	r29
+switch (AD_Mux_State)
+ 97e:	80 91 9d 01 	lds	r24, 0x019D	; 0x80019d <AD_Mux_State>
+ 982:	81 30       	cpi	r24, 0x01	; 1
+ 984:	19 f0       	breq	.+6      	; 0x98c <ADProcess+0x12>
+ 986:	83 30       	cpi	r24, 0x03	; 3
+ 988:	31 f0       	breq	.+12     	; 0x996 <ADProcess+0x1c>
+ 98a:	5d c0       	rjmp	.+186    	; 0xa46 <ADProcess+0xcc>
+  {
+  case MUX_INIT:
+    break;
+  case MUX_AD_CONFIG:
+    ADC__ConfigModes(MODE_10BITS,AD_SINGLE_CONVERSION);
+ 98c:	60 e0       	ldi	r22, 0x00	; 0
+ 98e:	81 e0       	ldi	r24, 0x01	; 1
+ 990:	0e 94 cf 01 	call	0x39e	; 0x39e <ADC__ConfigModes>
+    break;
+ 994:	58 c0       	rjmp	.+176    	; 0xa46 <ADProcess+0xcc>
+  case MUX_DUMMY_STATE_1: //=> This state is placed in order to assure the raising time for ADC reading
+    break;
+  case MUX_AD_READ:
+      if(AD_Enable_Table[AD_Channel] == ENABLED)
+ 996:	c0 91 80 01 	lds	r28, 0x0180	; 0x800180 <AD_Channel>
+ 99a:	d0 e0       	ldi	r29, 0x00	; 0
+ 99c:	fe 01       	movw	r30, r28
+ 99e:	e8 5a       	subi	r30, 0xA8	; 168
+ 9a0:	fe 4f       	sbci	r31, 0xFE	; 254
+ 9a2:	80 81       	ld	r24, Z
+ 9a4:	81 30       	cpi	r24, 0x01	; 1
+ 9a6:	09 f0       	breq	.+2      	; 0x9aa <ADProcess+0x30>
+ 9a8:	44 c0       	rjmp	.+136    	; 0xa32 <ADProcess+0xb8>
+         {
+         if(AD_Counter[AD_Channel] < NUM_AD_SAMPLES)
+ 9aa:	fe 01       	movw	r30, r28
+ 9ac:	e2 56       	subi	r30, 0x62	; 98
+ 9ae:	fe 4f       	sbci	r31, 0xFE	; 254
+ 9b0:	80 81       	ld	r24, Z
+ 9b2:	88 30       	cpi	r24, 0x08	; 8
+ 9b4:	38 f5       	brcc	.+78     	; 0xa04 <ADProcess+0x8a>
+             {
+             AD_Sample[AD_Channel] = ADC__GetValue(AD_Channel_Table[AD_Channel]);
+ 9b6:	fe 01       	movw	r30, r28
+ 9b8:	ee 5a       	subi	r30, 0xAE	; 174
+ 9ba:	fe 4f       	sbci	r31, 0xFE	; 254
+ 9bc:	80 81       	ld	r24, Z
+ 9be:	0e 94 f8 01 	call	0x3f0	; 0x3f0 <ADC__GetValue>
+ 9c2:	cc 0f       	add	r28, r28
+ 9c4:	dd 1f       	adc	r29, r29
+ 9c6:	cb 57       	subi	r28, 0x7B	; 123
+ 9c8:	de 4f       	sbci	r29, 0xFE	; 254
+ 9ca:	99 83       	std	Y+1, r25	; 0x01
+ 9cc:	88 83       	st	Y, r24
+             AD_Accumulator[AD_Channel] += AD_Sample[AD_Channel];
+ 9ce:	e0 91 80 01 	lds	r30, 0x0180	; 0x800180 <AD_Channel>
+ 9d2:	f0 e0       	ldi	r31, 0x00	; 0
+ 9d4:	cf 01       	movw	r24, r30
+ 9d6:	88 0f       	add	r24, r24
+ 9d8:	99 1f       	adc	r25, r25
+ 9da:	dc 01       	movw	r26, r24
+ 9dc:	ab 55       	subi	r26, 0x5B	; 91
+ 9de:	be 4f       	sbci	r27, 0xFE	; 254
+ 9e0:	ec 01       	movw	r28, r24
+ 9e2:	cb 57       	subi	r28, 0x7B	; 123
+ 9e4:	de 4f       	sbci	r29, 0xFE	; 254
+ 9e6:	2d 91       	ld	r18, X+
+ 9e8:	3c 91       	ld	r19, X
+ 9ea:	11 97       	sbiw	r26, 0x01	; 1
+ 9ec:	88 81       	ld	r24, Y
+ 9ee:	99 81       	ldd	r25, Y+1	; 0x01
+ 9f0:	82 0f       	add	r24, r18
+ 9f2:	93 1f       	adc	r25, r19
+ 9f4:	8d 93       	st	X+, r24
+ 9f6:	9c 93       	st	X, r25
+             AD_Counter[AD_Channel]++;
+ 9f8:	e2 56       	subi	r30, 0x62	; 98
+ 9fa:	fe 4f       	sbci	r31, 0xFE	; 254
+ 9fc:	80 81       	ld	r24, Z
+ 9fe:	8f 5f       	subi	r24, 0xFF	; 255
+ a00:	80 83       	st	Z, r24
+ a02:	17 c0       	rjmp	.+46     	; 0xa32 <ADProcess+0xb8>
+             }
+         else
+            {  // O Buffer Hal_Analog_Inputs[] é AQUI atualizado!
+            Hal_Analog_Inputs[AD_Channel] = (unsigned short int)(AD_Accumulator[AD_Channel]/NUM_AD_SAMPLES);
+ a04:	fe 01       	movw	r30, r28
+ a06:	ee 0f       	add	r30, r30
+ a08:	ff 1f       	adc	r31, r31
+ a0a:	df 01       	movw	r26, r30
+ a0c:	af 56       	subi	r26, 0x6F	; 111
+ a0e:	be 4f       	sbci	r27, 0xFE	; 254
+ a10:	eb 55       	subi	r30, 0x5B	; 91
+ a12:	fe 4f       	sbci	r31, 0xFE	; 254
+ a14:	80 81       	ld	r24, Z
+ a16:	91 81       	ldd	r25, Z+1	; 0x01
+ a18:	96 95       	lsr	r25
+ a1a:	87 95       	ror	r24
+ a1c:	96 95       	lsr	r25
+ a1e:	87 95       	ror	r24
+ a20:	96 95       	lsr	r25
+ a22:	87 95       	ror	r24
+ a24:	8d 93       	st	X+, r24
+ a26:	9c 93       	st	X, r25
+            AD_Accumulator[AD_Channel] = 0;
+ a28:	11 82       	std	Z+1, r1	; 0x01
+ a2a:	10 82       	st	Z, r1
+            AD_Counter[AD_Channel] = 0;
+ a2c:	c2 56       	subi	r28, 0x62	; 98
+ a2e:	de 4f       	sbci	r29, 0xFE	; 254
+ a30:	18 82       	st	Y, r1
+            }
+          } 
+       AD_Channel++;
+ a32:	80 91 80 01 	lds	r24, 0x0180	; 0x800180 <AD_Channel>
+ a36:	8f 5f       	subi	r24, 0xFF	; 255
+       if(AD_Channel >= NUM_OF_ANALOG_INPUT)
+ a38:	86 30       	cpi	r24, 0x06	; 6
+ a3a:	18 f4       	brcc	.+6      	; 0xa42 <ADProcess+0xc8>
+            Hal_Analog_Inputs[AD_Channel] = (unsigned short int)(AD_Accumulator[AD_Channel]/NUM_AD_SAMPLES);
+            AD_Accumulator[AD_Channel] = 0;
+            AD_Counter[AD_Channel] = 0;
+            }
+          } 
+       AD_Channel++;
+ a3c:	80 93 80 01 	sts	0x0180, r24	; 0x800180 <AD_Channel>
+ a40:	02 c0       	rjmp	.+4      	; 0xa46 <ADProcess+0xcc>
+       if(AD_Channel >= NUM_OF_ANALOG_INPUT)
+         {
+         AD_Channel = 0;
+ a42:	10 92 80 01 	sts	0x0180, r1	; 0x800180 <AD_Channel>
+       break;
+  default:
+       break;
+  }
+
+AD_Mux_State++;                                // Ticking the state machine.
+ a46:	80 91 9d 01 	lds	r24, 0x019D	; 0x80019d <AD_Mux_State>
+ a4a:	8f 5f       	subi	r24, 0xFF	; 255
+
+if (AD_Mux_State >= NUM_MUX_STEPS)
+ a4c:	84 30       	cpi	r24, 0x04	; 4
+ a4e:	18 f4       	brcc	.+6      	; 0xa56 <ADProcess+0xdc>
+       break;
+  default:
+       break;
+  }
+
+AD_Mux_State++;                                // Ticking the state machine.
+ a50:	80 93 9d 01 	sts	0x019D, r24	; 0x80019d <AD_Mux_State>
+ a54:	03 c0       	rjmp	.+6      	; 0xa5c <ADProcess+0xe2>
+
+if (AD_Mux_State >= NUM_MUX_STEPS)
+  {
+  AD_Mux_State = MUX_AD_CONFIG;
+ a56:	81 e0       	ldi	r24, 0x01	; 1
+ a58:	80 93 9d 01 	sts	0x019D, r24	; 0x80019d <AD_Mux_State>
+  }
+ a5c:	df 91       	pop	r29
+ a5e:	cf 91       	pop	r28
+ a60:	08 95       	ret
+
+00000a62 <Hal__BackgroundHandler>:
+ *  This function shall run in background in the main loop 
+ *  Call rate: 1ms, 5ms, 10ms, ...PARA ADC
+ */
+void Hal__BackgroundHandler(void)
+{
+ ADProcess();	
+ a62:	0e 94 bd 04 	call	0x97a	; 0x97a <ADProcess>
+ a66:	08 95       	ret
+
+00000a68 <SevenSeg_WriteValueToSegment>:
+const char SEGMENT_SELECT[] = {0xF1,0xF2,0xF4,0xF8};
+
+
+/* Write a value to one of the 4 digits of the display */
+void SevenSeg_WriteValueToSegment(char Segment, char *Value)
+{
+ a68:	fb 01       	movw	r30, r22
+	bitClear(PORTD, 4);
+ a6a:	5c 98       	cbi	0x0b, 4	; 11
+ a6c:	47 e0       	ldi	r20, 0x07	; 7
+ a6e:	50 e0       	ldi	r21, 0x00	; 0
+
+	for (uint8_t i = 0; i < 8; i++)  {
+		bitWrite(PORTB, 0, !!((*Value) & (1 << (7 - i))));
+ a70:	20 81       	ld	r18, Z
+ a72:	30 e0       	ldi	r19, 0x00	; 0
+ a74:	04 2e       	mov	r0, r20
+ a76:	02 c0       	rjmp	.+4      	; 0xa7c <SevenSeg_WriteValueToSegment+0x14>
+ a78:	35 95       	asr	r19
+ a7a:	27 95       	ror	r18
+ a7c:	0a 94       	dec	r0
+ a7e:	e2 f7       	brpl	.-8      	; 0xa78 <SevenSeg_WriteValueToSegment+0x10>
+ a80:	20 ff       	sbrs	r18, 0
+ a82:	02 c0       	rjmp	.+4      	; 0xa88 <SevenSeg_WriteValueToSegment+0x20>
+ a84:	28 9a       	sbi	0x05, 0	; 5
+ a86:	01 c0       	rjmp	.+2      	; 0xa8a <SevenSeg_WriteValueToSegment+0x22>
+ a88:	28 98       	cbi	0x05, 0	; 5
+		bitSet(PORTD, 7);
+ a8a:	5f 9a       	sbi	0x0b, 7	; 11
+		bitClear(PORTD, 7);
+ a8c:	5f 98       	cbi	0x0b, 7	; 11
+ a8e:	41 50       	subi	r20, 0x01	; 1
+ a90:	51 09       	sbc	r21, r1
+ a92:	70 f7       	brcc	.-36     	; 0xa70 <SevenSeg_WriteValueToSegment+0x8>
+ a94:	27 e0       	ldi	r18, 0x07	; 7
+ a96:	30 e0       	ldi	r19, 0x00	; 0
+	}
+
+	for (uint8_t i = 0; i < 8; i++)  {
+		bitWrite(PORTB, 0, !!(SEGMENT_SELECT[Segment] & (1 << (7 - i))));
+ a98:	e8 2f       	mov	r30, r24
+ a9a:	f0 e0       	ldi	r31, 0x00	; 0
+ a9c:	ea 59       	subi	r30, 0x9A	; 154
+ a9e:	fe 4f       	sbci	r31, 0xFE	; 254
+ aa0:	40 81       	ld	r20, Z
+ aa2:	50 e0       	ldi	r21, 0x00	; 0
+ aa4:	ca 01       	movw	r24, r20
+ aa6:	02 2e       	mov	r0, r18
+ aa8:	02 c0       	rjmp	.+4      	; 0xaae <SevenSeg_WriteValueToSegment+0x46>
+ aaa:	95 95       	asr	r25
+ aac:	87 95       	ror	r24
+ aae:	0a 94       	dec	r0
+ ab0:	e2 f7       	brpl	.-8      	; 0xaaa <SevenSeg_WriteValueToSegment+0x42>
+ ab2:	80 ff       	sbrs	r24, 0
+ ab4:	02 c0       	rjmp	.+4      	; 0xaba <SevenSeg_WriteValueToSegment+0x52>
+ ab6:	28 9a       	sbi	0x05, 0	; 5
+ ab8:	01 c0       	rjmp	.+2      	; 0xabc <SevenSeg_WriteValueToSegment+0x54>
+ aba:	28 98       	cbi	0x05, 0	; 5
+		bitSet(PORTD, 7);
+ abc:	5f 9a       	sbi	0x0b, 7	; 11
+		bitClear(PORTD, 7);
+ abe:	5f 98       	cbi	0x0b, 7	; 11
+ ac0:	21 50       	subi	r18, 0x01	; 1
+ ac2:	31 09       	sbc	r19, r1
+ ac4:	78 f7       	brcc	.-34     	; 0xaa4 <SevenSeg_WriteValueToSegment+0x3c>
+	}
+
+	bitSet(PORTD, 4);
+ ac6:	5c 9a       	sbi	0x0b, 4	; 11
+ ac8:	08 95       	ret
+
+00000aca <Display__Initialize>:
+/**
+ *  
+ */
+void Display__Initialize(void)
+{
+	Oven_Display_State = OVEN_INIT;
+ aca:	84 e0       	ldi	r24, 0x04	; 4
+ acc:	80 93 b2 01 	sts	0x01B2, r24	; 0x8001b2 <Oven_Display_State>
+	Display_Keys_Map = KEY_OFF_EVENT;
+ ad0:	10 92 b1 01 	sts	0x01B1, r1	; 0x8001b1 <Display_Keys_Map>
+ ad4:	08 95       	ret
+
+00000ad6 <Display__SetState>:
+/**
+ *  
+ */
+void Display__SetState(OVEN_DISPLAY_STATE_TYPE state)
+{
+	if(state < NUM_OF_OVEN_STATES)
+ ad6:	86 30       	cpi	r24, 0x06	; 6
+ ad8:	10 f4       	brcc	.+4      	; 0xade <Display__SetState+0x8>
+	{
+		Oven_Display_State = state;
+ ada:	80 93 b2 01 	sts	0x01B2, r24	; 0x8001b2 <Oven_Display_State>
+ ade:	08 95       	ret
+
+00000ae0 <UpdateDisplayLeds>:
+ */
+void UpdateDisplayLeds(void)
+{
+	unsigned short int ad_value;
+	
+	switch(Oven_Display_State)
+ ae0:	80 91 b2 01 	lds	r24, 0x01B2	; 0x8001b2 <Oven_Display_State>
+ ae4:	82 30       	cpi	r24, 0x02	; 2
+ ae6:	f9 f0       	breq	.+62     	; 0xb26 <UpdateDisplayLeds+0x46>
+ ae8:	28 f4       	brcc	.+10     	; 0xaf4 <UpdateDisplayLeds+0x14>
+ aea:	88 23       	and	r24, r24
+ aec:	59 f0       	breq	.+22     	; 0xb04 <UpdateDisplayLeds+0x24>
+ aee:	81 30       	cpi	r24, 0x01	; 1
+ af0:	69 f0       	breq	.+26     	; 0xb0c <UpdateDisplayLeds+0x2c>
+ af2:	08 95       	ret
+ af4:	83 30       	cpi	r24, 0x03	; 3
+ af6:	21 f1       	breq	.+72     	; 0xb40 <UpdateDisplayLeds+0x60>
+ af8:	84 30       	cpi	r24, 0x04	; 4
+ afa:	71 f5       	brne	.+92     	; 0xb58 <UpdateDisplayLeds+0x78>
+	{
+	case OVEN_INIT:
+	      Hal__SetAllLeds(LED_OFF);
+ afc:	81 e0       	ldi	r24, 0x01	; 1
+ afe:	0e 94 90 03 	call	0x720	; 0x720 <Hal__SetAllLeds>
+	      break;
+ b02:	08 95       	ret
+	case OVEN_OFF:
+	      Hal__SetAllLeds(LED_OFF);
+ b04:	81 e0       	ldi	r24, 0x01	; 1
+ b06:	0e 94 90 03 	call	0x720	; 0x720 <Hal__SetAllLeds>
+	      break;
+ b0a:	08 95       	ret
+	case OVEN_TIMEOUT:
+	   	break;
+	case OVEN_MIN:
+	    {
+		Hal__SetLed(LED_0, ACENDE_LED);
+ b0c:	60 e0       	ldi	r22, 0x00	; 0
+ b0e:	80 e0       	ldi	r24, 0x00	; 0
+ b10:	0e 94 82 03 	call	0x704	; 0x704 <Hal__SetLed>
+		Hal__SetLed(LED_1, APAGA_LED);
+ b14:	61 e0       	ldi	r22, 0x01	; 1
+ b16:	81 e0       	ldi	r24, 0x01	; 1
+ b18:	0e 94 82 03 	call	0x704	; 0x704 <Hal__SetLed>
+		Hal__SetLed(LED_2, APAGA_LED);
+ b1c:	61 e0       	ldi	r22, 0x01	; 1
+ b1e:	82 e0       	ldi	r24, 0x02	; 2
+ b20:	0e 94 82 03 	call	0x704	; 0x704 <Hal__SetLed>
+	    
+		//if (ad_value > 200)  
+		//   Hal__SetLed(LED_3, 0);
+		//else
+		  // Hal__SetLed(LED_3, 1);
+		break;
+ b24:	08 95       	ret
+	    }
+	case OVEN_MED:
+	{
+		Hal__SetLed(LED_0, ACENDE_LED);
+ b26:	60 e0       	ldi	r22, 0x00	; 0
+ b28:	80 e0       	ldi	r24, 0x00	; 0
+ b2a:	0e 94 82 03 	call	0x704	; 0x704 <Hal__SetLed>
+		Hal__SetLed(LED_1, ACENDE_LED);
+ b2e:	60 e0       	ldi	r22, 0x00	; 0
+ b30:	81 e0       	ldi	r24, 0x01	; 1
+ b32:	0e 94 82 03 	call	0x704	; 0x704 <Hal__SetLed>
+		Hal__SetLed(LED_2, APAGA_LED);
+ b36:	61 e0       	ldi	r22, 0x01	; 1
+ b38:	82 e0       	ldi	r24, 0x02	; 2
+ b3a:	0e 94 82 03 	call	0x704	; 0x704 <Hal__SetLed>
+		//ad_value = Hal_GetAnalogInput(POT_EXT);
+		//if (ad_value > 500)    
+		//	Hal__SetLed(LED_3, 0);
+		//else
+		//	Hal__SetLed(LED_3, 1);
+		break;
+ b3e:	08 95       	ret
+	}
+	case OVEN_MAX:
+	{
+		Hal__SetLed(LED_0, ACENDE_LED);
+ b40:	60 e0       	ldi	r22, 0x00	; 0
+ b42:	80 e0       	ldi	r24, 0x00	; 0
+ b44:	0e 94 82 03 	call	0x704	; 0x704 <Hal__SetLed>
+		Hal__SetLed(LED_1, ACENDE_LED);
+ b48:	60 e0       	ldi	r22, 0x00	; 0
+ b4a:	81 e0       	ldi	r24, 0x01	; 1
+ b4c:	0e 94 82 03 	call	0x704	; 0x704 <Hal__SetLed>
+		Hal__SetLed(LED_2, ACENDE_LED);
+ b50:	60 e0       	ldi	r22, 0x00	; 0
+ b52:	82 e0       	ldi	r24, 0x02	; 2
+ b54:	0e 94 82 03 	call	0x704	; 0x704 <Hal__SetLed>
+ b58:	08 95       	ret
+
+00000b5a <ReadDisplayKeys>:
+ */
+void ReadDisplayKeys(void)
+{
+        unsigned char leitura;
+		
+		Display_Keys_Map = KEY_NONE;
+ b5a:	8a ea       	ldi	r24, 0xAA	; 170
+ b5c:	80 93 b1 01 	sts	0x01B1, r24	; 0x8001b1 <Display_Keys_Map>
+       		   	
+		leitura = Hal__ReadKey(KEY_0);
+ b60:	80 e0       	ldi	r24, 0x00	; 0
+ b62:	0e 94 ec 03 	call	0x7d8	; 0x7d8 <Hal__ReadKey>
+		if(leitura  == TRUE)
+ b66:	81 30       	cpi	r24, 0x01	; 1
+ b68:	11 f4       	brne	.+4      	; 0xb6e <ReadDisplayKeys+0x14>
+		     {
+			Display_Keys_Map = KEY_MIN_EVENT;
+ b6a:	80 93 b1 01 	sts	0x01B1, r24	; 0x8001b1 <Display_Keys_Map>
+			 }
+		leitura = Hal__ReadKey(KEY_1);
+ b6e:	81 e0       	ldi	r24, 0x01	; 1
+ b70:	0e 94 ec 03 	call	0x7d8	; 0x7d8 <Hal__ReadKey>
+		if(leitura == TRUE)
+ b74:	81 30       	cpi	r24, 0x01	; 1
+ b76:	19 f4       	brne	.+6      	; 0xb7e <ReadDisplayKeys+0x24>
+		    {
+			Display_Keys_Map = KEY_MED_EVENT;
+ b78:	82 e0       	ldi	r24, 0x02	; 2
+ b7a:	80 93 b1 01 	sts	0x01B1, r24	; 0x8001b1 <Display_Keys_Map>
+			}
+		leitura = Hal__ReadKey(KEY_2);
+ b7e:	82 e0       	ldi	r24, 0x02	; 2
+ b80:	0e 94 ec 03 	call	0x7d8	; 0x7d8 <Hal__ReadKey>
+		if(leitura == TRUE)
+ b84:	81 30       	cpi	r24, 0x01	; 1
+ b86:	19 f4       	brne	.+6      	; 0xb8e <ReadDisplayKeys+0x34>
+		    {
+			Display_Keys_Map =  KEY_MAX_EVENT;
+ b88:	83 e0       	ldi	r24, 0x03	; 3
+ b8a:	80 93 b1 01 	sts	0x01B1, r24	; 0x8001b1 <Display_Keys_Map>
+			}
+		leitura = Hal__ReadKey(KEY_3);
+ b8e:	83 e0       	ldi	r24, 0x03	; 3
+ b90:	0e 94 ec 03 	call	0x7d8	; 0x7d8 <Hal__ReadKey>
+		if(leitura == TRUE)
+ b94:	81 30       	cpi	r24, 0x01	; 1
+ b96:	11 f4       	brne	.+4      	; 0xb9c <ReadDisplayKeys+0x42>
+			{
+			Display_Keys_Map =  KEY_OFF_EVENT; 
+ b98:	10 92 b1 01 	sts	0x01B1, r1	; 0x8001b1 <Display_Keys_Map>
+ b9c:	08 95       	ret
+
+00000b9e <Display__GetEvent>:
+
+
+KEY_EVENT_TYPE Display__GetEvent(void)
+{
+	KEY_EVENT_TYPE event;
+	ReadDisplayKeys();    // Lê as chaves e coloca valor na variável global Display_Keys_Map
+ b9e:	0e 94 ad 05 	call	0xb5a	; 0xb5a <ReadDisplayKeys>
+	event = Display_Keys_Map;
+	return (event);
+	
+}
+ ba2:	80 91 b1 01 	lds	r24, 0x01B1	; 0x8001b1 <Display_Keys_Map>
+ ba6:	08 95       	ret
+
+00000ba8 <UpdateDisplaySevenSeg>:
+ **************************************************/
+void UpdateDisplaySevenSeg(void)
+{
+char i;
+char *p_digito;
+switch(Oven_Display_State)
+ ba8:	80 91 b2 01 	lds	r24, 0x01B2	; 0x8001b2 <Oven_Display_State>
+ bac:	82 30       	cpi	r24, 0x02	; 2
+ bae:	09 f4       	brne	.+2      	; 0xbb2 <UpdateDisplaySevenSeg+0xa>
+ bb0:	4b c0       	rjmp	.+150    	; 0xc48 <UpdateDisplaySevenSeg+0xa0>
+ bb2:	28 f4       	brcc	.+10     	; 0xbbe <UpdateDisplaySevenSeg+0x16>
+ bb4:	88 23       	and	r24, r24
+ bb6:	49 f0       	breq	.+18     	; 0xbca <UpdateDisplaySevenSeg+0x22>
+ bb8:	81 30       	cpi	r24, 0x01	; 1
+ bba:	89 f1       	breq	.+98     	; 0xc1e <UpdateDisplaySevenSeg+0x76>
+ bbc:	08 95       	ret
+ bbe:	83 30       	cpi	r24, 0x03	; 3
+ bc0:	09 f4       	brne	.+2      	; 0xbc4 <UpdateDisplaySevenSeg+0x1c>
+ bc2:	57 c0       	rjmp	.+174    	; 0xc72 <UpdateDisplaySevenSeg+0xca>
+ bc4:	84 30       	cpi	r24, 0x04	; 4
+ bc6:	b1 f0       	breq	.+44     	; 0xbf4 <UpdateDisplaySevenSeg+0x4c>
+ bc8:	08 95       	ret
+	{
+	case OVEN_OFF:
+		{
+		p_digito = &ZERADO_DIGITO[0];
+		for (i = 0; i< NUM_OF_SEG; i++, p_digito++)
+		Hal__WriteValtoSegment(i, p_digito);
+ bca:	62 e2       	ldi	r22, 0x22	; 34
+ bcc:	71 e0       	ldi	r23, 0x01	; 1
+ bce:	80 e0       	ldi	r24, 0x00	; 0
+ bd0:	0e 94 ff 03 	call	0x7fe	; 0x7fe <Hal__WriteValtoSegment>
+ bd4:	63 e2       	ldi	r22, 0x23	; 35
+ bd6:	71 e0       	ldi	r23, 0x01	; 1
+ bd8:	81 e0       	ldi	r24, 0x01	; 1
+ bda:	0e 94 ff 03 	call	0x7fe	; 0x7fe <Hal__WriteValtoSegment>
+ bde:	64 e2       	ldi	r22, 0x24	; 36
+ be0:	71 e0       	ldi	r23, 0x01	; 1
+ be2:	82 e0       	ldi	r24, 0x02	; 2
+ be4:	0e 94 ff 03 	call	0x7fe	; 0x7fe <Hal__WriteValtoSegment>
+ be8:	65 e2       	ldi	r22, 0x25	; 37
+ bea:	71 e0       	ldi	r23, 0x01	; 1
+ bec:	83 e0       	ldi	r24, 0x03	; 3
+ bee:	0e 94 ff 03 	call	0x7fe	; 0x7fe <Hal__WriteValtoSegment>
+ bf2:	08 95       	ret
+		}
+	case OVEN_INIT:
+		{
+		p_digito = &ZERADO_DIGITO[0];
+		for (i = 0; i< NUM_OF_SEG; i++, p_digito++)
+		Hal__WriteValtoSegment(i, p_digito);
+ bf4:	62 e2       	ldi	r22, 0x22	; 34
+ bf6:	71 e0       	ldi	r23, 0x01	; 1
+ bf8:	80 e0       	ldi	r24, 0x00	; 0
+ bfa:	0e 94 ff 03 	call	0x7fe	; 0x7fe <Hal__WriteValtoSegment>
+ bfe:	63 e2       	ldi	r22, 0x23	; 35
+ c00:	71 e0       	ldi	r23, 0x01	; 1
+ c02:	81 e0       	ldi	r24, 0x01	; 1
+ c04:	0e 94 ff 03 	call	0x7fe	; 0x7fe <Hal__WriteValtoSegment>
+ c08:	64 e2       	ldi	r22, 0x24	; 36
+ c0a:	71 e0       	ldi	r23, 0x01	; 1
+ c0c:	82 e0       	ldi	r24, 0x02	; 2
+ c0e:	0e 94 ff 03 	call	0x7fe	; 0x7fe <Hal__WriteValtoSegment>
+ c12:	65 e2       	ldi	r22, 0x25	; 37
+ c14:	71 e0       	ldi	r23, 0x01	; 1
+ c16:	83 e0       	ldi	r24, 0x03	; 3
+ c18:	0e 94 ff 03 	call	0x7fe	; 0x7fe <Hal__WriteValtoSegment>
+ c1c:	08 95       	ret
+		//Hal__WriteValtoSegment(1, 0xC0);
+		//Hal__WriteValtoSegment(2, 0x80);
+		//Hal__WriteValtoSegment(3, 0xC0);
+		p_digito = &MINIMO_DIGITO[0];
+		for (i = 0; i< NUM_OF_SEG; i++, p_digito++)
+		Hal__WriteValtoSegment(i, p_digito);
+ c1e:	6e e1       	ldi	r22, 0x1E	; 30
+ c20:	71 e0       	ldi	r23, 0x01	; 1
+ c22:	80 e0       	ldi	r24, 0x00	; 0
+ c24:	0e 94 ff 03 	call	0x7fe	; 0x7fe <Hal__WriteValtoSegment>
+ c28:	6f e1       	ldi	r22, 0x1F	; 31
+ c2a:	71 e0       	ldi	r23, 0x01	; 1
+ c2c:	81 e0       	ldi	r24, 0x01	; 1
+ c2e:	0e 94 ff 03 	call	0x7fe	; 0x7fe <Hal__WriteValtoSegment>
+ c32:	60 e2       	ldi	r22, 0x20	; 32
+ c34:	71 e0       	ldi	r23, 0x01	; 1
+ c36:	82 e0       	ldi	r24, 0x02	; 2
+ c38:	0e 94 ff 03 	call	0x7fe	; 0x7fe <Hal__WriteValtoSegment>
+ c3c:	61 e2       	ldi	r22, 0x21	; 33
+ c3e:	71 e0       	ldi	r23, 0x01	; 1
+ c40:	83 e0       	ldi	r24, 0x03	; 3
+ c42:	0e 94 ff 03 	call	0x7fe	; 0x7fe <Hal__WriteValtoSegment>
+ c46:	08 95       	ret
+		//Hal__WriteValtoSegment(1, 0xA4);
+		//Hal__WriteValtoSegment(2, 0x82);
+		//Hal__WriteValtoSegment(3, 0xC0);
+		p_digito = &MEDIO_DIGITO[0];
+		for (i = 0; i< NUM_OF_SEG; i++, p_digito++)
+		Hal__WriteValtoSegment(i, p_digito);
+ c48:	6a e1       	ldi	r22, 0x1A	; 26
+ c4a:	71 e0       	ldi	r23, 0x01	; 1
+ c4c:	80 e0       	ldi	r24, 0x00	; 0
+ c4e:	0e 94 ff 03 	call	0x7fe	; 0x7fe <Hal__WriteValtoSegment>
+ c52:	6b e1       	ldi	r22, 0x1B	; 27
+ c54:	71 e0       	ldi	r23, 0x01	; 1
+ c56:	81 e0       	ldi	r24, 0x01	; 1
+ c58:	0e 94 ff 03 	call	0x7fe	; 0x7fe <Hal__WriteValtoSegment>
+ c5c:	6c e1       	ldi	r22, 0x1C	; 28
+ c5e:	71 e0       	ldi	r23, 0x01	; 1
+ c60:	82 e0       	ldi	r24, 0x02	; 2
+ c62:	0e 94 ff 03 	call	0x7fe	; 0x7fe <Hal__WriteValtoSegment>
+ c66:	6d e1       	ldi	r22, 0x1D	; 29
+ c68:	71 e0       	ldi	r23, 0x01	; 1
+ c6a:	83 e0       	ldi	r24, 0x03	; 3
+ c6c:	0e 94 ff 03 	call	0x7fe	; 0x7fe <Hal__WriteValtoSegment>
+ c70:	08 95       	ret
+		//Hal__WriteValtoSegment(1, 0xB0);
+		//Hal__WriteValtoSegment(2, 0xA4);
+		//Hal__WriteValtoSegment(3, 0xC0);
+		p_digito = &MAXIMO_DIGITO;   // ou p_digito = &MAXIMO_DIGITO[0];
+		for (i = 0; i< NUM_OF_SEG; i++, p_digito++)
+		Hal__WriteValtoSegment(i, p_digito);
+ c72:	66 e1       	ldi	r22, 0x16	; 22
+ c74:	71 e0       	ldi	r23, 0x01	; 1
+ c76:	80 e0       	ldi	r24, 0x00	; 0
+ c78:	0e 94 ff 03 	call	0x7fe	; 0x7fe <Hal__WriteValtoSegment>
+ c7c:	67 e1       	ldi	r22, 0x17	; 23
+ c7e:	71 e0       	ldi	r23, 0x01	; 1
+ c80:	81 e0       	ldi	r24, 0x01	; 1
+ c82:	0e 94 ff 03 	call	0x7fe	; 0x7fe <Hal__WriteValtoSegment>
+ c86:	68 e1       	ldi	r22, 0x18	; 24
+ c88:	71 e0       	ldi	r23, 0x01	; 1
+ c8a:	82 e0       	ldi	r24, 0x02	; 2
+ c8c:	0e 94 ff 03 	call	0x7fe	; 0x7fe <Hal__WriteValtoSegment>
+ c90:	69 e1       	ldi	r22, 0x19	; 25
+ c92:	71 e0       	ldi	r23, 0x01	; 1
+ c94:	83 e0       	ldi	r24, 0x03	; 3
+ c96:	0e 94 ff 03 	call	0x7fe	; 0x7fe <Hal__WriteValtoSegment>
+ c9a:	08 95       	ret
+
+00000c9c <Display__Handler>:
+/**
+ *  
+ */
+void Display__Handler(void)
+{
+ReadDisplayKeys();
+ c9c:	0e 94 ad 05 	call	0xb5a	; 0xb5a <ReadDisplayKeys>
+	
+#if (LED_DISPLAY == ENABLED)	
+	UpdateDisplayLeds();
+ ca0:	0e 94 70 05 	call	0xae0	; 0xae0 <UpdateDisplayLeds>
+#endif	
+
+#if (SEVEN_SEG_DISPLAY == ENABLED)
+     UpdateDisplaySevenSeg();
+ ca4:	0e 94 d4 05 	call	0xba8	; 0xba8 <UpdateDisplaySevenSeg>
+ ca8:	08 95       	ret
+
+00000caa <Sounds__Initialize>:
+//   para sem som
+//
+//*********************************************************
+ void Sounds__Initialize(void)
+{
+PlaySound = PLAY_NO_SOUND;   // variável global => sem som no início
+ caa:	83 e0       	ldi	r24, 0x03	; 3
+ cac:	80 93 b3 01 	sts	0x01B3, r24	; 0x8001b3 <PlaySound>
+ cb0:	08 95       	ret
+
+00000cb2 <Sounds__PlaySounds>:
+
+void Sounds__PlaySounds( SOUNDS_TYPE sound_id)
+{
+PlaySound = PLAY_NO_SOUND;
+
+if(sound_id < NUM_OF_SOUNDS)
+ cb2:	84 30       	cpi	r24, 0x04	; 4
+ cb4:	20 f0       	brcs	.+8      	; 0xcbe <Sounds__PlaySounds+0xc>
+//*********************************************************
+ 
+
+void Sounds__PlaySounds( SOUNDS_TYPE sound_id)
+{
+PlaySound = PLAY_NO_SOUND;
+ cb6:	83 e0       	ldi	r24, 0x03	; 3
+ cb8:	80 93 b3 01 	sts	0x01B3, r24	; 0x8001b3 <PlaySound>
+ cbc:	08 95       	ret
+
+if(sound_id < NUM_OF_SOUNDS)
+   	PlaySound = sound_id;
+ cbe:	80 93 b3 01 	sts	0x01B3, r24	; 0x8001b3 <PlaySound>
+ cc2:	08 95       	ret
+
+00000cc4 <PowerOnSoundHandler>:
+SOUND_STATUS status;
+
+//Hal__SetAllLeds(LED_ON);
+
+status = SOUND_PLAYING;
+Hal__SetBuzzerFreq(3000);
+ cc4:	88 eb       	ldi	r24, 0xB8	; 184
+ cc6:	9b e0       	ldi	r25, 0x0B	; 11
+ cc8:	0e 94 1a 04 	call	0x834	; 0x834 <Hal__SetBuzzerFreq>
+Hal__SetBuzzer(ON);
+ ccc:	81 e0       	ldi	r24, 0x01	; 1
+ cce:	0e 94 0e 04 	call	0x81c	; 0x81c <Hal__SetBuzzer>
+	#else
+		//round up by default
+		__ticks_dc = (uint32_t)(ceil(fabs(__tmp)));
+	#endif
+
+	__builtin_avr_delay_cycles(__ticks_dc);
+ cd2:	2f e7       	ldi	r18, 0x7F	; 127
+ cd4:	8a e1       	ldi	r24, 0x1A	; 26
+ cd6:	96 e0       	ldi	r25, 0x06	; 6
+ cd8:	21 50       	subi	r18, 0x01	; 1
+ cda:	80 40       	sbci	r24, 0x00	; 0
+ cdc:	90 40       	sbci	r25, 0x00	; 0
+ cde:	e1 f7       	brne	.-8      	; 0xcd8 <PowerOnSoundHandler+0x14>
+ ce0:	00 c0       	rjmp	.+0      	; 0xce2 <PowerOnSoundHandler+0x1e>
+ ce2:	00 00       	nop
+_delay_ms(2000);
+Hal__SetBuzzer(OFF);
+ ce4:	80 e0       	ldi	r24, 0x00	; 0
+ ce6:	0e 94 0e 04 	call	0x81c	; 0x81c <Hal__SetBuzzer>
+
+status = SOUND_DONE;
+return status;
+}
+ cea:	80 e0       	ldi	r24, 0x00	; 0
+ cec:	08 95       	ret
+
+00000cee <KeyPressSoundHandler>:
+SOUND_STATUS KeyPressSoundHandler(void)
+{
+SOUND_STATUS status;
+
+status = SOUND_PLAYING;
+Hal__SetBuzzer(ON);
+ cee:	81 e0       	ldi	r24, 0x01	; 1
+ cf0:	0e 94 0e 04 	call	0x81c	; 0x81c <Hal__SetBuzzer>
+ cf4:	2f e3       	ldi	r18, 0x3F	; 63
+ cf6:	8d e0       	ldi	r24, 0x0D	; 13
+ cf8:	93 e0       	ldi	r25, 0x03	; 3
+ cfa:	21 50       	subi	r18, 0x01	; 1
+ cfc:	80 40       	sbci	r24, 0x00	; 0
+ cfe:	90 40       	sbci	r25, 0x00	; 0
+ d00:	e1 f7       	brne	.-8      	; 0xcfa <KeyPressSoundHandler+0xc>
+ d02:	00 c0       	rjmp	.+0      	; 0xd04 <KeyPressSoundHandler+0x16>
+ d04:	00 00       	nop
+_delay_ms(1000);
+Hal__SetBuzzer(OFF);
+ d06:	80 e0       	ldi	r24, 0x00	; 0
+ d08:	0e 94 0e 04 	call	0x81c	; 0x81c <Hal__SetBuzzer>
+status = SOUND_DONE;
+return status;
+}
+ d0c:	80 e0       	ldi	r24, 0x00	; 0
+ d0e:	08 95       	ret
+
+00000d10 <Sounds__Background>:
+//
+//*********************************************************
+ 
+void Sounds__Background(void)
+{
+switch (PlaySound)
+ d10:	80 91 b3 01 	lds	r24, 0x01B3	; 0x8001b3 <PlaySound>
+ d14:	81 30       	cpi	r24, 0x01	; 1
+ d16:	71 f0       	breq	.+28     	; 0xd34 <Sounds__Background+0x24>
+ d18:	28 f0       	brcs	.+10     	; 0xd24 <Sounds__Background+0x14>
+ d1a:	82 30       	cpi	r24, 0x02	; 2
+ d1c:	99 f0       	breq	.+38     	; 0xd44 <Sounds__Background+0x34>
+ d1e:	83 30       	cpi	r24, 0x03	; 3
+ d20:	c1 f0       	breq	.+48     	; 0xd52 <Sounds__Background+0x42>
+ d22:	08 95       	ret
+{
+	case SOUND_POWER_ON:
+		if(PowerOnSoundHandler() == SOUND_DONE)
+ d24:	0e 94 62 06 	call	0xcc4	; 0xcc4 <PowerOnSoundHandler>
+ d28:	81 11       	cpse	r24, r1
+ d2a:	16 c0       	rjmp	.+44     	; 0xd58 <Sounds__Background+0x48>
+			{
+			PlaySound = PLAY_NO_SOUND;
+ d2c:	83 e0       	ldi	r24, 0x03	; 3
+ d2e:	80 93 b3 01 	sts	0x01B3, r24	; 0x8001b3 <PlaySound>
+ d32:	08 95       	ret
+			}
+		break;
+
+	case SOUND_KEY_PRESS:
+		if(KeyPressSoundHandler() == SOUND_DONE)
+ d34:	0e 94 77 06 	call	0xcee	; 0xcee <KeyPressSoundHandler>
+ d38:	81 11       	cpse	r24, r1
+ d3a:	0e c0       	rjmp	.+28     	; 0xd58 <Sounds__Background+0x48>
+			{
+			//	Hal__SetAllLeds(LED_ON);  // depuração
+			PlaySound = PLAY_NO_SOUND;    
+ d3c:	83 e0       	ldi	r24, 0x03	; 3
+ d3e:	80 93 b3 01 	sts	0x01B3, r24	; 0x8001b3 <PlaySound>
+ d42:	08 95       	ret
+
+status = SOUND_PLAYING;
+//Hal__SetBuzzerFreq(4000);
+//Hal__SetBuzzer(ON);
+//_delay_ms(1000);
+Hal__SetBuzzer(OFF);
+ d44:	80 e0       	ldi	r24, 0x00	; 0
+ d46:	0e 94 0e 04 	call	0x81c	; 0x81c <Hal__SetBuzzer>
+		break;
+
+	case SOUND_END_CYCLE:
+		if(EndCycleSoundHandler() == SOUND_DONE)
+			{
+			PlaySound = PLAY_NO_SOUND;  
+ d4a:	83 e0       	ldi	r24, 0x03	; 3
+ d4c:	80 93 b3 01 	sts	0x01B3, r24	; 0x8001b3 <PlaySound>
+ d50:	08 95       	ret
+			}
+		break;
+	
+	case PLAY_NO_SOUND:
+		Hal__SetBuzzer(OFF);
+ d52:	80 e0       	ldi	r24, 0x00	; 0
+ d54:	0e 94 0e 04 	call	0x81c	; 0x81c <Hal__SetBuzzer>
+ d58:	08 95       	ret
+
+00000d5a <TempSensor__Initialize>:
+{
+	TEMP_SENSOR_TYPE sensor_id;
+
+	for (sensor_id = 0; sensor_id < NUM_OF_TEMP_SENSOR; sensor_id++) 
+	{
+		Temperature[sensor_id] = 0;
+ d5a:	e5 eb       	ldi	r30, 0xB5	; 181
+ d5c:	f1 e0       	ldi	r31, 0x01	; 1
+ d5e:	11 82       	std	Z+1, r1	; 0x01
+ d60:	10 82       	st	Z, r1
+ d62:	13 82       	std	Z+3, r1	; 0x03
+ d64:	12 82       	std	Z+2, r1	; 0x02
+ d66:	08 95       	ret
+
+00000d68 <TempSensor__ConversionHandler>:
+	{
+		if(TempSensor_Enable_Table[sensor_id] == ENABLED)
+		{
+			// Fazer a leitura, realizar a conversão (T(°C) = ( (ValorAD + 400)/4 ) + 50)
+			// e armazenar em Temperature[]. 
+			ad_value = Hal__GetAnalogInput(TempSensorTable[sensor_id]);
+ d68:	85 e0       	ldi	r24, 0x05	; 5
+ d6a:	0e 94 02 04 	call	0x804	; 0x804 <Hal__GetAnalogInput>
+			ad_value = (ad_value + 400);
+			ad_value = (ad_value/4) + 50;
+ d6e:	80 57       	subi	r24, 0x70	; 112
+ d70:	9e 4f       	sbci	r25, 0xFE	; 254
+ d72:	96 95       	lsr	r25
+ d74:	87 95       	ror	r24
+ d76:	96 95       	lsr	r25
+ d78:	87 95       	ror	r24
+			Temperature[sensor_id] = ad_value;
+ d7a:	c2 96       	adiw	r24, 0x32	; 50
+ d7c:	90 93 b8 01 	sts	0x01B8, r25	; 0x8001b8 <Temperature+0x3>
+ d80:	80 93 b7 01 	sts	0x01B7, r24	; 0x8001b7 <Temperature+0x2>
+ d84:	08 95       	ret
+
+00000d86 <TempSensor__GetCelsius>:
+	
+}
+//---------------------------------------------------------------------------------------------------------------------
+unsigned short int TempSensor__GetCelsius(TEMP_SENSOR_TYPE sensor_id)
+{
+	if (sensor_id < NUM_OF_TEMP_SENSOR)
+ d86:	82 30       	cpi	r24, 0x02	; 2
+ d88:	48 f4       	brcc	.+18     	; 0xd9c <TempSensor__GetCelsius+0x16>
+	{
+		return Temperature[sensor_id];
+ d8a:	e8 2f       	mov	r30, r24
+ d8c:	f0 e0       	ldi	r31, 0x00	; 0
+ d8e:	ee 0f       	add	r30, r30
+ d90:	ff 1f       	adc	r31, r31
+ d92:	eb 54       	subi	r30, 0x4B	; 75
+ d94:	fe 4f       	sbci	r31, 0xFE	; 254
+ d96:	80 81       	ld	r24, Z
+ d98:	91 81       	ldd	r25, Z+1	; 0x01
+ d9a:	08 95       	ret
+	}
+	else
+	{
+		return 0;
+ d9c:	80 e0       	ldi	r24, 0x00	; 0
+ d9e:	90 e0       	ldi	r25, 0x00	; 0
+	}
+	
+}
+ da0:	08 95       	ret
+
+00000da2 <__divmodhi4>:
+ da2:	97 fb       	bst	r25, 7
+ da4:	07 2e       	mov	r0, r23
+ da6:	16 f4       	brtc	.+4      	; 0xdac <__divmodhi4+0xa>
+ da8:	00 94       	com	r0
+ daa:	07 d0       	rcall	.+14     	; 0xdba <__divmodhi4_neg1>
+ dac:	77 fd       	sbrc	r23, 7
+ dae:	09 d0       	rcall	.+18     	; 0xdc2 <__divmodhi4_neg2>
+ db0:	0e 94 e5 06 	call	0xdca	; 0xdca <__udivmodhi4>
+ db4:	07 fc       	sbrc	r0, 7
+ db6:	05 d0       	rcall	.+10     	; 0xdc2 <__divmodhi4_neg2>
+ db8:	3e f4       	brtc	.+14     	; 0xdc8 <__divmodhi4_exit>
+
+00000dba <__divmodhi4_neg1>:
+ dba:	90 95       	com	r25
+ dbc:	81 95       	neg	r24
+ dbe:	9f 4f       	sbci	r25, 0xFF	; 255
+ dc0:	08 95       	ret
+
+00000dc2 <__divmodhi4_neg2>:
+ dc2:	70 95       	com	r23
+ dc4:	61 95       	neg	r22
+ dc6:	7f 4f       	sbci	r23, 0xFF	; 255
+
+00000dc8 <__divmodhi4_exit>:
+ dc8:	08 95       	ret
+
+00000dca <__udivmodhi4>:
+ dca:	aa 1b       	sub	r26, r26
+ dcc:	bb 1b       	sub	r27, r27
+ dce:	51 e1       	ldi	r21, 0x11	; 17
+ dd0:	07 c0       	rjmp	.+14     	; 0xde0 <__udivmodhi4_ep>
+
+00000dd2 <__udivmodhi4_loop>:
+ dd2:	aa 1f       	adc	r26, r26
+ dd4:	bb 1f       	adc	r27, r27
+ dd6:	a6 17       	cp	r26, r22
+ dd8:	b7 07       	cpc	r27, r23
+ dda:	10 f0       	brcs	.+4      	; 0xde0 <__udivmodhi4_ep>
+ ddc:	a6 1b       	sub	r26, r22
+ dde:	b7 0b       	sbc	r27, r23
+
+00000de0 <__udivmodhi4_ep>:
+ de0:	88 1f       	adc	r24, r24
+ de2:	99 1f       	adc	r25, r25
+ de4:	5a 95       	dec	r21
+ de6:	a9 f7       	brne	.-22     	; 0xdd2 <__udivmodhi4_loop>
+ de8:	80 95       	com	r24
+ dea:	90 95       	com	r25
+ dec:	bc 01       	movw	r22, r24
+ dee:	cd 01       	movw	r24, r26
+ df0:	08 95       	ret
+
+00000df2 <_exit>:
+ df2:	f8 94       	cli
+
+00000df4 <__stop_program>:
+ df4:	ff cf       	rjmp	.-2      	; 0xdf4 <__stop_program>
