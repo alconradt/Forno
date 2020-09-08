@@ -54,7 +54,7 @@ KEY_EVENT_TYPE User_Action;
 //-------------------------------------- Global Variables ----------------------------------------------------------------
 
 unsigned char Timer_Counter;
-unsigned char Toggle;             // VARIÁVEL PARA PISCAR TODOS OSLEDS QUANDO INICIA CONTAGEM DE TEMPO DE FORNO LIGADO
+unsigned char Toggle;             // VARIÁVEL PARA PISCAR TODOS OS LEDS QUANDO INICIA CONTAGEM DE TEMPO DE FORNO LIGADO
 unsigned char Trigger;            // INDICA SE O FORNO ESTÁ LIGADO
 //-------------------------------------- PRIVATE (Function Prototypes) ---------------------------------------------------
 
@@ -131,13 +131,14 @@ void Appl__Handler(void)
 Display__Handler();
 
 if( (Trigger == TRUE ) &&
-(Timer__HMSGetStatus(TIMER_HMS_CYCLE_DURATION) == TIMER_EXPIRED) )
+((Timer__HMSGetStatus(TIMER_HMS_CYCLE_DURATION) == TIMER_EXPIRED)))
 	{
-	Display__SetState(OVEN_TIMEOUT);
-	OvenTempControl__SetLevel(TEMP_LEVEL_OVEN_OFF);
 	Sounds__PlaySounds(SOUND_END_CYCLE);
+	Display__SetState(OVEN_OFF);
+	OvenTempControl__SetLevel(TEMP_LEVEL_OVEN_OFF);
 	Trigger = FALSE;
 	}
+
 #endif //(EXP_OVEN == ENABLED)
 
 #if (EXP_TIMER == ENABLED)

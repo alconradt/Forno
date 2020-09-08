@@ -53,7 +53,43 @@ pwm_pt0 = TC0_REGISTERS;
 pwm_pt1 = TC1_REGISTERS;
 pwm_pt2 = TC2_REGISTERS;
 
+if((frequency > 1900) && frequency  < 2100 ){
+	switch(tc){
+		case PWM_TC0:
+		pwm_pt0->TCCR0B_REG.byte = 0b00100010;
+		break;
+		case PWM_TC1:
+		pwm_pt1->TCCR1B_REG.byte = 0b00100010;
+		break;
+		case PWM_TC2:
+		//pwm_pt2->TCCR2A_REG.byte = 0b00100001; //MODO 1 para PWM fase corrigida,
+		//pwm_pt2->TCCR2A_REG.byte = 0b00110001; //MODO 1 para PWM fase corrigida,
+		pwm_pt2->TCCR2B_REG.byte = 0b00100010;
+		break;
 
+		default:
+		break;
+	}
+}
+
+if((frequency > 2900) && frequency  < 3100 ){
+	switch(tc){
+		case PWM_TC0:
+		pwm_pt0->TCCR0B_REG.byte = 0b00100011;
+		break;
+		case PWM_TC1:
+		pwm_pt1->TCCR1B_REG.byte = 0b00100011;
+		break;
+		case PWM_TC2:
+		//pwm_pt2->TCCR2A_REG.byte =  0b00100001; //MODO 1 para PWM fase corrigida,
+		//pwm_pt2->TCCR2A_REG.byte = 0b00110001; //MODO 1 para PWM fase corrigida,
+		pwm_pt2->TCCR2B_REG.byte = 0b00100011;
+		break;
+
+		default:
+		break;
+	}
+}
 
 if((frequency > 3900) && frequency  < 4100 ){
 switch(tc){
@@ -71,6 +107,25 @@ case PWM_TC2:
 default:
 	break;
 }
+}
+
+if((frequency > 4900) && frequency  < 5100 ){
+	switch(tc){
+		case PWM_TC0:
+		pwm_pt0->TCCR0B_REG.byte = 0b00100101;
+		break;
+		case PWM_TC1:
+		pwm_pt1->TCCR1B_REG.byte = 0b00100101;
+		break;
+		case PWM_TC2:
+		//pwm_pt2->TCCR2A_REG.byte =  0b00100001; //MODO 1 para PWM fase corrigida,
+		//pwm_pt2->TCCR2A_REG.byte = 0b00110001; //MODO 1 para PWM fase corrigida,
+		pwm_pt2->TCCR2B_REG.byte = 0b00100101;
+		break;
+
+		default:
+		break;
+	}
 }
 }  // fim da função
 

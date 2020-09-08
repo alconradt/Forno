@@ -179,7 +179,7 @@ SOUND_STATUS PowerOnSoundHandler(void)
 {
 SOUND_STATUS status;
 status = SOUND_PLAYING;
-//Hal__SetBuzzerFreq(4000);
+Hal__SetBuzzerFreq(5000);
 
 switch (PowerON_Sound_Step)
 {
